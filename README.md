@@ -10,7 +10,7 @@ Intuitive magical memoization library with Proxy and WeakMap
 
 In frontend framework like React, object immutability is important.
 JavaScript itself doesn't support forcing immutability.
-Several libraries help encouraging immutalbe coding style,
+Several libraries help encouraging immutable coding style,
 like [immer](https://github.com/immerjs/immer).
 While immer helps updating an object,
 this library helps creating a derived value from an object, a.k.a. selector.
