@@ -35,8 +35,8 @@ jobs:
       - name: Test
         run: yarn test
 
-      - name: Compile
-        run: yarn run compile
+      - name: Build
+        run: yarn build
 
       - name: Publish
         run: npm publish
