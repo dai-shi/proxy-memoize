@@ -1,0 +1,51 @@
+{
+  "name": "proxy-memoize",
+  "description": "Intuitive magical memoization library with Proxy and WeakMap",
+  "version": "0.1.0",
+  "author": "Daishi Kato",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dai-shi/proxy-memoize.git"
+  },
+  "source": "./src/index.ts",
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.modern.js",
+  "types": "./dist/src/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "src",
+    "dist"
+  ],
+  "scripts": {
+    "compile": "microbundle build -f modern,umd",
+    "test": "run-s eslint tsc-test jest",
+    "eslint": "eslint --ext .js,.ts --ignore-pattern dist .",
+    "jest": "jest --preset ts-jest/presets/js-with-ts",
+    "tsc-test": "tsc --project . --noEmit",
+    "apidoc": "documentation readme --section API --markdown-toc false --parse-extension ts src/*.ts"
+  },
+  "keywords": [
+    "proxy",
+    "memoize",
+    "selector"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "proxy-compare": "^1.0.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.15",
+    "@typescript-eslint/eslint-plugin": "^4.5.0",
+    "@typescript-eslint/parser": "^4.5.0",
+    "documentation": "^13.1.0",
+    "eslint": "^7.12.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "jest": "^26.6.1",
+    "microbundle": "^0.12.4",
+    "npm-run-all": "^4.1.5",
+    "ts-jest": "^26.4.2",
+    "ts-loader": "^8.0.7",
+    "typescript": "^4.0.3"
+  }
+}
