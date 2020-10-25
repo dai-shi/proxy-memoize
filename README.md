@@ -114,7 +114,7 @@ create a memoized function
 
 #### Parameters
 
--   `fn` **function (arg: Arg): Result** 
+-   `fn` **function (obj: Obj): Result** 
 -   `options` **{size: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)?}?** 
 
 #### Examples
@@ -125,7 +125,7 @@ import memoize from 'proxy-memoize';
 const fn = memoize(obj => ({ sum: obj.a + obj.b, diff: obj.a - obj.b }));
 ```
 
-Returns **function (arg: Arg): Result** 
+Returns **function (obj: Obj): Result** 
 
 ## Related projects
 

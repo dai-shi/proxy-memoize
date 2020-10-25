@@ -5,7 +5,7 @@ import {
 } from 'proxy-compare';
 
 // properties
-const ARG_PROPERTY = 'g';
+const OBJ_PROPERTY = 'o';
 const RESULT_PROPERTY = 'r';
 const AFFECTED_PROPERTY = 'a';
 
@@ -17,37 +17,37 @@ const AFFECTED_PROPERTY = 'a';
  *
  * const fn = memoize(obj => ({ sum: obj.a + obj.b, diff: obj.a - obj.b }));
  */
-const memoize = <Arg extends object, Result>(
-  fn: (arg: Arg) => Result,
+const memoize = <Obj extends object, Result>(
+  fn: (obj: Obj) => Result,
   options?: { size?: number },
-): (arg: Arg) => Result => {
+): (obj: Obj) => Result => {
   const size = options?.size ?? 1;
   const memoList: {
-    [ARG_PROPERTY]: Arg;
+    [OBJ_PROPERTY]: Obj;
     [RESULT_PROPERTY]: Result;
     [AFFECTED_PROPERTY]: WeakMap<object, unknown>;
   }[] = [];
-  const resultCache = new WeakMap<Arg, Result>();
+  const resultCache = new WeakMap<Obj, Result>();
   const proxyCache = new WeakMap();
-  const memoizedFn = (arg: Arg) => {
-    if (resultCache.has(arg)) return resultCache.get(arg) as Result;
+  const memoizedFn = (obj: Obj) => {
+    if (resultCache.has(obj)) return resultCache.get(obj) as Result;
     for (let i = 0; i < memoList.length; i += 1) {
       const memo = memoList[i];
-      if (!isDeepChanged(memo[ARG_PROPERTY], arg, memo[AFFECTED_PROPERTY], proxyCache)) {
-        resultCache.set(arg, memo[RESULT_PROPERTY]);
+      if (!isDeepChanged(memo[OBJ_PROPERTY], obj, memo[AFFECTED_PROPERTY], proxyCache)) {
+        resultCache.set(obj, memo[RESULT_PROPERTY]);
         return memo[RESULT_PROPERTY];
       }
     }
     const affected = new WeakMap<object, unknown>();
-    const proxy = createDeepProxy(arg, affected, proxyCache);
+    const proxy = createDeepProxy(obj, affected, proxyCache);
     const result = untrack(fn(proxy));
     memoList.unshift({
-      [ARG_PROPERTY]: arg,
+      [OBJ_PROPERTY]: obj,
       [RESULT_PROPERTY]: result,
       [AFFECTED_PROPERTY]: affected,
     });
     if (memoList.length > size) memoList.pop();
-    resultCache.set(arg, result);
+    resultCache.set(obj, result);
     return result;
   };
   return memoizedFn;
