@@ -15,7 +15,7 @@ like [immer](https://github.com/immerjs/immer).
 While immer helps updating an object,
 this library helps creating a derived value from an object, a.k.a. selector.
 
-This library utilizes Proxy and WeakMap, and provide memoization.
+This library utilizes Proxy and WeakMap, and provides memoization.
 The memoized function will re-evaluate the original function
 only if the used part of argument (object) is changed.
 It's intuitive in a sense and magical in another sense.
