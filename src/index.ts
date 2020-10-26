@@ -66,10 +66,8 @@ const untrackArray = <Arr extends unknown[]>(arr: Arr): Arr => {
   let modified = false;
   arr.forEach((v, i) => {
     newArr[i] = untrack(v);
-    if (v !== null && newArr[i] !== null) {
+    if (!Object.is(newArr[i], v)) {
       modified = true;
-    } else {
-      newArr[i] = v;
     }
   });
   return modified ? newArr : arr;
@@ -80,10 +78,8 @@ const untrackObj = <Obj extends object>(obj: Obj): Obj => {
   let modified = false;
   Object.entries(obj).forEach(([k, v]) => {
     newObj[k as keyof Obj] = untrack(v);
-    if (v !== null && newObj[k as keyof Obj] !== null) {
+    if (!Object.is(newObj[k as keyof Obj], v)) {
       modified = true;
-    } else {
-      newObj[k as keyof Obj] = v;
     }
   });
   return modified ? newObj : obj;
