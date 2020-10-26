@@ -43,7 +43,7 @@ fn({ a: 1, b: 2 }) === fn({ a: 1, b: 2 }); // ---> true
 
 ## Usage with React Context
 
-Instead of useMemo.
+Instead of bare useMemo.
 
 ```js
 const Component = (props) => {
@@ -62,6 +62,8 @@ const App = ({ children }) => (
   </MyContext.Provider>
 );
 ```
+
+[CodeSandbox](https://codesandbox.io/s/proxy-memoize-demo-vrnze)
 
 ## Usage with React Redux
 
