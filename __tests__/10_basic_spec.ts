@@ -15,4 +15,22 @@ describe('basic spec', () => {
     expect(fn({ a: 1, b: 2, c: 3 })).toEqual({ a: 1, b: 2 });
     expect(fn({ a: 2, b: 3, c: 4 })).toBe(fn({ a: 2, b: 3, c: 5 }));
   });
+
+  it('x.a.b', () => {
+    const fn = memoize((x: { a: { b: number } }) => ({ a: x.a }));
+    expect(fn({ a: { b: 1 } })).toEqual({ a: { b: 1 } });
+    const a = { b: 2 };
+    expect(fn({ a })).toBe(fn({ a }));
+  });
+});
+
+describe('circular object', () => {
+  it('simple array', () => {
+    const fn = memoize((x: { a: number }) => {
+      const arr: unknown[] = [x.a];
+      arr.push(arr);
+      return arr;
+    });
+    expect(fn({ a: 1 })).toBe(fn({ a: 1 }));
+  });
 });

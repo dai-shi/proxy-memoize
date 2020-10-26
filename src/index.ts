@@ -40,7 +40,7 @@ const memoize = <Obj extends object, Result>(
     }
     const affected = new WeakMap<object, unknown>();
     const proxy = createDeepProxy(obj, affected, proxyCache);
-    const result = untrack(fn(proxy));
+    const result = untrack(fn(proxy), new Set());
     memoList.unshift({
       [OBJ_PROPERTY]: obj,
       [RESULT_PROPERTY]: result,
@@ -53,40 +53,18 @@ const memoize = <Obj extends object, Result>(
   return memoizedFn;
 };
 
-const untrack = <T>(x: T): T => {
+const untrack = <T>(x: T, seen: Set<T>): T => {
   if (typeof x !== 'object' || x === null) return x;
   const untrackedObj = getUntrackedObject(x);
   if (untrackedObj !== null) return untrackedObj;
-  if (Array.isArray(x)) untrackArray(x);
-  return untrackObj(x as unknown as object) as unknown as T;
-};
-
-const untrackArray = <Arr extends unknown[]>(arr: Arr): Arr => {
-  const newArr = [] as unknown[] as Arr;
-  let modified = false;
-  arr.forEach((v, i) => {
-    newArr[i] = untrack(v);
-    if (v !== null && newArr[i] !== null) {
-      modified = true;
-    } else {
-      newArr[i] = v;
-    }
-  });
-  return modified ? newArr : arr;
-};
-
-const untrackObj = <Obj extends object>(obj: Obj): Obj => {
-  const newObj = {} as Obj;
-  let modified = false;
-  Object.entries(obj).forEach(([k, v]) => {
-    newObj[k as keyof Obj] = untrack(v);
-    if (v !== null && newObj[k as keyof Obj] !== null) {
-      modified = true;
-    } else {
-      newObj[k as keyof Obj] = v;
-    }
-  });
-  return modified ? newObj : obj;
+  if (!seen.has(x)) {
+    seen.add(x);
+    Object.entries(x).forEach(([k, v]) => {
+      const vv = untrack(v, seen);
+      if (!Object.is(vv, v)) x[k as keyof T] = vv;
+    });
+  }
+  return x;
 };
 
 export default memoize;
