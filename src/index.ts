@@ -4,6 +4,20 @@ import {
   getUntrackedObject,
 } from 'proxy-compare';
 
+const untrack = <T>(x: T, seen: Set<T>): T => {
+  if (typeof x !== 'object' || x === null) return x;
+  const untrackedObj = getUntrackedObject(x);
+  if (untrackedObj !== null) return untrackedObj;
+  if (!seen.has(x)) {
+    seen.add(x);
+    Object.entries(x).forEach(([k, v]) => {
+      const vv = untrack(v, seen);
+      if (!Object.is(vv, v)) x[k as keyof T] = vv;
+    });
+  }
+  return x;
+};
+
 // properties
 const OBJ_PROPERTY = 'o';
 const RESULT_PROPERTY = 'r';
@@ -51,20 +65,6 @@ const memoize = <Obj extends object, Result>(
     return result;
   };
   return memoizedFn;
-};
-
-const untrack = <T>(x: T, seen: Set<T>): T => {
-  if (typeof x !== 'object' || x === null) return x;
-  const untrackedObj = getUntrackedObject(x);
-  if (untrackedObj !== null) return untrackedObj;
-  if (!seen.has(x)) {
-    seen.add(x);
-    Object.entries(x).forEach(([k, v]) => {
-      const vv = untrack(v, seen);
-      if (!Object.is(vv, v)) x[k as keyof T] = vv;
-    });
-  }
-  return x;
 };
 
 export default memoize;
