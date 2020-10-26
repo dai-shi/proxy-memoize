@@ -23,3 +23,14 @@ describe('basic spec', () => {
     expect(fn({ a })).toBe(fn({ a }));
   });
 });
+
+describe('circular object', () => {
+  it('simple array', () => {
+    const fn = memoize((x: { a: number }) => {
+      const arr: unknown[] = [x.a];
+      arr.push(arr);
+      return arr;
+    });
+    expect(fn({ a: 1 })).toBe(fn({ a: 1 }));
+  });
+});

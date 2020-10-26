@@ -41,7 +41,7 @@ const memoize = <Obj extends object, Result>(
     const affected = new WeakMap<object, unknown>();
     const proxy = createDeepProxy(obj, affected, proxyCache);
     let result = fn(proxy);
-    const untracked = untrack(result);
+    const untracked = untrack(result, new Set());
     if (untracked !== null) result = untracked;
     memoList.unshift({
       [OBJ_PROPERTY]: obj,
@@ -55,14 +55,17 @@ const memoize = <Obj extends object, Result>(
   return memoizedFn;
 };
 
-const untrack = <T>(x: T): T | null => {
+const untrack = <T>(x: T, seen: Set<T>): T | null => {
   if (typeof x !== 'object' || x === null) return null;
   const untrackedObj = getUntrackedObject(x);
   if (untrackedObj !== null) return untrackedObj;
-  Object.entries(x).forEach(([k, v]) => {
-    const vv = untrack(v);
-    if (vv !== null) x[k as keyof T] = untrack(v);
-  });
+  if (!seen.has(x)) {
+    seen.add(x);
+    Object.entries(x).forEach(([k, v]) => {
+      const vv = untrack(v, seen);
+      if (vv !== null) x[k as keyof T] = vv;
+    });
+  }
   return null;
 };
 
