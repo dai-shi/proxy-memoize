@@ -22,7 +22,8 @@
     "import/extensions": ["error", "never"],
     "symbol-description": "off",
     "no-use-before-define": "off",
-    "@typescript-eslint/ban-types": "off"
+    "@typescript-eslint/ban-types": "off",
+    "no-param-reassign": "off"
   },
   "overrides": [{
     "files": ["__tests__/**/*"],

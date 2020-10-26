@@ -62,27 +62,17 @@ const untrack = <T>(x: T): T => {
 };
 
 const untrackArray = <Arr extends unknown[]>(arr: Arr): Arr => {
-  const newArr = [] as unknown[] as Arr;
-  let modified = false;
   arr.forEach((v, i) => {
-    newArr[i] = untrack(v);
-    if (!Object.is(newArr[i], v)) {
-      modified = true;
-    }
+    arr[i] = untrack(v);
   });
-  return modified ? newArr : arr;
+  return arr;
 };
 
 const untrackObj = <Obj extends object>(obj: Obj): Obj => {
-  const newObj = {} as Obj;
-  let modified = false;
   Object.entries(obj).forEach(([k, v]) => {
-    newObj[k as keyof Obj] = untrack(v);
-    if (!Object.is(newObj[k as keyof Obj], v)) {
-      modified = true;
-    }
+    obj[k as keyof Obj] = untrack(v);
   });
-  return modified ? newObj : obj;
+  return obj;
 };
 
 export default memoize;
