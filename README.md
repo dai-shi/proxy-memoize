@@ -35,7 +35,7 @@ const fn = memoize(x => ({ sum: x.a + x.b, diff: x.a - x.b }));
 
 fn({ a: 2, b: 1, c: 1 }); // ---> { sum: 3, diff: 1 }
 fn({ a: 3, b: 1, c: 1 }); // ---> { sum: 4, diff: 2 }
-fn({ a: 3, b: 1, c: 9 }); // ---> { sum: 4, diff: 2 } (returnig a cached value)
+fn({ a: 3, b: 1, c: 9 }); // ---> { sum: 4, diff: 2 } (returning a cached value)
 fn({ a: 4, b: 1, c: 9 }); // ---> { sum: 5, diff: 3 }
 
 fn({ a: 1, b: 2 }) === fn({ a: 1, b: 2 }); // ---> true
