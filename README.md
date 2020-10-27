@@ -83,6 +83,8 @@ const Component = ({ id }) => {
 };
 ```
 
+[CodeSandbox](https://codesandbox.io/s/proxy-memoize-demo-c1021)
+
 ## Usage with Zustand
 
 For derived values.
