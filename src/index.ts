@@ -2,6 +2,7 @@ import {
   createDeepProxy,
   isDeepChanged,
   getUntrackedObject,
+  trackMemo,
 } from 'proxy-compare';
 
 const untrack = <T>(x: T, seen: Set<T>): T => {
@@ -52,6 +53,7 @@ const memoize = <Obj extends object, Result>(
         return memo[RESULT_PROPERTY];
       }
     }
+    trackMemo(obj);
     const affected = new WeakMap<object, unknown>();
     const proxy = createDeepProxy(obj, affected, proxyCache);
     const result = untrack(fn(proxy), new Set());
