@@ -19,6 +19,12 @@ const untrack = <T>(x: T, seen: Set<T>): T => {
   return x;
 };
 
+const getDeepUntrackedObject = <Obj extends object>(obj: Obj): Obj => {
+  const untrackedObj = getUntrackedObject(obj);
+  if (untrackedObj === null) return obj;
+  return getDeepUntrackedObject(untrackedObj);
+};
+
 // properties
 const OBJ_PROPERTY = 'o';
 const RESULT_PROPERTY = 'r';
@@ -45,11 +51,12 @@ const memoize = <Obj extends object, Result>(
   const resultCache = new WeakMap<Obj, Result>();
   const proxyCache = new WeakMap();
   const memoizedFn = (obj: Obj) => {
-    if (resultCache.has(obj)) return resultCache.get(obj) as Result;
+    const cacheKey = getDeepUntrackedObject(obj);
+    if (resultCache.has(cacheKey)) return resultCache.get(cacheKey) as Result;
     for (let i = 0; i < memoList.length; i += 1) {
       const memo = memoList[i];
       if (!isDeepChanged(memo[OBJ_PROPERTY], obj, memo[AFFECTED_PROPERTY], proxyCache)) {
-        resultCache.set(obj, memo[RESULT_PROPERTY]);
+        resultCache.set(cacheKey, memo[RESULT_PROPERTY]);
         return memo[RESULT_PROPERTY];
       }
     }
@@ -63,7 +70,7 @@ const memoize = <Obj extends object, Result>(
       [AFFECTED_PROPERTY]: affected,
     });
     if (memoList.length > size) memoList.pop();
-    resultCache.set(obj, result);
+    resultCache.set(cacheKey, result);
     return result;
   };
   return memoizedFn;
