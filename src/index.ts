@@ -124,6 +124,7 @@ const memoize = <Obj extends object, Result>(
     const result = untrack(fn(proxy), new Set());
     if (obj !== cacheKey) {
       copyAffected(cacheKey, obj, affected);
+      touchAffected(obj, cacheKey, affected);
     }
     memoList.unshift({
       [OBJ_PROPERTY]: obj,
