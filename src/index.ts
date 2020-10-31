@@ -123,7 +123,10 @@ const memoize = <Obj extends object, Result>(
     const proxy = createDeepProxy(obj, affected, proxyCache);
     const result = untrack(fn(proxy), new Set());
     if (obj !== cacheKey) {
-      copyAffected(cacheKey, obj, affected);
+      const origObj = getUntrackedObject(obj);
+      if (cacheKey !== origObj) {
+        copyAffected(cacheKey, origObj, affected);
+      }
       touchAffected(obj, cacheKey, affected);
     }
     memoList.unshift({
