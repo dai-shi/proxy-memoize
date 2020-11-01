@@ -2,9 +2,13 @@
 
 ## [Unreleased]
 
+## [0.2.1] - 2020-11-01
+### Changed
+- Support nested memoize (#5)
+
 ## [0.2.0] - 2020-10-31
 ### Changed
-- Support nested memoize (#4)
+- Support nested memoize (#4) incomplete
 
 ## [0.1.1] - 2020-10-26
 ### Changed
