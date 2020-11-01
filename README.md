@@ -72,18 +72,21 @@ Instead of [reselect](https://github.com/reduxjs/reselect).
 ```js
 import { useSelector } from 'react-redux';
 
-const selectTotal = memoize(({ state, id }) => ({
-  total: state.a + state.b,
-  title: state.titles[id]
-}))
+const getScore = memoize(state => ({
+  score: heavyComputation(state.a + state.b),
+  createdAt: Date.now(),
+}));
 
 const Component = ({ id }) => {
-  const { total, title } = useSelector(state => selectTotal({ state, id }));
-  return <div>{total} {title}</div>;
+  const { score, title } = useSelector(useCallback(memoize(state => ({
+    score: getScore(state),
+    title: state.titles[id],
+  })), [id]));
+  return <div>{score.score} {score.createdAt} {title}</div>;
 };
 ```
 
-[CodeSandbox](https://codesandbox.io/s/proxy-memoize-demo-c1021)
+- [CodeSandbox 1](https://codesandbox.io/s/proxy-memoize-demo-c1021)
 
 ## Usage with Zustand
 
