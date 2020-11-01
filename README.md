@@ -63,7 +63,7 @@ const App = ({ children }) => (
 );
 ```
 
-[CodeSandbox](https://codesandbox.io/s/proxy-memoize-demo-vrnze)
+- [CodeSandbox](https://codesandbox.io/s/proxy-memoize-demo-vrnze)
 
 ## Usage with React Redux
 
@@ -87,6 +87,7 @@ const Component = ({ id }) => {
 ```
 
 - [CodeSandbox 1](https://codesandbox.io/s/proxy-memoize-demo-c1021)
+- [CodeSandbox 2](https://codesandbox.io/s/proxy-memoize-demo-fi5ni)
 
 ## Usage with Zustand
 
@@ -111,7 +112,7 @@ const Component = () => {
 };
 ```
 
-[CodeSandbox](https://codesandbox.io/s/proxy-memoize-demo-yo00p)
+- [CodeSandbox](https://codesandbox.io/s/proxy-memoize-demo-yo00p)
 
 ## API
 
