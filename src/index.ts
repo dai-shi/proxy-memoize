@@ -40,26 +40,6 @@ const untrack = <T>(x: T, seen: Set<T>): T => {
   return x;
 };
 
-const getDeepUntrackedObject = <Obj extends object>(obj: Obj): Obj => {
-  const untrackedObj = getUntrackedObject(obj);
-  if (untrackedObj === null) return obj;
-  return getDeepUntrackedObject(untrackedObj);
-};
-
-const copyAffected = (orig: unknown, x: unknown, affected: Affected) => {
-  if (!isObject(orig) || !isObject(x)) return;
-  const used = affected.get(x);
-  if (!used) return;
-  affected.set(orig, used);
-  used.forEach((key) => {
-    copyAffected(
-      orig[key as keyof typeof orig],
-      x[key as keyof typeof x],
-      affected,
-    );
-  });
-};
-
 const touchAffected = (x: unknown, orig: unknown, affected: Affected) => {
   if (!isObject(x) || !isObject(orig)) return;
   const used = affected.get(orig);
@@ -102,7 +82,8 @@ const memoize = <Obj extends object, Result>(
   }>();
   const proxyCache = new WeakMap();
   const memoizedFn = (obj: Obj) => {
-    const cacheKey = getDeepUntrackedObject(obj);
+    const origObj = getUntrackedObject(obj);
+    const cacheKey = origObj || obj;
     const cache = resultCache.get(cacheKey);
     if (cache) {
       touchAffected(obj, cacheKey, cache[AFFECTED_PROPERTY]);
@@ -122,15 +103,11 @@ const memoize = <Obj extends object, Result>(
     const affected: Affected = new WeakMap();
     const proxy = createDeepProxy(obj, affected, proxyCache);
     const result = untrack(fn(proxy), new Set());
-    const origObj = getUntrackedObject(obj);
-    if (obj !== cacheKey) {
-      if (cacheKey !== origObj) {
-        copyAffected(cacheKey, origObj, affected);
-      }
-      touchAffected(obj, cacheKey, affected);
+    if (origObj !== null) {
+      touchAffected(obj, origObj, affected);
     }
     memoList.unshift({
-      [OBJ_PROPERTY]: origObj || obj,
+      [OBJ_PROPERTY]: cacheKey,
       [RESULT_PROPERTY]: result,
       [AFFECTED_PROPERTY]: affected,
     });
