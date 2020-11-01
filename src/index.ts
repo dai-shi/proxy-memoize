@@ -8,24 +8,6 @@ type Affected = WeakMap<object, Set<string | number | symbol>>;
 
 const isObject = (x: unknown): x is object => typeof x === 'object' && x !== null;
 
-/*
-const affectedToPathList = (rootObj: object, affected: Affected) => {
-  const list: (string | number | symbol)[][] = [];
-  const walk = (obj: object, path?: (string | number | symbol)[]) => {
-    const used = affected.get(obj);
-    if (used) {
-      used.forEach((key) => {
-        walk(obj[key as keyof typeof obj], path ? [...path, key] : [key]);
-      });
-    } else if (path) {
-      list.push(path);
-    }
-  };
-  walk(rootObj);
-  return list;
-};
-*/
-
 const untrack = <T>(x: T, seen: Set<T>): T => {
   if (!isObject(x)) return x;
   const untrackedObj = getUntrackedObject(x);
