@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+### Changed
+- Refactor and simplify (#6)
 
 ## [0.2.1] - 2020-11-01
 ### Changed
