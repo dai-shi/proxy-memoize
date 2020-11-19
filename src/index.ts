@@ -2,6 +2,7 @@ import {
   createDeepProxy,
   isDeepChanged,
   getUntrackedObject,
+  trackMemo,
 } from 'proxy-compare';
 
 type Affected = WeakMap<object, Set<string | number | symbol>>;
@@ -11,7 +12,10 @@ const isObject = (x: unknown): x is object => typeof x === 'object' && x !== nul
 const untrack = <T>(x: T, seen: Set<T>): T => {
   if (!isObject(x)) return x;
   const untrackedObj = getUntrackedObject(x);
-  if (untrackedObj !== null) return untrackedObj;
+  if (untrackedObj !== null) {
+    trackMemo(x);
+    return untrackedObj;
+  }
   if (!seen.has(x)) {
     seen.add(x);
     Object.entries(x).forEach(([k, v]) => {
