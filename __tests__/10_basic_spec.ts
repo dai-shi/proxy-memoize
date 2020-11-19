@@ -34,3 +34,61 @@ describe('circular object', () => {
     expect(fn({ a: 1 })).toBe(fn({ a: 1 }));
   });
 });
+
+describe('returning objects args', () => {
+  it('x checked, x returned, don\'t memoize', () => {
+    const fn = memoize((x: { a: number, b: number }) => x);
+    expect(fn({ a: 1, b: 1 })).not.toBe(fn({ a: 1, b: 2 }));
+  });
+
+  it('x.a checked, x returned, don\'t memoize', () => {
+    const fn = memoize((x: { a: number, b: number }) => {
+      if (x.a) {
+        return x;
+      }
+      return null;
+    });
+    expect(fn({ a: 1, b: 1 })).not.toBe(fn({ a: 1, b: 2 }));
+  });
+
+  it('x.a checked, x.a returned, don\'t memoize', () => {
+    const fn = memoize((x: { a: { b: number, c: number } }) => {
+      if (x.a) {
+        return x.a;
+      }
+      return null;
+    });
+    expect(fn({ a: { b: 1, c: 1 } })).not.toBe(fn({ a: { b: 1, c: 2 } }));
+  });
+
+  it('x.a.b checked, x.a returned, don\'t memoize', () => {
+    const fn = memoize((x: { a: { b: number, c: number } }) => {
+      if (x.a.b) {
+        return x.a;
+      }
+      return null;
+    });
+    expect(fn({ a: { b: 1, c: 1 } })).not.toBe(fn({ a: { b: 1, c: 2 } }));
+  });
+
+  it('x.a.b checked, x.a returned and nested, don\'t memoize', () => {
+    const fn = memoize((x: { a: { b: number, c: number } }) => {
+      if (x.a.b) {
+        return { d: { e: x.a } };
+      }
+      return null;
+    });
+    expect(fn({ a: { b: 1, c: 1 } })).not.toBe(fn({ a: { b: 1, c: 2 } }));
+  });
+
+  it('x.a.b checked, x.a (same object) returned and nested, do memoize', () => {
+    const fn = memoize((x: { a: { b: number, c: number } }) => {
+      if (x.a.b) {
+        return { d: { e: x.a } };
+      }
+      return null;
+    });
+    const a = { b: 1, c: 1 };
+    expect(fn({ a })).toBe(fn({ a }));
+  });
+});
