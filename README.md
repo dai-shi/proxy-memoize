@@ -63,7 +63,7 @@ const App = ({ children }) => (
 );
 ```
 
-- [CodeSandbox](https://codesandbox.io/s/proxy-memoize-demo-vrnze)
+-   [CodeSandbox](https://codesandbox.io/s/proxy-memoize-demo-vrnze)
 
 ## Usage with React Redux
 
@@ -86,8 +86,8 @@ const Component = ({ id }) => {
 };
 ```
 
-- [CodeSandbox 1](https://codesandbox.io/s/proxy-memoize-demo-c1021)
-- [CodeSandbox 2](https://codesandbox.io/s/proxy-memoize-demo-fi5ni)
+-   [CodeSandbox 1](https://codesandbox.io/s/proxy-memoize-demo-c1021)
+-   [CodeSandbox 2](https://codesandbox.io/s/proxy-memoize-demo-fi5ni)
 
 ## Usage with Zustand
 
@@ -112,7 +112,7 @@ const Component = () => {
 };
 ```
 
-- [CodeSandbox](https://codesandbox.io/s/proxy-memoize-demo-yo00p)
+-   [CodeSandbox](https://codesandbox.io/s/proxy-memoize-demo-yo00p)
 
 ## API
 
@@ -120,7 +120,7 @@ const Component = () => {
 
 ### memoize
 
-create a memoized function
+Create a memoized function
 
 #### Parameters
 
@@ -136,6 +136,22 @@ const fn = memoize(obj => ({ sum: obj.a + obj.b, diff: obj.a - obj.b }));
 ```
 
 Returns **function (obj: Obj): Result** 
+
+### getUntrackedObject
+
+This is to unwrap a proxy object and return an original object.
+It returns null if not relevant.
+
+#### Examples
+
+```javascript
+import memoize, { getUntrackedObject } from 'proxy-memoize';
+
+const fn = memoize(obj => {
+  console.log(getUntrackedObject(obj));
+  return { sum: obj.a + obj.b, diff: obj.a - obj.b };
+});
+```
 
 ## Related projects
 

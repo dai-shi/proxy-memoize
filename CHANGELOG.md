@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+### Added
+- Re-export getUntrackedObject from proxy-compare
 
 ## [0.2.3] - 2020-11-20
 ### Changed

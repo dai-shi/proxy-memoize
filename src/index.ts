@@ -45,7 +45,7 @@ const RESULT_PROPERTY = 'r';
 const AFFECTED_PROPERTY = 'a';
 
 /**
- * create a memoized function
+ * Create a memoized function
  *
  * @example
  * import memoize from 'proxy-memoize';
@@ -106,5 +106,19 @@ const memoize = <Obj extends object, Result>(
   };
   return memoizedFn;
 };
+
+/**
+ * This is to unwrap a proxy object and return an original object.
+ * It returns null if not relevant.
+ *
+ * @example
+ * import memoize, { getUntrackedObject } from 'proxy-memoize';
+ *
+ * const fn = memoize(obj => {
+ *   console.log(getUntrackedObject(obj));
+ *   return { sum: obj.a + obj.b, diff: obj.a - obj.b };
+ * });
+ */
+export { getUntrackedObject } from 'proxy-compare';
 
 export default memoize;
