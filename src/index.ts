@@ -111,6 +111,10 @@ const memoize = <Obj extends object, Result>(
  * This is to unwrap a proxy object and return an original object.
  * It returns null if not relevant.
  *
+ * [Notes]
+ * This function is for debugging purpose.
+ * It's not supposed to be used in production and it's subject to change.
+ *
  * @example
  * import memoize, { getUntrackedObject } from 'proxy-memoize';
  *
