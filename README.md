@@ -6,6 +6,13 @@
 
 Intuitive magical memoization library with Proxy and WeakMap
 
+## Project status
+
+The API is basically complete. Before reaching v1, 
+we would like to collect more bug reports and best practices.
+There are no obvious/known issues at the moment, but there are some
+[limitations and workarounds](#limitations_and_workarounds).
+
 ## Introduction
 
 In frontend framework like React, object immutability is important.
@@ -153,9 +160,120 @@ const fn = memoize(obj => {
 });
 ```
 
+## Limitations and workarounds
+
+### Inside the function, objects are wrapped by proxies and touching a property will record it.
+
+```js
+const fn = memoize(obj => {
+  console.log(obj.c); // this will mark ".c" as used
+  return { sum: obj.a + obj.b, diff: obj.a - obj.b };
+});
+```
+
+A workaround is to unwrap a proxy.
+
+```js
+const fn = memoize(obj => {
+  console.log(getUntrackedObject(obj).c);
+  return { sum: obj.a + obj.b, diff: obj.a - obj.b };
+});
+```
+
+### Memoized function will unwrap proxies in the return value only if it consists of plain objects/arrays.
+
+```js
+const fn = memoize(obj => {
+  return { x: obj.a, y: { z: [obj.b, obj.c] } }; // plain objects
+});
+```
+
+In this case above, the return value is clean, however, see the following.
+
+```js
+const fn = memoize(obj => {
+  return { x: new Set([obj.a]), y: new Map([['z', obj.b]]) }; // not plain
+});
+```
+
+We can't unwrap Set/Map or other non-plain objects.
+The problem is when `obj.a` is an object (which will be wrapped by a proxy)
+and touching its property will record the usage, which leads
+unexpected behavior.
+If `obj.a` is a primitive value, there's no problem.
+
+There's no workaround.
+Please be advised to use only plain objects/arrays. Nested objects are OK.
+
+## Comparison
+
+### Reselect
+
+Here's a simple example in reselect.
+
+```js
+import { createSelector } from 'reselect';
+
+const mySelector = createSelector(
+  state => state.values.value1,
+  state => state.values.value2,
+  (value1, value2) => value1 + value2,
+);
+```
+
+This can be written as follows.
+
+```js
+import memoize from 'proxy-memoize';
+
+const mySelector = createSelector(
+  state => state.values.value1 + state.values.value2,
+);
+```
+
+Another example from reselect.
+
+```js
+const subtotalSelector = createSelector(
+  state => state.shop.items,
+  items => items.reduce((acc, item) => acc + item.value, 0),
+);
+
+const taxSelector = createSelector(
+  subtotalSelector,
+  state => state.shop.taxPercent,
+  (subtotal, taxPercent) => subtotal * (taxPercent / 100),
+);
+
+export const totalSelector = createSelector(
+  subtotalSelector,
+  taxSelector,
+  (subtotal, tax) => ({ total: subtotal + tax }),
+);
+```
+
+This can be converted to something like this.
+
+```js
+export const totalSelector = memoize(state => {
+  const subtotal = state.shop.item.reduce((acc, item) => acc + item.value, 0);
+  const tax = subtotal * (state.shop.taxPercent / 100);
+  return { total: subtotal + tax };
+);
+```
+
+Finally, see this example.
+
+```js
+const todoTextsSelector = memoize(state => state.todos.map(todo => todo.text));
+```
+
+This can't be written in reselect.
+
 ## Related projects
 
 -   [react-tracked](https://github.com/dai-shi/react-tracked)
 -   [reactive-react-redux](https://github.com/dai-shi/reactive-react-redux)
 -   [svelte3-redux](https://github.com/dai-shi/svelte3-redux)
 -   [memoize-state](https://github.com/theKashey/memoize-state)
+-   [valtio](https://github.com/pmndrs/valtio)
