@@ -8,10 +8,11 @@ Intuitive magical memoization library with Proxy and WeakMap
 
 ## Project status
 
-The API is basically complete. Before reaching v1, 
-we would like to collect more bug reports and best practices.
+The API is complete. Unless we find some major issues, it will be fixed.
+Before reaching v1, we would like to collect more bug reports
+and best practices.
 There are no obvious/known issues at the moment, but there are some
-[limitations and workarounds](#limitations_and_workarounds).
+[limitations and workarounds](#limitations-and-workarounds).
 
 ## Introduction
 
@@ -203,7 +204,8 @@ unexpected behavior.
 If `obj.a` is a primitive value, there's no problem.
 
 There's no workaround.
-Please be advised to use only plain objects/arrays. Nested objects are OK.
+Please be advised to use only plain objects/arrays.
+Nested objects/arrays are OK.
 
 ## Comparison
 
