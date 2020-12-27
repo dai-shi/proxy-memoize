@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [0.3.1] - 2020-12-27
+### Changed
+- Fix a bug with nested memoized functions (#12)
+
 ## [0.3.0] - 2020-12-25
 ### Added
 - Re-export getUntrackedObject from proxy-compare
