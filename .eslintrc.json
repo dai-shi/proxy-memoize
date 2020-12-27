@@ -22,7 +22,8 @@
     "import/extensions": ["error", "never"],
     "symbol-description": "off",
     "@typescript-eslint/ban-types": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "no-unused-vars": "off"
   },
   "overrides": [{
     "files": ["__tests__/**/*"],
