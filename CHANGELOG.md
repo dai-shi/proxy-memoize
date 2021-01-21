@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+### Changed
+- Update proxy-compare v1.1.6 which fixes some edge cases
 
 ## [0.3.1] - 2020-12-27
 ### Changed
