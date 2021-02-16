@@ -233,7 +233,7 @@ This can be written as follows.
 ```js
 import memoize from 'proxy-memoize';
 
-const mySelector = createSelector(
+const mySelector = memoize(
   state => state.values.value1 + state.values.value2,
 );
 ```
