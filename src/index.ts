@@ -67,7 +67,6 @@ const memoize = <Obj extends object, Result>(
     [AFFECTED_PROPERTY]: Affected;
   }>();
   const proxyCache = new WeakMap();
-  const deepChangedCache = new WeakMap();
   const memoizedFn = (obj: Obj) => {
     const origObj = getUntrackedObject(obj);
     const cacheKey = origObj || obj;
@@ -78,7 +77,7 @@ const memoize = <Obj extends object, Result>(
     }
     for (let i = 0; i < memoList.length; i += 1) {
       const memo = memoList[i];
-      if (!isDeepChanged(memo[OBJ_PROPERTY], obj, memo[AFFECTED_PROPERTY], deepChangedCache)) {
+      if (!isDeepChanged(memo[OBJ_PROPERTY], obj, memo[AFFECTED_PROPERTY], new WeakMap())) {
         resultCache.set(cacheKey, {
           [RESULT_PROPERTY]: memo[RESULT_PROPERTY],
           [AFFECTED_PROPERTY]: memo[AFFECTED_PROPERTY],
