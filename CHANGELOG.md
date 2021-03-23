@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [0.3.3] - 2021-03-23
+### Changed
+- Fix too much caching (#17)
+
 ## [0.3.2] - 2021-01-21
 ### Changed
 - Update proxy-compare v1.1.6 which fixes some edge cases
