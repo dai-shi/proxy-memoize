@@ -272,10 +272,15 @@ export const totalSelector = memoize(state => {
 Finally, see this example.
 
 ```js
+const state = {
+  todos: [
+    { text: 'foo', completed: false }
+  ]
+};
 const todoTextsSelector = memoize(state => state.todos.map(todo => todo.text));
 ```
 
-This can't be written in reselect.
+This can't be written in reselect because if the `completed` value is toggled, the `todoTextsSelector` will return a referentially new array, even though the contents is shallow equal.
 
 ## Related projects
 
