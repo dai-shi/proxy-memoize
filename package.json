@@ -1,7 +1,7 @@
 {
   "name": "proxy-memoize",
   "description": "Intuitive magical memoization library with Proxy and WeakMap",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "author": "Daishi Kato",
   "repository": {
     "type": "git",
