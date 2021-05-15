@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+### Changed
+- Update proxy-compare v2.0.0 which only changes interanl API names
 
 ## [0.3.3] - 2021-03-23
 ### Changed

@@ -1,7 +1,7 @@
 import {
-  createDeepProxy,
-  isDeepChanged,
-  getUntrackedObject,
+  createProxy,
+  isChanged,
+  getUntracked,
   trackMemo,
 } from 'proxy-compare';
 
@@ -11,7 +11,7 @@ const isObject = (x: unknown): x is object => typeof x === 'object' && x !== nul
 
 const untrack = <T>(x: T, seen: Set<T>): T => {
   if (!isObject(x)) return x;
-  const untrackedObj = getUntrackedObject(x);
+  const untrackedObj = getUntracked(x);
   if (untrackedObj !== null) {
     trackMemo(x);
     return untrackedObj;
@@ -68,7 +68,7 @@ const memoize = <Obj extends object, Result>(
   }>();
   const proxyCache = new WeakMap();
   const memoizedFn = (obj: Obj) => {
-    const origObj = getUntrackedObject(obj);
+    const origObj = getUntracked(obj);
     const cacheKey = origObj || obj;
     const cache = resultCache.get(cacheKey);
     if (cache) {
@@ -77,7 +77,7 @@ const memoize = <Obj extends object, Result>(
     }
     for (let i = 0; i < memoList.length; i += 1) {
       const memo = memoList[i];
-      if (!isDeepChanged(memo[OBJ_PROPERTY], obj, memo[AFFECTED_PROPERTY], new WeakMap())) {
+      if (!isChanged(memo[OBJ_PROPERTY], obj, memo[AFFECTED_PROPERTY], new WeakMap())) {
         resultCache.set(cacheKey, {
           [RESULT_PROPERTY]: memo[RESULT_PROPERTY],
           [AFFECTED_PROPERTY]: memo[AFFECTED_PROPERTY],
@@ -87,7 +87,7 @@ const memoize = <Obj extends object, Result>(
       }
     }
     const affected: Affected = new WeakMap();
-    const proxy = createDeepProxy(obj, affected, proxyCache);
+    const proxy = createProxy(obj, affected, proxyCache);
     const result = untrack(fn(proxy), new Set());
     if (origObj !== null) {
       touchAffected(obj, origObj, affected);
@@ -123,6 +123,6 @@ const memoize = <Obj extends object, Result>(
  *   return { sum: obj.a + obj.b, diff: obj.a - obj.b };
  * });
  */
-export { getUntrackedObject } from 'proxy-compare';
+export { getUntracked as getUntrackedObject } from 'proxy-compare';
 
 export default memoize;
