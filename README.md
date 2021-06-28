@@ -54,7 +54,7 @@ fn({ a: 1, b: 2 }) === fn({ a: 1, b: 2 }); // ---> true
 
 Instead of bare useMemo.
 
-```js
+```jsx
 const Component = (props) => {
   const [state, dispatch] = useContext(MyContext);
   const render = useCallback(memoize(([props, state]) => (
@@ -78,7 +78,7 @@ const App = ({ children }) => (
 
 Instead of [reselect](https://github.com/reduxjs/reselect).
 
-```js
+```jsx
 import { useSelector } from 'react-redux';
 
 const getScore = memoize(state => ({
@@ -98,11 +98,39 @@ const Component = ({ id }) => {
 -   [CodeSandbox 1](https://codesandbox.io/s/proxy-memoize-demo-c1021)
 -   [CodeSandbox 2](https://codesandbox.io/s/proxy-memoize-demo-fi5ni)
 
+### Using `size` option
+
+The example above might seem tricky to create memoized selector in component.
+Alternatively, we can use `size` option.
+
+```jsx
+import { useSelector } from 'react-redux';
+
+const getScore = memoize(state => ({
+  score: heavyComputation(state.a + state.b),
+  createdAt: Date.now(),
+}));
+
+const selector = memoize(([state, id]) => ({
+  score: getScore(state),
+  title: state.titles[id],
+}), {
+  size: 500,
+});
+
+const Component = ({ id }) => {
+  const { score, title } = useSelector(state => selector([state, id]));
+  return <div>{score.score} {score.createdAt} {title}</div>;
+};
+```
+
+The drawback of this approach is we need a good estimate of `size` in advance.
+
 ## Usage with Zustand
 
 For derived values.
 
-```js
+```jsx
 import create from 'zustand';
 
 const useStore = create(set => ({
