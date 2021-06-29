@@ -10,6 +10,7 @@
   "source": "./src/index.ts",
   "main": "./dist/index.umd.js",
   "module": "./dist/index.modern.js",
+  "react-native": "./dist/index.modern.js",
   "types": "./dist/src/index.d.ts",
   "sideEffects": false,
   "files": [
@@ -31,7 +32,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "proxy-compare": "2.0.0"
+    "proxy-compare": "2.0.1"
   },
   "devDependencies": {
     "@types/jest": "^26.0.23",
