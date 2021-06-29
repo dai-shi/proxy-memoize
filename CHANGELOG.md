@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+
+## [0.3.5] - 2021-04-29
 ### Changed
 - Fix package.json for React Native (#25)
 
