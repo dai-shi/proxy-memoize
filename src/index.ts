@@ -52,7 +52,7 @@ const AFFECTED_PROPERTY = 'a';
  *
  * const fn = memoize(obj => ({ sum: obj.a + obj.b, diff: obj.a - obj.b }));
  */
-const memoize = <Obj extends object, Result>(
+export const memoize = <Obj extends object, Result>(
   fn: (obj: Obj) => Result,
   options?: { size?: number },
 ): (obj: Obj) => Result => {
