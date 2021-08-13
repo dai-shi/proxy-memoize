@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [0.3.6] - 2021-08-13
+### Changed
+- Fix package.json properly for ESM (#27)
+
 ## [0.3.5] - 2021-04-29
 ### Changed
 - Fix package.json for React Native (#25)
