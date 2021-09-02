@@ -18,6 +18,7 @@
       "types": "./dist/src/index.d.ts",
       "module": "./dist/index.modern.js",
       "import": "./dist/index.modern.mjs",
+      "node": "./dist/wrapper.cjs",
       "default": "./dist/index.umd.js"
     }
   },
@@ -28,7 +29,7 @@
   ],
   "scripts": {
     "compile": "microbundle build -f modern,umd",
-    "postcompile": "cp dist/index.modern.mjs dist/index.modern.js && cp dist/index.modern.mjs.map dist/index.modern.js.map",
+    "postcompile": "cp dist/index.modern.mjs dist/index.modern.js && cp dist/index.modern.mjs.map dist/index.modern.js.map && cp src/wrapper.cjs dist/",
     "test": "run-s eslint tsc-test jest",
     "eslint": "eslint --ext .js,.ts --ignore-pattern dist .",
     "jest": "jest --preset ts-jest/presets/js-with-ts",
