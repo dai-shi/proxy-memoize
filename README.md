@@ -29,6 +29,34 @@ The memoized function will re-evaluate the original function
 only if the used part of argument (object) is changed.
 It's intuitive in a sense and magical in another sense.
 
+## How it works
+
+When it (re-)evaluates a function,
+it will wrap an input object with proxies (recursively, on demand)
+and invoke the function.
+When it's finished it will check what is "affected".
+The "affected" is a list of paths of the input object
+that are accessed during the function invocation.
+
+Next time when it receives a new input object,
+it will check if values in "affected" paths are changed.
+If so, it will re-evaluate the function.
+Otherwise, it will return a cached result.
+
+The cache size is `1` by default, but configurable.
+
+We have 2-tier cache mechanism.
+What is described so far is the second tier cache.
+
+The first tier cache is with WeakMap.
+It's a WeakMap of the input object and the result of function invocation.
+There's no notion of cache size.
+
+In summary, there are two types of cache:
+
+- tier-1: WeakMap based cache (size=infinity)
+- tier-2: Proxy based cache (size=1, configurable)
+
 ## Install
 
 ```bash
@@ -239,6 +267,55 @@ If `obj.a` is a primitive value, there's no problem.
 There's no workaround.
 Please be advised to use only plain objects/arrays.
 Nested objects/arrays are OK.
+
+### Input object must not be mutated
+
+```js
+const fn = memoize(obj => {
+  return { sum: obj.a + obj.b, diff: obj.a - obj.b };
+});
+
+const state = { a: 1, b: 2 };
+const result1 = fn(state);
+state.a += 1; // Don't do this, the state object must be immutable
+const result2 = fn(state); // Ends up unexpected result
+```
+
+The input `obj` or the `state` must be immutable.
+The whole concept is built around the immutability.
+It's faily common in Redux and React,
+but be careful if you are not familiar with the concept.
+
+There's no workaround.
+
+### Input can just be one object
+
+```js
+const fn = memoize(obj => {
+  return { sum: obj.a + obj.b, diff: obj.a - obj.b };
+});
+```
+
+The input `obj` is the only argument that a function can receive.
+
+
+```js
+const fn = memoize((arg1, arg2) => {
+  // arg2 can't be used
+  // ...
+});
+```
+
+A workaround is to create a wrapper.
+
+```js
+const memoizeWithArgs = (fnWithArgs, options) => {
+  const fn = memoize(args => fWithArgs(...args), options);
+  return (...args) => fn (args);
+};
+```
+
+Note: this will essentially bypass the tier-1 cache with WeakMap.
 
 ## Comparison
 
