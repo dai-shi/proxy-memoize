@@ -1,6 +1,9 @@
 # Change Log
 
 ## [Unreleased]
+### Changed
+- CJS build for Node.js (#32)
+
 
 ## [0.3.6] - 2021-08-13
 ### Changed
