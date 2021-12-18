@@ -102,7 +102,7 @@ const App = ({ children }) => (
 
 -   [CodeSandbox](https://codesandbox.io/s/proxy-memoize-demo-vrnze)
 
-## Usage with React Redux
+## Usage with React Redux & Reselect
 
 Instead of [reselect](https://github.com/reduxjs/reselect).
 
@@ -125,6 +125,7 @@ const Component = ({ id }) => {
 
 -   [CodeSandbox 1](https://codesandbox.io/s/proxy-memoize-demo-c1021)
 -   [CodeSandbox 2](https://codesandbox.io/s/proxy-memoize-demo-fi5ni)
+-   [Hooks & Recipes](docs/react-redux)
 
 ### Using `size` option
 
@@ -321,71 +322,55 @@ Note: this will essentially bypass the tier-1 cache with WeakMap.
 
 ### Reselect
 
-Here's a simple example in reselect.
+At a basic level, memoize can be substituted in for `createSelector`. Doing
+so will return a selector function with proxy-memoize's built-in tracking
+of your state object.
 
-```js
-import { createSelector } from 'reselect';
-
+```ts
+// reselect
+// selecting values from the state object requires composing multiple functions
 const mySelector = createSelector(
   state => state.values.value1,
   state => state.values.value2,
   (value1, value2) => value1 + value2,
 );
-```
 
-This can be written as follows.
+// ----------------------------------------------------------------------
 
-```js
-import memoize from 'proxy-memoize';
-
+// proxy-memoize
+// the same selector can now be written as a single memoized function
 const mySelector = memoize(
   state => state.values.value1 + state.values.value2,
 );
 ```
 
-Another example from reselect.
+With complex state objects, the ability to track individual properties
+within `state` means that proxy-memoize will only calculate a new
+value _if and only if_ the tracked property changes.
 
-```js
-const subtotalSelector = createSelector(
-  state => state.shop.items,
-  items => items.reduce((acc, item) => acc + item.value, 0),
-);
-
-const taxSelector = createSelector(
-  subtotalSelector,
-  state => state.shop.taxPercent,
-  (subtotal, taxPercent) => subtotal * (taxPercent / 100),
-);
-
-export const totalSelector = createSelector(
-  subtotalSelector,
-  taxSelector,
-  (subtotal, tax) => ({ total: subtotal + tax }),
-);
-```
-
-This can be converted to something like this.
-
-```js
-export const totalSelector = memoize(state => {
-  const subtotal = state.shop.item.reduce((acc, item) => acc + item.value, 0);
-  const tax = subtotal * (state.shop.taxPercent / 100);
-  return { total: subtotal + tax };
-);
-```
-
-Finally, see this example.
-
-```js
+```ts
 const state = {
-  todos: [
-    { text: 'foo', completed: false }
-  ]
+  todos: [{ text: 'foo', completed: false }]
 };
+
+// reselect
+// If the .completed property changes inside state, the selector must be recalculated
+// even through none of the properties we care about changed. In react-redux, this
+// selector will result in additional UI re-renders or the developer to implement
+// selectorOptions.memoizeOptions.resultEqualityCheck
+createSelector(
+  state => state.todos,
+  todos => todos.map(todo => todo.text)
+);
+
+// ----------------------------------------------------------------------
+
+// proxy-memozie
+// If the .completed property changes inside state, the selector does NOT change
+// this is because we track only the accessed property (todos.text) and can ignore
+// the unrelated change
 const todoTextsSelector = memoize(state => state.todos.map(todo => todo.text));
 ```
-
-This can't be written in reselect because if the `completed` value is toggled, the `todoTextsSelector` will return a referentially new array, even though the contents is shallow equal.
 
 ## Related projects
 
