@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+
+## [0.3.8] - 2022-03-18
 ### Changed
 - Update proxy-compare
 
