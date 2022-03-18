@@ -193,6 +193,8 @@ Create a memoized function
 *   `fn` **function (obj: Obj): Result** 
 *   `options` **{size: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)?}?** 
 
+    *   `options.size`  (default: 1)
+
 #### Examples
 
 ```javascript
