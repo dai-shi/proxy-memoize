@@ -54,8 +54,8 @@ There's no notion of cache size.
 
 In summary, there are two types of cache:
 
-- tier-1: WeakMap based cache (size=infinity)
-- tier-2: Proxy based cache (size=1, configurable)
+*   tier-1: WeakMap based cache (size=infinity)
+*   tier-2: Proxy based cache (size=1, configurable)
 
 ## Install
 
@@ -100,7 +100,7 @@ const App = ({ children }) => (
 );
 ```
 
--   [CodeSandbox](https://codesandbox.io/s/proxy-memoize-demo-vrnze)
+*   [CodeSandbox](https://codesandbox.io/s/proxy-memoize-demo-vrnze)
 
 ## Usage with React Redux & Reselect
 
@@ -123,9 +123,9 @@ const Component = ({ id }) => {
 };
 ```
 
--   [CodeSandbox 1](https://codesandbox.io/s/proxy-memoize-demo-c1021)
--   [CodeSandbox 2](https://codesandbox.io/s/proxy-memoize-demo-fi5ni)
--   [Hooks & Recipes](docs/react-redux)
+*   [CodeSandbox 1](https://codesandbox.io/s/proxy-memoize-demo-c1021)
+*   [CodeSandbox 2](https://codesandbox.io/s/proxy-memoize-demo-fi5ni)
+*   [Hooks & Recipes](docs/react-redux)
 
 ### Using `size` option
 
@@ -178,7 +178,7 @@ const Component = () => {
 };
 ```
 
--   [CodeSandbox](https://codesandbox.io/s/proxy-memoize-demo-yo00p)
+*   [CodeSandbox](https://codesandbox.io/s/proxy-memoize-demo-yo00p)
 
 ## API
 
@@ -190,8 +190,8 @@ Create a memoized function
 
 #### Parameters
 
--   `fn` **function (obj: Obj): Result** 
--   `options` **{size: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)?}?** 
+*   `fn` **function (obj: Obj): Result** 
+*   `options` **{size: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)?}?** 
 
 #### Examples
 
@@ -203,12 +203,12 @@ const fn = memoize(obj => ({ sum: obj.a + obj.b, diff: obj.a - obj.b }));
 
 Returns **function (obj: Obj): Result** 
 
-### getUntrackedObject
+### getUntracked
 
 This is to unwrap a proxy object and return an original object.
 It returns null if not relevant.
 
-[Notes]
+\[Notes]
 This function is for debugging purpose.
 It's not supposed to be used in production and it's subject to change.
 
@@ -299,7 +299,6 @@ const fn = memoize(obj => {
 
 The input `obj` is the only argument that a function can receive.
 
-
 ```js
 const fn = memoize((arg1, arg2) => {
   // arg2 can't be used
@@ -346,7 +345,7 @@ const mySelector = memoize(
 
 With complex state objects, the ability to track individual properties
 within `state` means that proxy-memoize will only calculate a new
-value _if and only if_ the tracked property changes.
+value *if and only if* the tracked property changes.
 
 ```ts
 const state = {
@@ -374,8 +373,8 @@ const todoTextsSelector = memoize(state => state.todos.map(todo => todo.text));
 
 ## Related projects
 
--   [react-tracked](https://github.com/dai-shi/react-tracked)
--   [reactive-react-redux](https://github.com/dai-shi/reactive-react-redux)
--   [svelte3-redux](https://github.com/dai-shi/svelte3-redux)
--   [memoize-state](https://github.com/theKashey/memoize-state)
--   [valtio](https://github.com/pmndrs/valtio)
+*   [react-tracked](https://github.com/dai-shi/react-tracked)
+*   [reactive-react-redux](https://github.com/dai-shi/reactive-react-redux)
+*   [svelte3-redux](https://github.com/dai-shi/svelte3-redux)
+*   [memoize-state](https://github.com/theKashey/memoize-state)
+*   [valtio](https://github.com/pmndrs/valtio)
