@@ -189,8 +189,10 @@ Create a memoized function
 
 #### Parameters
 
-*   `fn` **function (obj: Obj): Result** 
+*   `fn` **function (obj: Obj): Result** function to memoize
 *   `options` **{size: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)?}?** 
+
+    *   `options.size`  \[default: 1] maximum number of items to store
 
 #### Examples
 

@@ -51,6 +51,10 @@ const AFFECTED_PROPERTY = 'a';
  * import memoize from 'proxy-memoize';
  *
  * const fn = memoize(obj => ({ sum: obj.a + obj.b, diff: obj.a - obj.b }));
+ *
+ * @param fn - function to memoize
+ * @param options
+ * @param options.size - [default: 1] maximum number of items to store
  */
 const memoize = <Obj extends object, Result>(
   fn: (obj: Obj) => Result,
