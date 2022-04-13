@@ -10,7 +10,7 @@ Intuitive magical memoization library with Proxy and WeakMap
 ## Project status
 
 The v1 API is complete and fixed.
-Our docs and examples are not very comprehensie,
+Our docs and examples are not very comprehensive,
 and we hope to have more best practices.
 Contributions are welcome.
 
