@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [1.0.0] - 2022-04-13
+### Added
+- Initial v1 release (code is not changed from v0.3.8)
+
 ## [0.3.8] - 2022-03-18
 ### Changed
 - Update proxy-compare
