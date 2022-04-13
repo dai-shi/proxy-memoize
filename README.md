@@ -9,11 +9,10 @@ Intuitive magical memoization library with Proxy and WeakMap
 
 ## Project status
 
-The API is complete. Unless we find some major issues, it will be fixed.
-Before reaching v1, we would like to collect more bug reports
-and best practices.
-There are no obvious/known issues at the moment, but there are some
-[limitations and workarounds](#limitations-and-workarounds).
+The v1 API is complete and fixed.
+Our docs and examples are not very comprehensie,
+and we hope to have more best practices.
+Contributions are welcome.
 
 ## Introduction
 
@@ -375,8 +374,12 @@ const todoTextsSelector = memoize(state => state.todos.map(todo => todo.text));
 
 ## Related projects
 
+proxy-memoize depends on an internal library `proxy-compare`.
+`react-tracked` and `valtio` are libraries that depends on the same library.
+
 *   [react-tracked](https://github.com/dai-shi/react-tracked)
-*   [reactive-react-redux](https://github.com/dai-shi/reactive-react-redux)
-*   [svelte3-redux](https://github.com/dai-shi/svelte3-redux)
-*   [memoize-state](https://github.com/theKashey/memoize-state)
 *   [valtio](https://github.com/pmndrs/valtio)
+
+`memoize-state` provides a similar API for the same goal.
+
+*   [memoize-state](https://github.com/theKashey/memoize-state)
