@@ -31,9 +31,10 @@ export class CircularQueue<T> {
     return true;
   }
 
-  private dequeue() {
-    // We only use the enqueue method, so dequeue don't need to check empty
-    // if(this.empty()) return false;
+  dequeue() {
+    if (this.empty()) {
+      return false;
+    }
     this._head = (this._head + 1) % this._size;
     this._data[this._head] = undefined as unknown as T;
     return true;
