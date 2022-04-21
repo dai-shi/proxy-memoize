@@ -59,6 +59,7 @@ const memoize = <Obj extends object, Result>(
   fn: (obj: Obj) => Result,
   options?: { size?: number },
 ): (obj: Obj) => Result => {
+  let memoListHead = 0;
   const size = options?.size ?? 1;
   const memoList: {
     [OBJ_PROPERTY]: Obj;
@@ -78,8 +79,9 @@ const memoize = <Obj extends object, Result>(
       touchAffected(obj, cacheKey, cache[AFFECTED_PROPERTY]);
       return cache[RESULT_PROPERTY];
     }
-    for (let i = 0; i < memoList.length; i += 1) {
-      const memo = memoList[i];
+    for (let i = 0; i < size; i += 1) {
+      const memo = memoList[(memoListHead + i) % size];
+      if (!memo) break;
       if (!isChanged(memo[OBJ_PROPERTY], obj, memo[AFFECTED_PROPERTY], new WeakMap())) {
         resultCache.set(cacheKey, {
           [RESULT_PROPERTY]: memo[RESULT_PROPERTY],
@@ -95,12 +97,12 @@ const memoize = <Obj extends object, Result>(
     if (origObj !== null) {
       touchAffected(obj, origObj, affected);
     }
-    memoList.unshift({
+    memoListHead = (memoListHead - 1 + size) % size;
+    memoList[memoListHead] = {
       [OBJ_PROPERTY]: cacheKey,
       [RESULT_PROPERTY]: result,
       [AFFECTED_PROPERTY]: affected,
-    });
-    if (memoList.length > size) memoList.pop();
+    };
     resultCache.set(cacheKey, {
       [RESULT_PROPERTY]: result,
       [AFFECTED_PROPERTY]: affected,
