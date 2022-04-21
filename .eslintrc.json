@@ -23,6 +23,8 @@
     "symbol-description": "off",
     "@typescript-eslint/ban-types": "off",
     "no-param-reassign": "off",
+    "no-underscore-dangle": "off",
+    "import/prefer-default-export": "off",
     "no-unused-vars": "off"
   },
   "overrides": [{

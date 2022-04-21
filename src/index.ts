@@ -4,6 +4,7 @@ import {
   getUntracked,
   trackMemo,
 } from 'proxy-compare';
+import { CircularQueue } from './queue';
 
 type Affected = WeakMap<object, Set<string | number | symbol>>;
 
@@ -60,11 +61,11 @@ const memoize = <Obj extends object, Result>(
   options?: { size?: number },
 ): (obj: Obj) => Result => {
   const size = options?.size ?? 1;
-  const memoList: {
+  const memoList = new CircularQueue<{
     [OBJ_PROPERTY]: Obj;
     [RESULT_PROPERTY]: Result;
     [AFFECTED_PROPERTY]: Affected;
-  }[] = [];
+  }>(size);
   const resultCache = new WeakMap<Obj, {
     [RESULT_PROPERTY]: Result;
     [AFFECTED_PROPERTY]: Affected;
@@ -78,8 +79,9 @@ const memoize = <Obj extends object, Result>(
       touchAffected(obj, cacheKey, cache[AFFECTED_PROPERTY]);
       return cache[RESULT_PROPERTY];
     }
-    for (let i = 0; i < memoList.length; i += 1) {
-      const memo = memoList[i];
+    const memoListSize = memoList.size();
+    for (let i = 0; i < memoListSize; i += 1) {
+      const memo = memoList.get(i);
       if (!isChanged(memo[OBJ_PROPERTY], obj, memo[AFFECTED_PROPERTY], new WeakMap())) {
         resultCache.set(cacheKey, {
           [RESULT_PROPERTY]: memo[RESULT_PROPERTY],
@@ -95,12 +97,13 @@ const memoize = <Obj extends object, Result>(
     if (origObj !== null) {
       touchAffected(obj, origObj, affected);
     }
-    memoList.unshift({
+
+    // CircularQueue will auto dequeue when it's full
+    memoList.enqueue({
       [OBJ_PROPERTY]: cacheKey,
       [RESULT_PROPERTY]: result,
       [AFFECTED_PROPERTY]: affected,
     });
-    if (memoList.length > size) memoList.pop();
     resultCache.set(cacheKey, {
       [RESULT_PROPERTY]: result,
       [AFFECTED_PROPERTY]: affected,
