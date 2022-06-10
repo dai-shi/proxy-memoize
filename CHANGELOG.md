@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+### Changed
+- refactor with array based queue #41
 
 ## [1.0.0] - 2022-04-13
 ### Added
