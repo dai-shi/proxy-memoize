@@ -224,6 +224,23 @@ const fn = memoize(obj => {
 });
 ```
 
+## Importing package
+
+This package uses ESM default export.
+
+Modern environment supports ESM and the following works fine.
+```js
+import memoize from 'proxy-memoize';
+```
+
+In case it doesn't work in your environment, here are some workarounds:
+```js
+import memoize from 'proxy-memoize/dist/index.modern.js';
+const memoize = require('proxy-memoize').default;
+import memoize from 'proxy-memoize/dist/wrapper.cjs';
+const memoize = require('proxy-memoize/dist/wrapper.cjs');
+```
+
 ## Limitations and workarounds
 
 ### Inside the function, objects are wrapped by proxies and touching a property will record it.
