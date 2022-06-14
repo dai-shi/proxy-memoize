@@ -29,7 +29,7 @@
   ],
   "scripts": {
     "compile": "microbundle build -f modern,umd",
-    "postcompile": "cp dist/index.modern.mjs dist/index.modern.js && cp dist/index.modern.mjs.map dist/index.modern.js.map && cp src/wrapper.cjs dist/",
+    "postcompile": "cp dist/index.modern.js dist/index.modern.mjs && cp dist/index.modern.js.map dist/index.modern.mjs.map && cp src/wrapper.cjs dist/",
     "test": "run-s eslint tsc-test jest",
     "eslint": "eslint --ext .js,.ts --ignore-pattern dist .",
     "jest": "jest",
@@ -49,19 +49,19 @@
     "proxy-compare": "2.2.0"
   },
   "devDependencies": {
-    "@types/jest": "^27.4.1",
-    "@typescript-eslint/eslint-plugin": "^5.19.0",
-    "@typescript-eslint/parser": "^5.19.0",
+    "@types/jest": "^28.1.1",
+    "@typescript-eslint/eslint-plugin": "^5.28.0",
+    "@typescript-eslint/parser": "^5.28.0",
     "documentation": "^13.2.5",
-    "eslint": "^8.13.0",
+    "eslint": "^8.17.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
-    "immer": "^9.0.12",
-    "jest": "^27.5.1",
-    "microbundle": "^0.14.2",
+    "immer": "^9.0.15",
+    "jest": "^28.1.1",
+    "microbundle": "^0.15.0",
     "npm-run-all": "^4.1.5",
-    "ts-jest": "^27.1.4",
-    "ts-loader": "^9.2.8",
-    "typescript": "^4.6.3"
+    "ts-jest": "^28.0.5",
+    "ts-loader": "^9.3.0",
+    "typescript": "^4.7.3"
   }
 }
