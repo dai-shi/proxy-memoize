@@ -72,7 +72,7 @@ describe('issue #16', () => {
 
     const selector = memoize(
       ({ state, orderId }: { state: StateType; orderId: number }) => ({
-        amount: getAmount(state.receipts[orderId]),
+        amount: getAmount(state.receipts[orderId] as ReceiptType),
       }),
       { size: 50 }, // for safety
     );
@@ -124,7 +124,7 @@ describe('issue #16', () => {
       receipts: {
         ...secondState.receipts,
         5: {
-          ...secondState.receipts[5],
+          ...(secondState.receipts[5] as ReceiptType),
           amount: 40,
         },
       },

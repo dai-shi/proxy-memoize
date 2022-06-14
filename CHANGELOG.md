@@ -4,6 +4,7 @@
 ### Changed
 - refactor with array based queue #41
 - fix: nested functions with embedded proxies #46
+- update proxy-compare #47
 
 ## [1.0.0] - 2022-04-13
 ### Added
