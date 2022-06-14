@@ -6719,10 +6719,9 @@ protocols@^1.1.0, protocols@^1.4.0:
   resolved "https://registry.yarnpkg.com/protocols/-/protocols-1.4.8.tgz#48eea2d8f58d9644a4a32caae5d5db290a075ce8"
   integrity sha512-IgjKyaUSjsROSO8/D49Ab7hP8mJgTYcqApOqdPhLoPxAplXmkp+zRvsrSQjFn5by0rhm4VH0GAUELIPpx7B1yg==
 
-proxy-compare@2.1.0:
+"proxy-compare@https://pkg.csb.dev/dai-shi/proxy-compare/commit/8a81f124/proxy-compare":
   version "2.1.0"
-  resolved "https://registry.yarnpkg.com/proxy-compare/-/proxy-compare-2.1.0.tgz#5f99b3ed6a265135ce7ec145ce304e6f89b6511b"
-  integrity sha512-wapJ3h/w8fRSyPEG0y2WMV+tf9xwvj3nxM6aHVuPEOwKs/t5xLSKZb44ubNTiqq2T6lmEMHEWGMTaU2L6ddaFA==
+  resolved "https://pkg.csb.dev/dai-shi/proxy-compare/commit/8a81f124/proxy-compare#ebdcd52c92f7de32240d1d94da63340039f0e5c1"
 
 psl@^1.1.33:
   version "1.8.0"
