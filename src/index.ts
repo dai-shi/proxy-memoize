@@ -26,14 +26,14 @@ const untrack = <T>(x: T, seen: Set<T>): T => {
   return x;
 };
 
-const touchAffected = (x: unknown, orig: unknown, affected: Affected) => {
-  if (!isObject(x) || !isObject(orig)) return;
-  const used = affected.get(orig);
+const touchAffected = (dst: unknown, src: unknown, affected: Affected) => {
+  if (!isObject(dst) || !isObject(src)) return;
+  const used = affected.get(getUntracked(src) || src);
   if (!used) return;
   used.forEach((key) => {
     touchAffected(
-      x[key as keyof typeof x],
-      orig[key as keyof typeof orig],
+      dst[key as keyof typeof dst],
+      src[key as keyof typeof src],
       affected,
     );
   });
@@ -61,52 +61,42 @@ const memoize = <Obj extends object, Result>(
 ): (obj: Obj) => Result => {
   let memoListHead = 0;
   const size = options?.size ?? 1;
-  const memoList: {
+  type Entry = {
     [OBJ_PROPERTY]: Obj;
     [RESULT_PROPERTY]: Result;
     [AFFECTED_PROPERTY]: Affected;
-  }[] = [];
-  const resultCache = new WeakMap<Obj, {
-    [RESULT_PROPERTY]: Result;
-    [AFFECTED_PROPERTY]: Affected;
-  }>();
+  }
+  const memoList: Entry[] = [];
+  const resultCache = new WeakMap<Obj, Entry>();
   const proxyCache = new WeakMap();
   const memoizedFn = (obj: Obj) => {
-    const origObj = getUntracked(obj);
-    const cacheKey = origObj || obj;
+    const cacheKey = getUntracked(obj) || obj;
     const cache = resultCache.get(cacheKey);
     if (cache) {
-      touchAffected(obj, cacheKey, cache[AFFECTED_PROPERTY]);
+      touchAffected(obj, cache[OBJ_PROPERTY], cache[AFFECTED_PROPERTY]);
       return cache[RESULT_PROPERTY];
     }
     for (let i = 0; i < size; i += 1) {
       const memo = memoList[(memoListHead + i) % size];
       if (!memo) break;
       if (!isChanged(memo[OBJ_PROPERTY], obj, memo[AFFECTED_PROPERTY], new WeakMap())) {
-        resultCache.set(cacheKey, {
-          [RESULT_PROPERTY]: memo[RESULT_PROPERTY],
-          [AFFECTED_PROPERTY]: memo[AFFECTED_PROPERTY],
-        });
-        touchAffected(obj, cacheKey, memo[AFFECTED_PROPERTY]);
+        resultCache.set(cacheKey, memo);
+        touchAffected(obj, memo[OBJ_PROPERTY], memo[AFFECTED_PROPERTY]);
         return memo[RESULT_PROPERTY];
       }
     }
     const affected: Affected = new WeakMap();
     const proxy = createProxy(obj, affected, proxyCache);
     const result = untrack(fn(proxy), new Set());
-    if (origObj !== null) {
-      touchAffected(obj, origObj, affected);
-    }
-    memoListHead = (memoListHead - 1 + size) % size;
-    memoList[memoListHead] = {
-      [OBJ_PROPERTY]: cacheKey,
+    touchAffected(obj, obj, affected);
+    const entry: Entry = {
+      [OBJ_PROPERTY]: obj,
       [RESULT_PROPERTY]: result,
       [AFFECTED_PROPERTY]: affected,
     };
-    resultCache.set(cacheKey, {
-      [RESULT_PROPERTY]: result,
-      [AFFECTED_PROPERTY]: affected,
-    });
+    memoListHead = (memoListHead - 1 + size) % size;
+    memoList[memoListHead] = entry;
+    resultCache.set(cacheKey, entry);
     return result;
   };
   return memoizedFn;
