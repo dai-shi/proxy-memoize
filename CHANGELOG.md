@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+
+## [1.1.0] - 2022-06-14
 ### Changed
 - refactor with array based queue #41
 - fix: nested functions with embedded proxies #46
