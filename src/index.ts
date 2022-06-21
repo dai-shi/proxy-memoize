@@ -120,4 +120,13 @@ const memoize = <Obj extends object, Result>(
  */
 export { getUntracked as getUntrackedObject } from 'proxy-compare';
 
+/**
+ * This is to replace newProxy function in upstream library, proxy-compare.
+ * Use it at your own risk.
+ *
+ * [Notes]
+ * See related discussoin: https://github.com/dai-shi/proxy-compare/issues/40
+ */
+export { replaceNewProxy } from 'proxy-compare';
+
 export default memoize;

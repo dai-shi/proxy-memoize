@@ -224,16 +224,26 @@ const fn = memoize(obj => {
 });
 ```
 
+### replaceNewProxy
+
+This is to replace newProxy function in upstream library, proxy-compare.
+Use it at your own risk.
+
+\[Notes]
+See related discussoin: <https://github.com/dai-shi/proxy-compare/issues/40>
+
 ## Importing package
 
 This package uses ESM default export.
 
 Modern environment supports ESM and the following works fine.
+
 ```js
 import memoize from 'proxy-memoize';
 ```
 
 In case it doesn't work in your environment, here are some workarounds:
+
 ```js
 import memoize from 'proxy-memoize/dist/index.modern.js';
 const memoize = require('proxy-memoize').default;
