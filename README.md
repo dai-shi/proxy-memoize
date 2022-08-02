@@ -243,7 +243,7 @@ const memoize = require('proxy-memoize/dist/wrapper.cjs');
 
 ## Limitations and workarounds
 
-### Inside the function, objects are wrapped by proxies and touching a property will record it.
+### Inside the function, objects are wrapped with proxies and touching a property will record it.
 
 ```js
 const fn = memoize(obj => {
@@ -278,7 +278,7 @@ const fn = memoize(obj => {
 ```
 
 We can't unwrap Set/Map or other non-plain objects.
-The problem is when `obj.a` is an object (which will be wrapped by a proxy)
+The problem is when `obj.a` is an object (which will be wrapped with a proxy)
 and touching its property will record the usage, which leads
 unexpected behavior.
 If `obj.a` is a primitive value, there's no problem.
@@ -391,8 +391,8 @@ const todoTextsSelector = memoize(state => state.todos.map(todo => todo.text));
 
 ## Related projects
 
-proxy-memoize depends on an internal library `proxy-compare`.
-`react-tracked` and `valtio` are libraries that depends on the same library.
+proxy-memoize depends on an internal library [proxy-compare](https://github.com/dai-shi/proxy-compare).
+`react-tracked` and `valtio` are libraries that depend on the same library.
 
 *   [react-tracked](https://github.com/dai-shi/react-tracked)
 *   [valtio](https://github.com/pmndrs/valtio)
