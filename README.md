@@ -328,7 +328,7 @@ A workaround is to create a wrapper.
 
 ```js
 const memoizeWithArgs = (fnWithArgs, options) => {
-  const fn = memoize(args => fWithArgs(...args), options);
+  const fn = memoize(args => fnWithArgs(...args), options);
   return (...args) => fn (args);
 };
 ```
