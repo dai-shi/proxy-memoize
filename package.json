@@ -46,7 +46,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "proxy-compare": "https://pkg.csb.dev/dai-shi/proxy-compare/commit/75f636c5/proxy-compare"
+    "proxy-compare": "2.3.0"
   },
   "devDependencies": {
     "@types/jest": "^28.1.1",
