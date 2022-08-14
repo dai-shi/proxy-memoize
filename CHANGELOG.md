@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+
+## [1.2.0] - 2022-08-14
 ### Changed
 - update proxy-compare and re-export replaceNewProxy #48 
 
