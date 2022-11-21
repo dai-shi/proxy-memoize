@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+### Changed
+- feat: noWeakMap option #53
 
 ## [1.2.0] - 2022-08-14
 ### Changed
