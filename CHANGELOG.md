@@ -4,6 +4,7 @@
 ### Changed
 - feat: noWeakMap option #53
 - breaking: use named exports #56
+- feat(deps): update proxy-compare #57
 ### Migration
 ```js
 // old
