@@ -5,7 +5,22 @@ import {
   trackMemo,
 } from 'proxy-compare';
 
-type Affected = WeakMap<object, Set<string | number | symbol>>;
+// constants from proxy-compare
+const HAS_KEY_PROPERTY = 'h';
+const ALL_OWN_KEYS_PROPERTY = 'w';
+const HAS_OWN_KEY_PROPERTY = 'o';
+const KEYS_PROPERTY = 'k';
+
+type HasKeySet = Set<string | symbol>
+type HasOwnKeySet = Set<string | symbol>
+type KeysSet = Set<string | symbol>
+type Used = {
+  [HAS_KEY_PROPERTY]?: HasKeySet;
+  [ALL_OWN_KEYS_PROPERTY]?: true;
+  [HAS_OWN_KEY_PROPERTY]?: HasOwnKeySet;
+  [KEYS_PROPERTY]?: KeysSet;
+};
+type Affected = WeakMap<object, Used>;
 
 const isObject = (x: unknown): x is object => typeof x === 'object' && x !== null;
 
@@ -30,7 +45,16 @@ const touchAffected = (dst: unknown, src: unknown, affected: Affected) => {
   if (!isObject(dst) || !isObject(src)) return;
   const used = affected.get(getUntracked(src) || src);
   if (!used) return;
-  used.forEach((key) => {
+  used[HAS_KEY_PROPERTY]?.forEach((key) => {
+    Reflect.has(dst, key);
+  });
+  if (used[ALL_OWN_KEYS_PROPERTY] === true) {
+    Reflect.ownKeys(dst);
+  }
+  used[HAS_OWN_KEY_PROPERTY]?.forEach((key) => {
+    Reflect.getOwnPropertyDescriptor(dst, key);
+  });
+  used[KEYS_PROPERTY]?.forEach((key) => {
     touchAffected(
       dst[key as keyof typeof dst],
       src[key as keyof typeof src],
