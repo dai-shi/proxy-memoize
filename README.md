@@ -190,9 +190,10 @@ Create a memoized function
 #### Parameters
 
 *   `fn` **function (obj: Obj): Result** 
-*   `options` **{size: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)?}?** 
+*   `options` **{size: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)?, noWeakMap: [boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?}?** 
 
     *   `options.size`  (default: 1)
+    *   `options.noWeakMap`  disable tier-1 cache (default: false)
 
 #### Examples
 
