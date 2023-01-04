@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+
+## [2.0.0] - 2023-01-05
 ### Changed
 - feat: noWeakMap option #53
 - breaking: use named exports #56
