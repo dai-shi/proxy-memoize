@@ -65,7 +65,7 @@ npm install proxy-memoize
 ## How it behaves
 
 ```js
-import memoize from 'proxy-memoize';
+import { memoize } from 'proxy-memoize';
 
 const fn = memoize(x => ({ sum: x.a + x.b, diff: x.a - x.b }));
 
@@ -198,7 +198,7 @@ Create a memoized function
 #### Examples
 
 ```javascript
-import memoize from 'proxy-memoize';
+import { memoize } from 'proxy-memoize';
 
 const fn = memoize(obj => ({ sum: obj.a + obj.b, diff: obj.a - obj.b }));
 ```
@@ -217,10 +217,10 @@ It's not supposed to be used in production and it's subject to change.
 #### Examples
 
 ```javascript
-import memoize, { getUntrackedObject } from 'proxy-memoize';
+import { memoize, getUntracked } from 'proxy-memoize';
 
 const fn = memoize(obj => {
-  console.log(getUntrackedObject(obj));
+  console.log(getUntracked(obj));
   return { sum: obj.a + obj.b, diff: obj.a - obj.b };
 });
 ```
@@ -230,27 +230,7 @@ const fn = memoize(obj => {
 This is to replace newProxy function in upstream library, proxy-compare.
 Use it at your own risk.
 
-\[Notes]
 See related discussoin: <https://github.com/dai-shi/proxy-compare/issues/40>
-
-## Importing package
-
-This package uses ESM default export.
-
-Modern environment supports ESM and the following works fine.
-
-```js
-import memoize from 'proxy-memoize';
-```
-
-In case it doesn't work in your environment, here are some workarounds:
-
-```js
-import memoize from 'proxy-memoize/dist/index.modern.js';
-const memoize = require('proxy-memoize').default;
-import memoize from 'proxy-memoize/dist/wrapper.cjs';
-const memoize = require('proxy-memoize/dist/wrapper.cjs');
-```
 
 ## Limitations and workarounds
 

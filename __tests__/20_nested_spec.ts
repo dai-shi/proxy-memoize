@@ -1,6 +1,6 @@
 /* eslint no-self-compare: off */
 
-import memoize from '../src/index';
+import { memoize } from '../src/index';
 
 describe('one-level nested spec', () => {
   type State = {

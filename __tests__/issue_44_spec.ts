@@ -1,4 +1,4 @@
-import memoize from '../src/index';
+import { memoize } from '../src/index';
 
 describe('issue #44', () => {
   it('nested selectors', () => {
