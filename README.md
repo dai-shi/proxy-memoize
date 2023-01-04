@@ -189,8 +189,8 @@ Create a memoized function
 
 #### Parameters
 
-*   `fn` **function (obj: Obj): Result** 
-*   `options` **{size: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)?, noWeakMap: [boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?}?** 
+*   `fn` **function (obj: Obj): Result**&#x20;
+*   `options` **{size: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)?, noWeakMap: [boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?}?**&#x20;
 
     *   `options.size`  (default: 1)
     *   `options.noWeakMap`  disable tier-1 cache (default: false)
@@ -203,7 +203,7 @@ import { memoize } from 'proxy-memoize';
 const fn = memoize(obj => ({ sum: obj.a + obj.b, diff: obj.a - obj.b }));
 ```
 
-Returns **function (obj: Obj): Result** 
+Returns **function (obj: Obj): Result**&#x20;
 
 ### getUntracked
 
