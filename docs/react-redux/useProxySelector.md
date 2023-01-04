@@ -3,7 +3,7 @@ This creates a `useProxySelector` hook which can be used to create a typed `useS
 
 ## The Hook
 ```ts
-import memoize from "proxy-memoize";
+import { memoize } from "proxy-memoize";
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
 

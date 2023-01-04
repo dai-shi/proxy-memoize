@@ -1,4 +1,4 @@
-import memoize from '../src/index';
+import { memoize } from '../src/index';
 
 describe('basic spec', () => {
   it('x.a', () => {
