@@ -1,6 +1,6 @@
 # proxy-memoize
 
-[![CI](https://img.shields.io/github/workflow/status/dai-shi/proxy-memoize/CI)](https://github.com/dai-shi/proxy-memoize/actions?query=workflow%3ACI)
+[![CI](https://img.shields.io/github/actions/workflow/status/dai-shi/proxy-memoize/ci.yml?branch=main)](https://github.com/dai-shi/proxy-memoize/actions?query=workflow%3ACI)
 [![npm](https://img.shields.io/npm/v/proxy-memoize)](https://www.npmjs.com/package/proxy-memoize)
 [![size](https://img.shields.io/bundlephobia/minzip/proxy-memoize)](https://bundlephobia.com/result?p=proxy-memoize)
 [![discord](https://img.shields.io/discord/627656437971288081)](https://discord.gg/MrQdmzd)
