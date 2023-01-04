@@ -3,6 +3,14 @@
 ## [Unreleased]
 ### Changed
 - feat: noWeakMap option #53
+- breaking: use named exports #56
+### Migration
+```js
+// old
+import memoize, { getUntrackedObject } from 'proxy-memoize';
+// new
+import { memoize, getUntracked } from 'proxy-memoize';
+```
 
 ## [1.2.0] - 2022-08-14
 ### Changed
