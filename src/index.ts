@@ -1,4 +1,5 @@
 export { memoize } from './memoize';
+export { memoizeWithArgs } from './memoizeWithArgs';
 
 /**
  * This is to unwrap a proxy object and return an original object.

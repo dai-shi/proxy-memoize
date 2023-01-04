@@ -233,6 +233,25 @@ const fn = memoize(obj => ({ sum: obj.a + obj.b, diff: obj.a - obj.b }));
 
 Returns **function (obj: Obj): Result**&#x20;
 
+### memoizeWithArgs
+
+Create a memoized function with args
+
+#### Parameters
+
+*   `fnWithArgs` **function (...args: Args): Result**&#x20;
+*   `options` **Options?**&#x20;
+
+    *   `options.size`  (default: 1)
+
+#### Examples
+
+```javascript
+import { memoizeWithArgs } from 'proxy-memoize';
+
+const fn = memoizeWithArgs((a, b) => ({ sum: a.v + b.v, diff: a.v - b.v }));
+```
+
 ## Limitations and workarounds
 
 ### Inside the function, objects are wrapped with proxies and touching a property will record it.
@@ -316,16 +335,9 @@ const fn = memoize((arg1, arg2) => {
 });
 ```
 
-A workaround is to create a wrapper.
+A workaround is to use `memoizeWithArgs` util.
 
-```js
-const memoizeWithArgs = (fnWithArgs, options) => {
-  const fn = memoize(args => fnWithArgs(...args), options);
-  return (...args) => fn (args);
-};
-```
-
-Note: this will essentially bypass the tier-1 cache with WeakMap.
+Note: this disables the tier-1 cache with WeakMap.
 
 ## Comparison
 
