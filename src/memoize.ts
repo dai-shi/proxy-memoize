@@ -95,18 +95,16 @@ export function memoize<Obj extends object, Result>(
   const resultCache = options?.noWeakMap ? null : new WeakMap<Obj, Entry>();
   const proxyCache = new WeakMap();
   const memoizedFn = (obj: Obj) => {
-    const cacheKey = getUntracked(obj) || obj;
-    const cache = resultCache?.get(cacheKey);
+    const cache = resultCache?.get(obj);
     if (cache) {
-      touchAffected(obj, cache[OBJ_PROPERTY], cache[AFFECTED_PROPERTY]);
       return cache[RESULT_PROPERTY];
     }
     for (let i = 0; i < size; i += 1) {
       const memo = memoList[(memoListHead + i) % size];
       if (!memo) break;
       if (!isChanged(memo[OBJ_PROPERTY], obj, memo[AFFECTED_PROPERTY], new WeakMap())) {
-        resultCache?.set(cacheKey, memo);
         touchAffected(obj, memo[OBJ_PROPERTY], memo[AFFECTED_PROPERTY]);
+        resultCache?.set(obj, memo);
         return memo[RESULT_PROPERTY];
       }
     }
@@ -121,7 +119,7 @@ export function memoize<Obj extends object, Result>(
     };
     memoListHead = (memoListHead - 1 + size) % size;
     memoList[memoListHead] = entry;
-    resultCache?.set(cacheKey, entry);
+    resultCache?.set(obj, entry);
     return result;
   };
   return memoizedFn;

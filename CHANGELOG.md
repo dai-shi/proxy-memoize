@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+### Changed
+- fix: abandon cacheKey and avoid re-running touchAffected on cache #60
 
 ## [2.0.0] - 2023-01-05
 ### Changed
