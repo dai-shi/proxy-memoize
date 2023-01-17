@@ -160,7 +160,7 @@ The drawback of this approach is we need a good estimate of `size` in advance.
 For derived values.
 
 ```jsx
-import create from 'zustand';
+import { create } from 'zustand';
 
 const useStore = create(set => ({
   valueA,
