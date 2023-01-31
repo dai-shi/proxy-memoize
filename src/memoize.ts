@@ -50,13 +50,12 @@ const touchAffected = (
   touched: Touched,
 ) => {
   if (!isObject(dst) || !isObject(src)) return;
-  const origSrc = getUntracked(src) || src;
-  const used = affected.get(origSrc);
+  const used = affected.get(getUntracked(src) || src);
   if (!used) return;
-  let touchedDsts = touched.get(origSrc);
+  let touchedDsts = touched.get(src);
   if (!touchedDsts) {
     touchedDsts = new WeakSet();
-    touched.set(origSrc, touchedDsts);
+    touched.set(src, touchedDsts);
   }
   if (touchedDsts.has(dst)) {
     return;
@@ -113,7 +112,6 @@ export function memoize<Obj extends object, Result>(
   }
   const memoList: Entry[] = [];
   const resultCache = options?.noWeakMap ? null : new WeakMap<Obj, Entry>();
-  const proxyCache = new WeakMap();
   const memoizedFn = (obj: Obj) => {
     const cache = resultCache?.get(obj);
     if (cache) {
@@ -130,7 +128,7 @@ export function memoize<Obj extends object, Result>(
       }
     }
     const affected: Affected = new WeakMap();
-    const proxy = createProxy(obj, affected, proxyCache);
+    const proxy = createProxy(obj, affected);
     const result = untrack(fn(proxy), new Set());
     const touched: Touched = new WeakMap();
     touchAffected(obj, obj, affected, touched);
