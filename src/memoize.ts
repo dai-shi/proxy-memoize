@@ -41,10 +41,27 @@ const untrack = <T>(x: T, seen: Set<T>): T => {
   return x;
 };
 
-const touchAffected = (dst: unknown, src: unknown, affected: Affected) => {
+type Touched = WeakMap<object, WeakSet<object>>;
+
+const touchAffected = (
+  dst: unknown,
+  src: unknown,
+  affected: Affected,
+  touched: Touched,
+) => {
   if (!isObject(dst) || !isObject(src)) return;
-  const used = affected.get(getUntracked(src) || src);
+  const origSrc = getUntracked(src) || src;
+  const used = affected.get(origSrc);
   if (!used) return;
+  let touchedDsts = touched.get(origSrc);
+  if (!touchedDsts) {
+    touchedDsts = new WeakSet();
+    touched.set(dst, touchedDsts);
+  }
+  if (touchedDsts.has(dst)) {
+    return;
+  }
+  touchedDsts.add(dst);
   used[HAS_KEY_PROPERTY]?.forEach((key) => {
     Reflect.has(dst, key);
   });
@@ -59,6 +76,7 @@ const touchAffected = (dst: unknown, src: unknown, affected: Affected) => {
       dst[key as keyof typeof dst],
       src[key as keyof typeof src],
       affected,
+      touched,
     );
   });
 };
@@ -67,6 +85,7 @@ const touchAffected = (dst: unknown, src: unknown, affected: Affected) => {
 const OBJ_PROPERTY = 'o';
 const RESULT_PROPERTY = 'r';
 const AFFECTED_PROPERTY = 'a';
+const TOUCHED_PROPERTY = 't';
 
 /**
  * Create a memoized function
@@ -90,6 +109,7 @@ export function memoize<Obj extends object, Result>(
     [OBJ_PROPERTY]: Obj;
     [RESULT_PROPERTY]: Result;
     [AFFECTED_PROPERTY]: Affected;
+    [TOUCHED_PROPERTY]: Touched;
   }
   const memoList: Entry[] = [];
   const resultCache = options?.noWeakMap ? null : new WeakMap<Obj, Entry>();
@@ -97,13 +117,14 @@ export function memoize<Obj extends object, Result>(
   const memoizedFn = (obj: Obj) => {
     const cache = resultCache?.get(obj);
     if (cache) {
+      touchAffected(obj, cache[OBJ_PROPERTY], cache[AFFECTED_PROPERTY], cache[TOUCHED_PROPERTY]);
       return cache[RESULT_PROPERTY];
     }
     for (let i = 0; i < size; i += 1) {
       const memo = memoList[(memoListHead + i) % size];
       if (!memo) break;
       if (!isChanged(memo[OBJ_PROPERTY], obj, memo[AFFECTED_PROPERTY], new WeakMap())) {
-        touchAffected(obj, memo[OBJ_PROPERTY], memo[AFFECTED_PROPERTY]);
+        touchAffected(obj, memo[OBJ_PROPERTY], memo[AFFECTED_PROPERTY], memo[TOUCHED_PROPERTY]);
         resultCache?.set(obj, memo);
         return memo[RESULT_PROPERTY];
       }
@@ -111,11 +132,13 @@ export function memoize<Obj extends object, Result>(
     const affected: Affected = new WeakMap();
     const proxy = createProxy(obj, affected, proxyCache);
     const result = untrack(fn(proxy), new Set());
-    touchAffected(obj, obj, affected);
+    const touched: Touched = new WeakMap();
+    touchAffected(obj, obj, affected, touched);
     const entry: Entry = {
       [OBJ_PROPERTY]: obj,
       [RESULT_PROPERTY]: result,
       [AFFECTED_PROPERTY]: affected,
+      [TOUCHED_PROPERTY]: touched,
     };
     memoListHead = (memoListHead - 1 + size) % size;
     memoList[memoListHead] = entry;
