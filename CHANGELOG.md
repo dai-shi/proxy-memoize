@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [2.0.2] - 2023-01-31
+### Changed
+- fix: nested memoized function usage #64
+
 ## [2.0.1] - 2023-01-13
 ### Changed
 - fix: abandon cacheKey and avoid re-running touchAffected on cache #60
