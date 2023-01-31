@@ -56,7 +56,7 @@ const touchAffected = (
   let touchedDsts = touched.get(origSrc);
   if (!touchedDsts) {
     touchedDsts = new WeakSet();
-    touched.set(dst, touchedDsts);
+    touched.set(origSrc, touchedDsts);
   }
   if (touchedDsts.has(dst)) {
     return;
