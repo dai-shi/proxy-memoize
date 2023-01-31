@@ -93,7 +93,6 @@ export function memoize<Obj extends object, Result>(
   }
   const memoList: Entry[] = [];
   const resultCache = options?.noWeakMap ? null : new WeakMap<Obj, Entry>();
-  const proxyCache = new WeakMap();
   const memoizedFn = (obj: Obj) => {
     const cache = resultCache?.get(obj);
     if (cache) {
@@ -109,7 +108,7 @@ export function memoize<Obj extends object, Result>(
       }
     }
     const affected: Affected = new WeakMap();
-    const proxy = createProxy(obj, affected, proxyCache);
+    const proxy = createProxy(obj, affected);
     const result = untrack(fn(proxy), new Set());
     touchAffected(obj, obj, affected);
     const entry: Entry = {
