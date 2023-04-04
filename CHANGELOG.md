@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [2.0.3] - 2023-04-04
+### Changed
+- build: disable minification #66
+
 ## [2.0.2] - 2023-01-31
 ### Changed
 - fix: nested memoized function usage #64
