@@ -1,5 +1,6 @@
 ---
 import * as readme from '../../../README.md';
+import Layout from '../components/Layout.astro';
 
 // useful for the tab section
 const sections = readme.getHeadings().filter((h => h.depth === 2))
@@ -16,6 +17,9 @@ const docs = await Astro.glob('../../../docs/**/*.md');
 		<title>Proxy Memoize</title>
 	</head>
 	<body>
+	<Layout >
 		<readme.Content />
+    </Layout>
+
 	</body>
 </html>

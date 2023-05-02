@@ -11,5 +11,9 @@
   },
   "dependencies": {
     "astro": "^2.3.2"
+  },
+  "devDependencies": {
+    "@unocss/reset": "^0.51.8",
+    "unocss": "^0.51.8"
   }
 }
