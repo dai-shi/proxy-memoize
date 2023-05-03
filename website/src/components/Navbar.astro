@@ -1,5 +1,7 @@
-
-<html  lang="en">
+---
+import ToggleTheme from './ToggleTheme.astro';
+---
+<html  lang="en" >
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,9 +11,11 @@
     <img src='/proxy-memoize-logo.svg' alt='proxy memoize logo'/>
     <div class='w-40% h-full relative '>
     <img src='/search-icon.svg' alt='search icon' class='absolute left-20px top-1/2 transform -translate-y-1/2'/>
-    <input type='text' placeholder='Search' class='w-full h-full bg-hex-FAFBFC rounded-28px  pl-14 pr-10 focus:(bg-red-400 border-sky-300)'/>
+    <input type='text' placeholder='Search' class='font-Dm text-gray w-full h-full transition-all duration-300 ease-in-out bg-hex-FAFBFC rounded-28px  pl-14 pr-10 outline-none border border-hex-ffffff00 focus:( border border-light-blue) dark:(bg-black)' id='searchInput'/>
+    <div id='clear' class='cursor-pointer text-gray text-30px opacity-60 absolute right-3 -mt-4px top-1/2 transform -translate-y-1/2'>&times;</div>
     </div>
-    <div class='rounded-25px border border-hex-ECF5FF border-2 w-40 h-full'></div>
+   <ToggleTheme/>
     </div>
   </body>
+  
 </html>

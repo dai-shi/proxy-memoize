@@ -8,7 +8,7 @@ const sections = readme.getHeadings().filter((h => h.depth === 2))
 const docs = await Astro.glob('../../../docs/**/*.md');
 ---
 
-<html lang="en">
+<html lang="en" id='parentHTML'>
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -20,6 +20,5 @@ const docs = await Astro.glob('../../../docs/**/*.md');
 	<Layout >
 		<readme.Content />
     </Layout>
-
 	</body>
 </html>

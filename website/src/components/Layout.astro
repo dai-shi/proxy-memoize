@@ -14,7 +14,7 @@ import Sidebar from './Sidebar.astro';
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <div class='flex flex-col justify-start '>
+    <div class='flex flex-col justify-start transition-all duration-300 ease-in-out dark:bg-full-black'>
       <Navbar/>
       <MainHero/> 
       <div class='flex flex-row items-start gap-80px px-48px mt-10'>
@@ -25,4 +25,32 @@ import Sidebar from './Sidebar.astro';
       </div>
     </div>
   </body>
+  <script>
+	const parent= document.getElementById('parentHTML')
+	const button = document.getElementById('toggleTheme')
+	const toggleBg= document.getElementById('switch')
+	const search= document.getElementById('searchInput')
+	const clearIcon= document.getElementById('clear')
+//TODO: show and hide the icon with typing
+
+if ( search.value) {
+clearIcon.style.visibility = "block"
+}else{
+  
+clearIcon.style.visibility = "hidden"
+}
+	button.addEventListener("click",darkMode)
+	function darkMode() {
+	if (parent.classList.contains('dark')){
+		parent.classList.remove("dark")
+		toggleBg.style.left='6px'
+
+	}
+	else{	
+		parent.classList.add("dark")
+		toggleBg.style.left='106px'
+	}
+
+	}
+	</script>
 </html>
