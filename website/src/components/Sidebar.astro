@@ -2,37 +2,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+   
   </head>
   <body>
-  <div class='w-225px min-h-289px sticky top-10 mt-20'>
-      <div>
-<!-- icon here -->      <p>
-      Introduction
-      </p>
-      <div>
-<!-- icon here -->      <p>
-      Guides
-      </p>
-      <div>
-<!-- icon here -->      <p>
-      API
-      </p>
-      <div>
-<!-- icon here -->      <p>
-      Repository
-      </p>
-      </div>
-      <div>
-<!-- icon here -->      <p>
-      Updates
-      </p>
-      </div>
-      <div>
-<!-- icon here -->      <p>
-      Help
-      </p>
-      </div>
-      <div class='h-44px p-4 fixed bottom-10 left-0 bg-gradient-to-r from-hex-DCEDFF to-hex-F5FAFF border-l-6 border-l-hex-183F6E flex justify-center items-center gap-1 dark:(border-light-gray from-hex-3C3C3C to-hex-3C3C3C)'>
+  <div class='w-225px min-h-289px sticky top-10 mt-20 flex flex-col justify-start items-start gap-4 font-Dm text-14px font-bold text-indigo' id='sidebarItems'>
+ 
+
+      <div class='h-44px p-4 fixed bottom-10 left-0 bg-gradient-to-r from-hex-DCEDFF to-hex-F5FAFF border-l-6 border-l-indigo flex justify-center items-center gap-1 dark:(border-light-gray from-hex-3C3C3C to-hex-3C3C3C)'>
       <img src='/pheno-agency-logo.svg' alt="pheno agency logo" class='-mt-4px'/>
       <p class='font-Roboto text-indigo font-500 text-14px dark:(text-hex-EFEFEF)'>
 
@@ -41,4 +17,72 @@
       </div>
       </div>
   </body>
+  <script>
+  const items = [
+      {
+      id:0,
+      title:'Introduction',
+      img:'introduction',
+      },
+      {
+      id:1,
+      title:'Guides',
+      img:'guides',
+      },
+      {
+      id:2,
+      title:'API',
+      img:'API',
+      },
+      {
+      id:3,
+      title:'Repository',
+      img:'repository',
+      },
+      {
+      id:4,
+      title:'Updates',
+      img:'updates',
+      },
+      {
+      id:5,
+      title:'Help',
+      img:'help',
+      },
+  ]
+  const itemsContainer = document.getElementById("sidebarItems")
+
+   items.forEach(item => {
+      const itemContainer = document.createElement('div')
+      itemContainer.style.display='flex'
+      itemContainer.style.flexDirection='row'
+      itemContainer.style.gap='10px'
+      itemContainer.style.cursor='pointer'
+      itemContainer.style.opacity='0.6'
+      itemContainer.addEventListener('click',myFunction)
+
+      function myFunction(e) {
+       var elements = document.querySelector(".active");
+
+       if(elements !==null){
+            elements.classList.remove("active");
+       }
+
+        itemContainer.classList.add("active")
+      }
+  
+     
+
+      const itemImg = new Image();
+      const itemTitle = document.createElement('p')
+      itemImg.src = `/${item.img}.svg` 
+      itemTitle.textContent = item.title;
+      itemContainer.appendChild(itemImg)
+      itemContainer.appendChild(itemTitle)
+      itemsContainer.appendChild(itemContainer)
+  })
+  </script>
+  <style>
+      .active {background: black}
+  </style>
   </html>
