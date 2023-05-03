@@ -5,7 +5,8 @@ import UnoCSS from 'unocss/astro';
 export default defineConfig({
   // setup for github pages
   site: 'https://pheno-agency.github.io',
-  base: '/proxy-memoize',
+  // note: this is the path to the repo, not the path to the site
+  base: '/website/',
   integrations: [
     UnoCSS({
       injectReset: true, // or a path to the reset file
