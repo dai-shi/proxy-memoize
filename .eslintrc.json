@@ -17,13 +17,12 @@
     "import/resolver": {
       "node": {
         "extensions": [".js", ".jsx", ".ts", ".tsx"],
-        "paths": ["src", "website"]
       }
     }
   },
   "rules": {
     "@typescript-eslint/explicit-function-return-type": "off",
-    "import/extensions": ["error", "never"],
+    "import/extensions": "off",
     "symbol-description": "off",
     "@typescript-eslint/ban-types": "off",
     "no-param-reassign": "off",
