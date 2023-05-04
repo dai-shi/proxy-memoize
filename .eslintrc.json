@@ -5,10 +5,7 @@
   ],
   "extends": [
     "plugin:@typescript-eslint/recommended",
-    "airbnb-base",
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "plugin:import/typescript"
+    "airbnb-base"
   ],
   "env": {
     "browser": true
@@ -16,7 +13,7 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"],
+        "extensions": [".js", ".ts"]
       }
     }
   },
