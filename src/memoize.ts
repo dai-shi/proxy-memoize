@@ -5,6 +5,10 @@ import {
   trackMemo,
 } from 'proxy-compare';
 
+// This is required only for performance.
+// https://github.com/dai-shi/proxy-memoize/issues/68
+const targetCache = new WeakMap();
+
 // constants from proxy-compare
 const HAS_KEY_PROPERTY = 'h';
 const ALL_OWN_KEYS_PROPERTY = 'w';
@@ -108,7 +112,7 @@ export function memoize<Obj extends object, Result>(
       }
     }
     const affected: Affected = new WeakMap();
-    const proxy = createProxy(obj, affected);
+    const proxy = createProxy(obj, affected, undefined, targetCache);
     const result = untrack(fn(proxy), new Set());
     touchAffected(obj, obj, affected);
     const entry: Entry = {
