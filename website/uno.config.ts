@@ -1,4 +1,4 @@
-// uno.config.ts
+/* eslint-disable */
 import {
   defineConfig,
   presetAttributify,
