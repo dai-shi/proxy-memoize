@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+
+## [2.0.4] - 2023-05-06
 ### Changed
 - fix: use target cache for better performance #72
 
