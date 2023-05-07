@@ -6,7 +6,7 @@ export default defineConfig({
   // setup for github pages
   site: 'https://pheno-agency.github.io',
   // note: this is the path to the repo, not the path to the site
-  base: '/proxy-memoize/website/',
+  base: '/',
   integrations: [
     UnoCSS({
       injectReset: true, // or a path to the reset file
