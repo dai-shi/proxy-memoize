@@ -17,12 +17,11 @@ Contributions are welcome.
 
 ## Introduction
 
-In frontend framework like React, object immutability is important.
-JavaScript itself doesn't support forcing immutability.
-Several libraries help encouraging immutable coding style,
-like [immer](https://github.com/immerjs/immer).
-While immer helps updating an object,
-this library helps creating a derived value from an object, a.k.a. selector.
+Immutability is pivotal in more than a few frameworks, like React and Redux. It enables simple-yet-efficient change detection in large nested data structures.
+
+JavaScript is a mutable language by default. Libraries like [immer](https://github.com/immerjs/immer) simplify _updating_ immutable data strucutres.
+
+This library helps _deriving data_ from immutable structures (AKA, selectors), efficiantly caching results for faster performance.
 
 This library utilizes Proxy and WeakMap, and provides memoization.
 The memoized function will re-evaluate the original function
