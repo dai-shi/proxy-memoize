@@ -1,84 +1,81 @@
-<html  lang="en">
-  <body>
-  <div class='hello w-225px min-h-289px sticky top-20 flex flex-col justify-start items-start gap-4 font-Dm text-14px font-bold text-indigo dark:(text-light-gray)' id='sidebarItems'>
- <div>
- <img src=''/>
- </div>
+---
+const items = [
+  {
+    id: 0,
+    title: "Introduction",
+    img: "/introduction.svg",
+  },
+  {
+    id: 1,
+    title: "Guides",
+    img: "/guides.svg",
+  },
+  {
+    id: 2,
+    title: "API",
+    img: "/API.svg",
+  },
+  {
+    id: 3,
+    title: "Repository",
+    img: "/repository.svg",
+  },
+  {
+    id: 4,
+    title: "Updates",
+    img: "/updates.svg",
+  },
+  {
+    id: 5,
+    title: "Help",
+    img: "/help.svg",
+  },
+];
+---
 
-      <div class='h-44px p-4 fixed bottom-10 left-0 bg-gradient-to-r from-hex-DCEDFF to-hex-F5FAFF border-l-6 border-l-indigo flex justify-center items-center gap-1 dark:(border-light-gray from-hex-3C3C3C to-hex-3C3C3C)'>
-        <img src='/pheno-agency-logo.svg' alt="pheno agency logo" class='-mt-4px'/>
-        <p class='font-Roboto text-indigo font-500 text-14px dark:(text-hex-EFEFEF)'>
-         Designed by Pheno
-        </p>
-       </div>
+<div
+  class="hello w-225px min-h-289px sticky top-20 flex flex-col justify-start items-start gap-4 font-Dm text-14px font-bold text-indigo dark:(text-light-gray)"
+  '
+>
+  {
+    items.map(({ title, img }) => (
+      <div class="sidebarItem flex cursor-pointer opacity-60 gap-10px">
+        <img src={img} alt="" />
+        <span>{title}</span>
       </div>
+    ))
+  }
+  <div>
+    <img src="" />
+  </div>
 
-  </body>
+  <div
+    class="h-44px p-4 fixed bottom-0 left-0 bg-gradient-to-r from-hex-DCEDFF to-hex-F5FAFF border-l-6 border-l-indigo flex justify-center items-center gap-1 dark:(border-light-gray from-hex-3C3C3C to-hex-3C3C3C)"
+  >
+    <img src="/pheno-agency-logo.svg" alt="pheno agency logo" class="-mt-4px" />
+    <p
+      class="font-Roboto text-indigo font-500 text-14px dark:(text-hex-EFEFEF)"
+    >
+      Designed by Pheno
+    </p>
+  </div>
+</div>
+<script>
+  function sidebarOnClick(e: Event) {
+    const clickedElement = (e.target as Element).parentElement!;
+    const currentActiveElement = document.querySelector(".sidebarItem.active");
 
-  <script>
-  const items = [
-      {
-      id:0,
-      title:'Introduction',
-      img:'introduction',
-      },
-      {
-      id:1,
-      title:'Guides',
-      img:'guides',
-      },
-      {
-      id:2,
-      title:'API',
-      img:'API',
-      },
-      {
-      id:3,
-      title:'Repository',
-      img:'repository',
-      },
-      {
-      id:4,
-      title:'Updates',
-      img:'updates',
-      },
-      {
-      id:5,
-      title:'Help',
-      img:'help',
-      },
-  ]
-  const itemsContainer = document.getElementById("sidebarItems")
+    if (currentActiveElement !== null) {
+      currentActiveElement.classList.remove("active");
+    }
 
-   items.forEach(item => {
-      const itemContainer = document.createElement('div')
-      itemContainer.style.display='flex'
-      itemContainer.style.flexDirection='row'
-      itemContainer.style.gap='10px'
-      itemContainer.style.cursor='pointer'
-      itemContainer.style.opacity='0.6'
-      itemContainer.addEventListener('click',myFunction)
-
-      function myFunction(e) {
-       var elements = document.querySelector(".active");
-
-       if(elements !==null){
-            elements.classList.remove("active");
-       }
-
-        itemContainer.classList.add("active")
-      }
-  
-     
-
-      const itemImg = new Image();
-      const itemTitle = document.createElement('p')
-      itemImg.src = `/${item.img}.svg` 
-      itemTitle.textContent = item.title;
-      itemContainer.appendChild(itemImg)
-      itemContainer.appendChild(itemTitle)
-      itemsContainer.appendChild(itemContainer)
-  })
-  </script>
-
-  </html>
+    clickedElement.classList.add("active");
+  }
+  const buttons = document.querySelectorAll(".sidebarItem");
+  buttons.forEach((el) => el.addEventListener("click", sidebarOnClick));
+</script>
+<style>
+  .active {
+    background: red;
+  }
+</style>
