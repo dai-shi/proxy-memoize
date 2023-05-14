@@ -34,23 +34,21 @@ const items = [
 ---
 
 <div
-  class="hello w-225px min-h-289px sticky top-20 flex flex-col justify-start items-start gap-4 font-Dm text-14px font-bold text-indigo dark:(text-light-gray)"
+  class="w-225px min-h-289px sticky top-20 flex flex-col justify-start items-start gap-4 font-Dm text-14px font-bold text-indigo dark:(text-light-gray)"
   '
 >
   {
     items.map(({ title, img }) => (
-      <div class="sidebarItem flex cursor-pointer opacity-60 gap-10px">
-        <img src={img} alt="" />
-        <span>{title}</span>
+      <div class="sidebarItem pl-10px border-l-6 border-l-transparent flex cursor-pointer opacity-60 gap-10px">
+        <img src={img} alt=$[title] />
+        <span class="font-Dm">{title}</span>
       </div>
     ))
   }
-  <div>
-    <img src="" />
-  </div>
+
 
   <div
-    class="h-44px p-4 fixed bottom-0 left-0 bg-gradient-to-r from-hex-DCEDFF to-hex-F5FAFF border-l-6 border-l-indigo flex justify-center items-center gap-1 dark:(border-light-gray from-hex-3C3C3C to-hex-3C3C3C)"
+    class="h-44px p-4 fixed bottom-10 left-0 bg-gradient-to-r from-hex-DCEDFF to-hex-F5FAFF border-l-6 border-l-indigo flex justify-center items-center gap-1 dark:(border-light-gray from-hex-3C3C3C to-hex-3C3C3C)"
   >
     <img src="/pheno-agency-logo.svg" alt="pheno agency logo" class="-mt-4px" />
     <p
@@ -76,6 +74,9 @@ const items = [
 </script>
 <style>
   .active {
-    background: red;
+    border-left: 6px solid #183F6E !important;
+    width: 100%;
+    background: linear-gradient(to right, #DCEDFF 100%,#F5FAFF 0% );
   }
+
 </style>

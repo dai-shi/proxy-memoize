@@ -3,6 +3,7 @@
 import MainHero from './Mainhero.astro';
 import Navbar from './Navbar.astro';
 import Sidebar from './Sidebar.astro';
+import SectionSelector from './SectionSelector.astro'
 ---
 
 <html  lang="en">
@@ -12,8 +13,12 @@ import Sidebar from './Sidebar.astro';
       <MainHero/> 
       <div class='flex flex-row items-start gap-80px px-48px mt-10'>
       <Sidebar/>
-          <div class='flex-1 mx-auto'>
-          <slot/> <!-- your content is injected here -->
+          <div class='flex-col mt-10 w-full'>
+<SectionSelector/>
+<div class="prose prose-violet w-full max-w-full">
+
+	<slot/> <!-- your content is injected here -->
+</div>
           </div>
       </div>
     </div>

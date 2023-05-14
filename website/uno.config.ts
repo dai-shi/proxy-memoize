@@ -31,21 +31,55 @@ export default defineConfig({
     },
   },
   presets: [
-    presetUno(),
-    presetAttributify(),
+    presetUno(), // required
+    presetAttributify(), // required when using attributify mode
+    presetTypography({
+      // selectorName: 'markdown', // now use like `markdown markdown-gray`, `not-markdown`
+      // cssExtend is an object with CSS selector as key and
+      // CSS declaration block as value like writing normal CSS.
+      cssExtend: {
+        'h1,h2,h3,h4,h5,h6': {
+          color: '#183F6E',
+          'font-family': 'Roboto',
+        },
+        pre: {
+          background: '#183F6E',
+        },
+        'pre code': {
+          'font-family': 'DM Sans',
+        },
+        p: {
+          color: '#536E8F',
+        },
+        'code span': {
+          color: '#fff',
+        },
+        'a:hover': {
+          color: '#f43f5e',
+        },
+        'a:visited': {
+          color: '#14b8a6',
+        },
+      },
+    }),
     presetIcons(),
-    presetTypography(),
     presetWebFonts({
       provider: 'google', // default provider
-
       fonts: {
+        // these will extend the default theme
+        Roboto: [
+          {
+            name: 'Roboto',
+            weights: ['700', '500'],
+          },
+          {
+            name: 'sans-serif',
+            provider: 'none',
+          },
+        ],
         Dm: {
           name: 'DM Sans',
           weights: ['400', '500', '700'],
-        },
-        Roboto: {
-          name: 'Roboto',
-          weights: ['700', '500'],
         },
       },
     }),
