@@ -8,7 +8,7 @@ import SectionSelector from './SectionSelector.astro'
 
 <html  lang="en">
   <body>
-    <div class='flex flex-col justify-start transition-all duration-300 ease-in-out dark:bg-full-black'>
+    <div class='overflow-hidden flex flex-col justify-start transition-all duration-300 ease-in-out dark:bg-full-black'>
       <Navbar/>
       <MainHero/> 
       <div class='flex flex-row items-start gap-80px px-48px mt-10'>
@@ -29,8 +29,8 @@ import SectionSelector from './SectionSelector.astro'
 	const toggleBg= document.getElementById('switch')
 	const search= document.getElementById('searchInput')
 	const clearIcon= document.getElementById('clear')
-//TODO: show and hide the icon with typing
-
+const windowWidth = window.screen.width
+//TODO: show and hide the clear icon after typing
 if ( search.value) {
 clearIcon.style.visibility = "block"
 }else{
@@ -41,12 +41,27 @@ clearIcon.style.visibility = "hidden"
 	function darkMode() {
 	if (parent.classList.contains('dark')){
 		parent.classList.remove("dark")
-		toggleBg.style.left='6px'
+		if(windowWidth >1024){
+	
+			toggleBg.style.left='6px'
+		}
+		if(windowWidth >768 &&windowWidth <1024){
+			toggleBg.style.left='4px'
+	
+		}
 
 	}
 	else{	
 		parent.classList.add("dark")
-		toggleBg.style.left='106px'
+		if(windowWidth >1024){
+
+			toggleBg.style.left='106px'
+		}
+		if(windowWidth >768 &&windowWidth <1024){
+			toggleBg.style.left='48px'
+
+		}
+
 	}
 
 	}

@@ -29,16 +29,13 @@ const selectItems=[
     {selectItems.map(({title})=>{
         return(
 <button class="flex flex-col justify-start items-center gap-16px notActive">
-    <p class='font-Dm text-14px font-500 text-gray dark:text-white' id={title}>{title}</p>
+    <p class='font-Dm text-14px font-500 text-gray dark:text-white whitespace-nowrap' id={title}>{title}</p>
     <div class="w-full h-4px rounded-full bg-hex-009B8D hidden" ></div>
     </button>
     )
     })}
 </div>
 <script>
-const element = document.getElementById("install");
-let pos = element;
-console.log('test',pos)
 
 const buttons = document.querySelectorAll(".topbarItems");
 buttons.forEach((el) => el.addEventListener("click", sidebarOnClick));
