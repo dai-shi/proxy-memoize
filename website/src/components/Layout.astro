@@ -1,54 +1,59 @@
-
 ---
-import MainHero from './Mainhero.astro';
-import Navbar from './Navbar.astro';
-import Sidebar from './Sidebar.astro';
-import SectionSelector from './SectionSelector.astro'
+import MainHero from "./Mainhero.astro";
+import Navbar from "./Navbar.astro";
+import Sidebar from "./Sidebar.astro";
+import SectionSelector from "./SectionSelector.astro";
+
+const { sections } = Astro.props
 ---
 
-<html  lang="en">
-  <body>
-    <div class='flex flex-col justify-start transition-all duration-300 ease-in-out dark:bg-full-black'>
-      <Navbar/>
-      <MainHero/> 
-      <div class='flex flex-row items-start gap-80px px-48px mt-10'>
-      <Sidebar/>
-          <div class='flex-col mt-10 w-full'>
-<SectionSelector/>
-<div class="prose prose-violet w-full max-w-full">
+<html lang="en">
+	<body>
+		<div
+			class="flex flex-col justify-start transition-all duration-300 ease-in-out dark:bg-full-black"
+		>
+			<Navbar />
+			<MainHero />
+			<div class="flex flex-row items-start gap-80px px-48px mt-10">
+				<Sidebar />
+				<div class="flex-col mt-10 w-full">
+					<SectionSelector sections={sections}/>
+					<div class="prose prose-violet w-full max-w-full">
+						<slot />
+						<!-- your content is injected here -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script>
+		const parent = document.getElementById("parentHTML");
+		const button = document.getElementById("toggleTheme");
+		const toggleBg = document.getElementById("switch");
+		const search = document.getElementById("searchInput");
+		const clearIcon = document.getElementById("clear");
+		//TODO: show and hide the icon with typing
 
-	<slot/> <!-- your content is injected here -->
-</div>
-          </div>
-      </div>
-    </div>
-  </body>
-  <script>
-	const parent= document.getElementById('parentHTML')
-	const button = document.getElementById('toggleTheme')
-	const toggleBg= document.getElementById('switch')
-	const search= document.getElementById('searchInput')
-	const clearIcon= document.getElementById('clear')
-//TODO: show and hide the icon with typing
-
-if ( search.value) {
-clearIcon.style.visibility = "block"
-}else{
-  
-clearIcon.style.visibility = "hidden"
-}
-	button.addEventListener("click",darkMode)
-	function darkMode() {
-	if (parent.classList.contains('dark')){
-		parent.classList.remove("dark")
-		toggleBg.style.left='6px'
-
-	}
-	else{	
-		parent.classList.add("dark")
-		toggleBg.style.left='106px'
-	}
-
-	}
+		if (search.value) {
+			clearIcon.style.visibility = "block";
+		} else {
+			clearIcon.style.visibility = "hidden";
+		}
+		button.addEventListener("click", darkMode);
+		function darkMode() {
+			if (parent.classList.contains("dark")) {
+				parent.classList.remove("dark");
+				toggleBg.style.left = "6px";
+			} else {
+				parent.classList.add("dark");
+				toggleBg.style.left = "106px";
+			}
+		}
 	</script>
 </html>
+
+<style>
+	html {
+		scroll-behavior: smooth;
+	}
+</style>

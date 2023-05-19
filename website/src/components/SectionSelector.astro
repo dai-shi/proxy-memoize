@@ -1,85 +1,75 @@
 ---
-const selectItems=[
-    {id:0,
-    title:'How it works',
-},
-    {id:1,
-    title:'Install',
-},
-    {id:2,
-    title:'How it behaves',
+const selectItems = [
+    { id: 0, title: "How it works" },
+    { id: 1, title: "Install" },
+    { id: 2, title: "How it behaves" },
+    { id: 3, title: "Usage with React Context" },
+    { id: 4, title: "Using size option" },
+    { id: 5, title: "Usage with Zustand" },
+];
 
-},
-    {id:3,
-    title:'Usage with React Context',
-
-},
-    {id:4,
-    title:'Using size option',
-},
-    {id:5,
-    title:'Usage with Zustand',
-
-
-},
-]
+const { sections } = Astro.props
 ---
 
-<div class="topbarItems sticky top-64px  border-b-2px border-b-DEF2F0 flex flex-row justify-start items-center gap-32px mb-40px bg-white dark:bg-full-black">
-    {selectItems.map(({title})=>{
-        return(
-<button class="flex flex-col justify-start items-center gap-16px notActive">
-    <p class='font-Dm text-14px font-500 text-gray dark:text-white' id={title}>{title}</p>
-    <div class="w-full h-4px rounded-full bg-hex-009B8D hidden" ></div>
-    </button>
-    )
-    })}
+<div
+    class="topbarItems sticky top-64px border-b-2px border-b-DEF2F0 flex flex-row justify-start items-center gap-32px mb-40px bg-white dark:bg-full-black"
+>
+    {
+        sections.map(({ text, slug }) => {
+            return (
+                <a href={"#" + slug} class="flex active flex-col justify-start items-center gap-16px notActive">
+                    <p
+                        class="font-Dm text-14px font-500 text-gray dark:text-white"
+                    >
+                        {text}
+                    </p>
+                    <div class="w-full h-4px rounded-full bg-hex-009B8D hidden" />
+                </a>
+            );
+        })
+    }
 </div>
 <script>
-const element = document.getElementById("install");
-let pos = element;
-console.log('test',pos)
+    const element = document.getElementById("install");
+    let pos = element;
+    console.log("test", sections);
 
-const buttons = document.querySelectorAll(".topbarItems");
-buttons.forEach((el) => el.addEventListener("click", sidebarOnClick));
+    const buttons = document.querySelectorAll(".topbarItems");
+    buttons.forEach((el) => el.addEventListener("click", sidebarOnClick));
 
-function sidebarOnClick(e: Event) {
-const clickedElement = (e.target as Element).parentElement!;
+    function sidebarOnClick(e: Event) {
+        const clickedElement = (e.target as Element).parentElement!;
 
-const text = e.target.innerHTML
-const triger = text.replace(/\s+/g, '-').toLowerCase();
-    var element = document.getElementById(triger);
-    var headerOffset = 120;
-    var elementPosition = element.getBoundingClientRect().top;
-    var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-  
-    window.scrollTo({
-         top: offsetPosition,
-         behavior: "smooth"
-    });
+        const text = e.target.innerHTML;
+        const triger = text.replace(/\s+/g, "-").toLowerCase();
+        var element = document.getElementById(triger);
+        var headerOffset = 120;
+        var elementPosition = element.getBoundingClientRect().top;
+        var offsetPosition =
+            elementPosition + window.pageYOffset - headerOffset;
 
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+        });
 
-//  document?.getElementById(triger).scrollIntoView({behavior:"smooth"});
+        //  document?.getElementById(triger).scrollIntoView({behavior:"smooth"});
 
- const currentActiveElement = document.querySelector(".active");
-if (currentActiveElement !== null) {
-  currentActiveElement.classList.remove("active");
-} 
-    clickedElement.classList.add("active");
-
-}
-  
-
+        const currentActiveElement = document.querySelector(".active");
+        if (currentActiveElement !== null) {
+            currentActiveElement.classList.remove("active");
+        }
+        clickedElement.classList.add("active");
+    }
 </script>
 <style>
-    .notActive{
+    .notActive {
         margin-bottom: 16px;
     }
-    .active{
+    .active {
         margin-bottom: 0px !important;
     }
-    .active >div{
+    .active > div {
         display: block;
     }
-   
-  </style>
+</style>
