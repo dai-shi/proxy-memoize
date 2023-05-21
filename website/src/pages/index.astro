@@ -1,27 +1,14 @@
 ---
-import * as readme from '../../../README.md';
-import Layout from '../components/Layout.astro';
-import Markdown from '../components/Markdown.astro';
+import * as readme from "../../../README.md";
+import Layout from "../components/Layout.astro";
+import Markdown from "../components/Markdown.astro";
 
 // useful for the tab section
-const sections = readme.getHeadings().filter((h => h.depth === 2))
-
-const docs = await Astro.glob('../../../docs/**/*.md');
+const sections = readme.getHeadings().filter((h) => h.depth === 2);
 ---
 
-<html lang="en" id='parentHTML'>
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Proxy Memoize</title>
-	</head>
-	<body>
-	<Layout sections={sections}>
-		<Markdown>
-			<readme.Content />
-		</Markdown>
-    </Layout>
-	</body>
-</html>
+<Layout sections={sections}>
+	<Markdown>
+		<readme.Content />
+	</Markdown>
+</Layout>

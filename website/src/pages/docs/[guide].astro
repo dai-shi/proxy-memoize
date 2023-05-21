@@ -1,0 +1,25 @@
+---
+import Layout from "../../components/Layout.astro";
+import Markdown from "../../components/Markdown.astro";
+export async function getStaticPaths() {
+    const docs = await Astro.glob("../../../../docs/**/*.md");
+
+  
+    return docs.flatMap((d) => {
+	const doc = { ...d.getHeadings()[0]! };
+	return { params: { guide: doc.slug } };
+});
+}
+
+const { guide: guideParam } = Astro.params;
+const docs = await Astro.glob("../../../../docs/**/*.md");
+
+const guide = docs.find(d => d.getHeadings()[0].slug === guideParam)!
+const sections = guide.getHeadings().filter((h) => h.depth === 2);
+---
+
+<Layout sections={sections}>
+	<Markdown>
+        <guide.Content />
+	</Markdown>
+</Layout>
