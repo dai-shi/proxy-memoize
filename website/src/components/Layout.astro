@@ -1,69 +1,71 @@
-
 ---
-import MainHero from './Mainhero.astro';
-import Navbar from './Navbar.astro';
-import Sidebar from './Sidebar.astro';
-import SectionSelector from './SectionSelector.astro'
+import MainHero from "./Mainhero.astro";
+import Navbar from "./Navbar.astro";
+import Sidebar from "./Sidebar.astro";
+import SectionSelector from "./SectionSelector.astro";
+
+const docs = await Astro.glob("../../../docs/**/*.md");
+
+const guides = docs.flatMap((d) => {
+	const doc = { ...d.getHeadings()[0]! };
+	return { title: doc.text, href: "/docs/" + doc.slug, id: doc.slug };
+});
+
+const { sections } = Astro.props;
 ---
 
-<html  lang="en">
-  <body>
-    <div class='overflow-hidden flex flex-col justify-start transition-all duration-300 ease-in-out dark:bg-full-black'>
-      <Navbar/>
-      <MainHero/> 
-      <div class='flex flex-row items-start gap-80px px-48px mt-10'>
-      <Sidebar/>
-          <div class='flex-col mt-10 w-full'>
-<SectionSelector/>
-<div class="prose prose-violet w-full max-w-full">
-
-	<slot/> <!-- your content is injected here -->
-</div>
-          </div>
-      </div>
-    </div>
-  </body>
-  <script>
-	const parent= document.getElementById('parentHTML')
-	const button = document.getElementById('toggleTheme')
-	const toggleBg= document.getElementById('switch')
-	const search= document.getElementById('searchInput')
-	const clearIcon= document.getElementById('clear')
-const windowWidth = window.screen.width
-//TODO: show and hide the clear icon after typing
-if ( search.value) {
-clearIcon.style.visibility = "block"
-}else{
-  
-clearIcon.style.visibility = "hidden"
-}
-	button.addEventListener("click",darkMode)
-	function darkMode() {
-	if (parent.classList.contains('dark')){
-		parent.classList.remove("dark")
-		if(windowWidth >1024){
-	
-			toggleBg.style.left='6px'
-		}
-		if(windowWidth >768 &&windowWidth <1024){
-			toggleBg.style.left='4px'
-	
+<html lang="en" id="parentHTML">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/proxy-memoize/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Proxy Memoize</title>
+	</head>
+	<body>
+		<div
+			class="flex flex-col justify-start transition-all duration-300 ease-in-out dark:bg-full-black"
+		>
+			<Navbar />
+			<MainHero />
+			<div class="flex flex-row items-start gap-80px px-48px mt-10 <lg:mt-0">
+				<Sidebar guides={guides} />
+				<div class="flex-col mt-10 w-70% <lg:w-100% <lg:mt-6vw">
+					<SectionSelector sections={sections} />
+					<div class="prose prose-violet w-full max-w-full">
+						<slot />
+						<!-- your content is injected here -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script>
+		const parentEl = document.getElementById("parentHTML")!;
+		const toggleThemeEl = document.getElementById("toggleTheme")!;
+		const toggleBgEl = document.getElementById("switch")!;
+		if (localStorage.getItem('theme') === 'dark') {
+			parentEl.classList.add("dark");
+			toggleBgEl.style.left = "106px";
 		}
 
-	}
-	else{	
-		parent.classList.add("dark")
-		if(windowWidth >1024){
-
-			toggleBg.style.left='106px'
+		function darkMode() {
+			if (parentEl.classList.contains("dark")) {
+				localStorage.setItem('theme', 'light')
+				parentEl.classList.remove("dark");
+				toggleBgEl.style.left = "6px";
+			} else {
+				localStorage.setItem('theme', 'dark')
+				parentEl.classList.add("dark");
+				toggleBgEl.style.left = "106px";
+			}
 		}
-		if(windowWidth >768 &&windowWidth <1024){
-			toggleBg.style.left='48px'
-
-		}
-
-	}
-
-	}
+		toggleThemeEl.addEventListener("click", darkMode);
 	</script>
 </html>
+
+<style>
+	html {
+		scroll-behavior: smooth;
+	}
+</style>

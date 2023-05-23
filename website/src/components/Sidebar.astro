@@ -1,82 +1,106 @@
 ---
+const { guides } = Astro.props;
 const items = [
   {
     id: 0,
     title: "Introduction",
-    img: "/introduction.svg",
+    img: "/proxy-memoize/introduction.svg",
+    href: "/proxy-memoize/#introduction",
   },
   {
     id: 1,
     title: "Guides",
-    img: "/guides.svg",
+    img: "/proxy-memoize/guides.svg",
+    subsection: guides,
   },
   {
     id: 2,
     title: "API",
-    img: "/API.svg",
+    img: "/proxy-memoize/API.svg",
+    href: "/proxy-memoize/#api",
   },
   {
     id: 3,
     title: "Repository",
-    img: "/repository.svg",
+    img: "/proxy-memoize/repository.svg",
+    href: "https://github.com/dai-shi/proxy-memoize/",
   },
   {
     id: 4,
-    title: "Updates",
-    img: "/updates.svg",
+    title: "Change Log",
+    img: "/proxy-memoize/updates.svg",
+    href: "https://github.com/dai-shi/proxy-memoize/blob/main/CHANGELOG.md",
   },
   {
     id: 5,
     title: "Help",
-    img: "/help.svg",
+    img: "/proxy-memoize/help.svg",
+    href: "https://github.com/dai-shi/proxy-memoize/issues",
   },
 ];
 ---
 
 <div
-  class="min-w-170px w-225px min-h-289px sticky top-20 flex flex-col justify-start items-start gap-4 font-Dm text-14px font-bold text-indigo dark:(text-light-gray)"
-  '
+  class="w-225px min-h-289px sticky top-100px flex flex-col justify-start items-start gap-2 font-Dm text-14px font-bold text-indigo dark:(text-light-gray) <lg:hidden"
 >
   {
-    items.map(({ title, img }) => (
-      <div class="sidebarItem pl-10px border-l-6 border-l-transparent flex cursor-pointer opacity-60 gap-10px">
-        <img src={img} alt=$[title] />
-        <span class="font-Dm">{title}</span>
-      </div>
+    items.map(({ title, img, href, subsection }) => (
+      <>
+        <a
+          href={href}
+          class={`${ subsection ? 'opacity-40!' : 'sidebarItem cursor-pointer'} opacity-60 w-full p-10px border-l-6 border-l-transparent flex items-center gap-10px`}
+        >
+          <img src={img} alt={title} />
+          <span class="font-Dm">{title}</span>
+        </a>
+        {subsection?.map(({ title, href: subHref}: { title: string, id: string, href: string }) => (
+          <a href={'/proxy-memoize' + subHref} class="sidebarItem p-10px pl-22px ml-16px border-l-6 border-l-transparent flex items-center cursor-pointer opacity-60 gap-10px">
+            <span>#</span>
+            <span class="font-Dm">{title}</span>
+          </a>
+        ))}
+      </>
     ))
   }
-
-
-  <div
-    class="h-44px p-4 fixed bottom-10 left-0 bg-gradient-to-r from-hex-DCEDFF to-hex-F5FAFF border-l-6 border-l-indigo flex justify-center items-center gap-1 dark:(border-light-gray from-hex-3C3C3C to-hex-3C3C3C)"
-  >
-    <img src="/pheno-agency-logo.svg" alt="pheno agency logo" class="-mt-4px" />
-    <p
-      class="font-Roboto text-indigo font-500 text-14px dark:(text-hex-EFEFEF)"
-    >
-      Designed by Pheno
-    </p>
-  </div>
+</div>
+<div
+  class="h-44px p-4 fixed bottom-10 left-0 bg-gradient-to-r from-hex-DCEDFF to-hex-F5FAFF border-l-6 border-l-indigo flex justify-center items-center gap-1 dark:(border-light-gray from-hex-3C3C3C to-hex-3C3C3C)"
+>
+  <img src="/proxy-memoize/pheno-agency-logo.svg" alt="pheno agency logo" class="-mt-4px" />
+  <p class="font-Roboto text-indigo font-500 text-14px dark:(text-hex-EFEFEF)">
+    Designed by Pheno
+  </p>
 </div>
 <script>
   function sidebarOnClick(e: Event) {
-    const clickedElement = (e.target as Element).parentElement!;
+    const clickedElement = e.currentTarget as Element;
     const currentActiveElement = document.querySelector(".sidebarItem.active");
 
     if (currentActiveElement !== null) {
       currentActiveElement.classList.remove("active");
+      currentActiveElement.classList.add("opacity-60");
     }
 
     clickedElement.classList.add("active");
+    clickedElement.classList.remove("opacity-60");
   }
   const buttons = document.querySelectorAll(".sidebarItem");
-  buttons.forEach((el) => el.addEventListener("click", sidebarOnClick));
+  buttons.forEach((el) =>{
+    if (location.href.endsWith(el.attributes.getNamedItem('href')?.value!)) {
+        el.classList.add('active')
+        el.classList.remove("opacity-60");
+      }
+    el.addEventListener("click", sidebarOnClick, { capture: false })
+  });
 </script>
 <style>
   .active {
-    border-left: 6px solid #183F6E !important;
+    border-left: 6px solid #183f6e !important;
     width: 100%;
-    background: linear-gradient(to right, #DCEDFF 100%,#F5FAFF 0% );
+    background: linear-gradient(
+      89.46deg,
+      #dcedff 0.36%,
+      rgba(245, 250, 255, 0) 106.19%
+    );
   }
-
 </style>

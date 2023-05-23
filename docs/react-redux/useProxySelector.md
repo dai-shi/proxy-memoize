@@ -1,4 +1,4 @@
-# useProxySelector Hook
+# useProxySelector
 This creates a `useProxySelector` hook which can be used to create a typed `useSelector` hook powered by `proxy-memoize`. By defining this hook in your application code, you can ensure that the `state` object reflects your redux state object.
 
 ## The Hook
