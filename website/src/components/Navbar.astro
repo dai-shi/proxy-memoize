@@ -1,5 +1,5 @@
 ---
-import ToggleTheme from "./ToggleTheme.astro";
+import Test from './ToggleTheme'
 ---
 
 <div
@@ -8,5 +8,6 @@ class="fixed z-10 w-full flex flex-row justify-between items-center gap-20 h-100
 <img src="/proxy-memoize/Hamburger.svg" alt="Hamburger" class="hidden <lg:block">
 <img src="/proxy-memoize/proxy-memoize-logo.svg" alt="proxy memoize logo" class="w-177px h-40px <lg:w-166px <lg:h-38px" />
 
-  <ToggleTheme />
+  <!-- <ToggleTheme /> -->
+<Test client:load />
 </div>

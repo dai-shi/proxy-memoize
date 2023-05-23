@@ -45,27 +45,32 @@ const { sections } = Astro.props;
 		const toggleThemeEl = document.getElementById("toggleTheme")!;
 		const toggleBgEl = document.getElementById("switch")!;
 		if (localStorage.getItem('theme') === 'dark') {
-			parentEl.classList.add("dark");
-			toggleBgEl.style.left = "106px";
+		  parentEl.classList.add("dark");
+		//   toggleBgEl.style.left = "106px";
 		}
-
 		function darkMode() {
-			if (parentEl.classList.contains("dark")) {
-				localStorage.setItem('theme', 'light')
-				parentEl.classList.remove("dark");
-				toggleBgEl.style.left = "6px";
-			} else {
-				localStorage.setItem('theme', 'dark')
-				parentEl.classList.add("dark");
-				toggleBgEl.style.left = "106px";
-			}
+		  if (parentEl.classList.contains("dark")) {
+			localStorage.setItem('theme', 'light')
+			parentEl.classList.remove("dark");
+			// toggleBgEl.style.left = "6px";
+		  } else {
+			localStorage.setItem('theme', 'dark')
+			parentEl.classList.add("dark");
+			// toggleBgEl.style.left = "106px";
+		  }
 		}
 		toggleThemeEl.addEventListener("click", darkMode);
-	</script>
+	  </script>
 </html>
 
 <style>
 	html {
 		scroll-behavior: smooth;
 	}
+	.prose:where(pre):not(:where(.not-prose,.not-prose *)) {
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    border-radius: 0.375rem;
+    background: #183F6E ;
+}
 </style>
