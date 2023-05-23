@@ -3,9 +3,10 @@ import ToggleTheme from "./ToggleTheme.astro";
 ---
 
 <div
-  class="fixed z-10 w-full flex flex-row justify-between items-center gap-20 h-65px py-10px px-10 bg-white dark:bg-full-black"
+class="fixed z-10 w-full flex flex-row justify-between items-center gap-20 h-100px pt-32px pb-27px px-48px bg-white dark:bg-full-black <lg:h-88px <md:h-65px <lg:pt-28px <lg:pb-22px"
 >
-  <img src="/proxy-memoize-logo.svg" alt="proxy memoize logo" />
-  
+<img src="/Hamburger.svg" alt="Hamburger" class="hidden <lg:block">
+<img src="/proxy-memoize-logo.svg" alt="proxy memoize logo" class="w-177px h-40px <lg:w-166px <lg:h-38px" />
+
   <ToggleTheme />
 </div>

@@ -28,9 +28,9 @@ const { sections } = Astro.props;
 		>
 			<Navbar />
 			<MainHero />
-			<div class="flex flex-row items-start gap-80px px-48px mt-10">
+			<div class="flex flex-row items-start gap-80px px-48px mt-10 <lg:mt-0">
 				<Sidebar guides={guides} />
-				<div class="flex-col mt-10 w-full">
+				<div class="flex-col mt-10 w-70% <lg:w-100% <lg:mt-0">
 					<SectionSelector sections={sections} />
 					<div class="prose prose-violet w-full max-w-full">
 						<slot />
