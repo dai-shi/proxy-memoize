@@ -10,23 +10,28 @@ const selectItems = [
 
 const { sections } = Astro.props
 ---
+<div class="sticky top-100px mb-40px <lg:hidden">
 
-<div
-    class="sticky top-64px border-b-2px border-b-DEF2F0 flex flex-row justify-start items-end gap-32px mb-40px bg-white dark:bg-full-black w-90.7% overflow-x-scroll <lg:hidden"
->
+    <div
+    class="sectionSelector  flex flex-row justify-start items-end gap-32px  bg-white dark:bg-full-black w-full overflow-auto "
+    >
     {
         sections.map(({ text, slug }: { text: string, slug: string }) => {
             const href = "#" + slug
             return (
                 <a href={href} class="tab-item flex flex-col justify-start items-center gap-16px notActive font-Dm text-14px font-500 text-gray dark:text-white">
-                 
+                    
                        <p class="w-max">{text}
                         </p> 
-                    <div class="w-full h-4px rounded-full bg-hex-009B8D hidden" />
-                </a>
-            );
-        })
-    }
+                        <div class="w-full h-4px rounded-full bg-hex-009B8D hidden" />
+                        </a>
+                        );
+                    })
+                }
+</div>
+<div class="w-full border-b-2px border-b-DEF2F0 -mt-18px"/>
+    
+
 </div>
 <script>
     const tabItems = document.querySelectorAll(".tab-item");
@@ -53,6 +58,18 @@ const { sections } = Astro.props
     }
 </script>
 <style scoped>
+ .sectionSelector::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.sectionSelector::-webkit-scrollbar {
+    background-color: transparent;
+}
+
+.sectionSelector::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
     .notActive {
         margin-bottom: 16px;
     }

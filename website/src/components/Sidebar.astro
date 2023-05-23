@@ -4,44 +4,44 @@ const items = [
   {
     id: 0,
     title: "Introduction",
-    img: "/introduction.svg",
+    img: "/proxy-memoize/introduction.svg",
     href: "/proxy-memoize/#introduction",
   },
   {
     id: 1,
     title: "Guides",
-    img: "/guides.svg",
+    img: "/proxy-memoize/guides.svg",
     subsection: guides,
   },
   {
     id: 2,
     title: "API",
-    img: "/API.svg",
+    img: "/proxy-memoize/API.svg",
     href: "/proxy-memoize/#api",
   },
   {
     id: 3,
     title: "Repository",
-    img: "/repository.svg",
+    img: "/proxy-memoize/repository.svg",
     href: "https://github.com/dai-shi/proxy-memoize/",
   },
   {
     id: 4,
     title: "Change Log",
-    img: "/updates.svg",
+    img: "/proxy-memoize/updates.svg",
     href: "https://github.com/dai-shi/proxy-memoize/blob/main/CHANGELOG.md",
   },
   {
     id: 5,
     title: "Help",
-    img: "/help.svg",
+    img: "/proxy-memoize/help.svg",
     href: "https://github.com/dai-shi/proxy-memoize/issues",
   },
 ];
 ---
 
 <div
-  class="w-225px min-h-289px sticky top-20 flex flex-col justify-start items-start gap-2 font-Dm text-14px font-bold text-indigo dark:(text-light-gray) <lg:hidden"
+  class="w-225px min-h-289px sticky top-100px flex flex-col justify-start items-start gap-2 font-Dm text-14px font-bold text-indigo dark:(text-light-gray) <lg:hidden"
 >
   {
     items.map(({ title, img, href, subsection }) => (
@@ -66,7 +66,7 @@ const items = [
 <div
   class="h-44px p-4 fixed bottom-10 left-0 bg-gradient-to-r from-hex-DCEDFF to-hex-F5FAFF border-l-6 border-l-indigo flex justify-center items-center gap-1 dark:(border-light-gray from-hex-3C3C3C to-hex-3C3C3C)"
 >
-  <img src="/pheno-agency-logo.svg" alt="pheno agency logo" class="-mt-4px" />
+  <img src="/proxy-memoize/pheno-agency-logo.svg" alt="pheno agency logo" class="-mt-4px" />
   <p class="font-Roboto text-indigo font-500 text-14px dark:(text-hex-EFEFEF)">
     Designed by Pheno
   </p>

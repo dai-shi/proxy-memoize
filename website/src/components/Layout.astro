@@ -17,7 +17,7 @@ const { sections } = Astro.props;
 <html lang="en" id="parentHTML">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="/proxy-memoize/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Proxy Memoize</title>
@@ -30,7 +30,7 @@ const { sections } = Astro.props;
 			<MainHero />
 			<div class="flex flex-row items-start gap-80px px-48px mt-10 <lg:mt-0">
 				<Sidebar guides={guides} />
-				<div class="flex-col mt-10 w-70% <lg:w-100% <lg:mt-0">
+				<div class="flex-col mt-10 w-70% <lg:w-100% <lg:mt-6vw">
 					<SectionSelector sections={sections} />
 					<div class="prose prose-violet w-full max-w-full">
 						<slot />
