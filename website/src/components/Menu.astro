@@ -1,5 +1,7 @@
 ---
 const { guides } = Astro.props;
+const { sections } = Astro.props;
+
 const items = [
   {
     id: 0,
@@ -39,9 +41,16 @@ const items = [
   },
 ];
 ---
+<div class="relative hidden <lg:block">
+<img src="/Hamburger.svg" alt="Hamburger" id="hamburger" class="hidden <lg:block <lg:w-38px <lg:h-38px <md:w-24px <md:h-24px cursor-pointer">
 
-<div
-  class="w-225px min-h-289px sticky top-100px flex flex-col justify-start items-start gap-2 font-Dm text-14px font-bold text-indigo dark:(text-light-gray) <lg:hidden"
+<div id="menuContianer" class="  absolute w-110vw h-110vh -left-100px -top-100px opacity-0 -z-1 bg-hex-ffffff4a transition-all duration-500 ease-in-out">
+<div id='menu' class="absolute flex flex-col px-24px py-16px rounded-r-16px
+ -left-1000px top-72px w-304px h-954px bg-white dark:bg-full-black transition-all duration-500 ease-in-out">
+
+  <button id='closeMenu' class="text-30px cursor-pointer self-end text-hex-8094AC rounded-5px">&times;</button>
+  <div
+  class="w-225px min-h-289px sticky top-65px flex flex-col justify-start items-start gap-2 font-Dm text-14px font-bold text-indigo dark:(text-light-gray)"
 >
   {
     items.map(({ title, img, href, subsection }) => (
@@ -65,15 +74,38 @@ const items = [
 </div>
 <div
 style={{background: 'linear-gradient(89.46deg, #DCEDFF 0.36%, rgba(245, 250, 255, 0) 106.19%)'}}
-  class="h-44px p-4 fixed bottom-10 left-0  border-l-6 border-l-indigo flex justify-center items-center gap-1 dark:(border-light-gray from-hex-3C3C3C to-hex-3C3C3C)"
+  class="h-44px p-4 fixed bottom-4rem left-3.2rem  border-l-6 border-l-indigo flex justify-center items-center gap-1 dark:(border-light-gray from-hex-3C3C3C to-hex-3C3C3C)"
 >
-  <img src="/proxy-memoize/pheno-agency-logo.svg" alt="pheno agency logo" class="w-27px h-27px" />
+  <img src="/proxy-memoize/pheno-agency-logo.svg" alt="pheno agency logo" class=" w-27px h-27px" />
   <p class="font-Roboto text-indigo font-500 text-14px dark:(text-hex-EFEFEF)">
     Designed by Pheno
   </p>
 </div>
+</div>
+</div>
+</div>
+
 <script>
-  function sidebarOnClick(e: Event) {
+
+  const hamburger = document.getElementById("hamburger")!;
+  const colse = document.getElementById("closeMenu")!;
+  const menuContianer = document.getElementById("menuContianer")!;
+  const menu = document.getElementById("menu")!;
+function openMenu(){
+  menuContianer.style.backdropFilter='Blur(2px)'
+  menuContianer.style.zIndex='2'
+  menuContianer.style.opacity='1'
+  menu.style.left="52px"
+}
+function colseMenu(){
+  menuContianer.style.backdropFilter='Blur(0px)'
+  menuContianer.style.zIndex='-1'
+  menuContianer.style.opacity='0'
+  menu.style.left="-1000px"
+}
+hamburger.addEventListener("click",openMenu)
+colse.addEventListener("click",colseMenu)
+function sidebarOnClick(e: Event) {
     const clickedElement = e.currentTarget as Element;
     const currentActiveElement = document.querySelector(".sidebarItem.active");
 
