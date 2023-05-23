@@ -12,6 +12,8 @@ const guides = docs.flatMap((d) => {
 });
 
 const { sections } = Astro.props;
+
+
 ---
 
 <html lang="en" id="parentHTML">
@@ -26,7 +28,7 @@ const { sections } = Astro.props;
 		<div
 			class="flex flex-col justify-start transition-all duration-300 ease-in-out dark:bg-full-black"
 		>
-			<Navbar />
+			<Navbar guides={guides} />
 			<MainHero />
 			<div class="w-100% px-48px flex flex-row items-start gap-80px mt-10 max-w-1600px mx-auto <lg:mt-0 <md:mt-8vw <md:px-20px">
 				<Sidebar guides={guides} />

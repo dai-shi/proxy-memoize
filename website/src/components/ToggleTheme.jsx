@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useWindowSize } from './useWindowWidth';
 
-export default function Test() {
+export default function ToggleTheme() {
   const { width } = useWindowSize();
   const [mode, setMode] = useState('light');
   useEffect(() => {
