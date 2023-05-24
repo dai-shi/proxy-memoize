@@ -5,8 +5,8 @@ export default function ToggleTheme() {
   const { width } = useWindowSize();
   const [mode, setMode] = useState('light');
   useEffect(() => {
-    const parentEl = document.getElementById('parentHTML');
-    const condition = parentEl.classList.contains('dark');
+    const htmlEl = document.getElementsByTagName('html')[0];
+    const condition = htmlEl.classList.contains('dark');
     if (condition) {
       setMode('light');
     }
@@ -25,7 +25,7 @@ export default function ToggleTheme() {
   };
   return (
     <button
-      className=' relative rounded-25px border border-hex-ECF5FF border-2 w-221px h-50px flex justify-between items-center cursor-pointer p-2 dark:(bg-black border-0) <lg:w-107px <lg:h-38px <lg:rounded-19px <lg:p-1 <md:border-none <md:w-24px <md:h-24px'
+      className='relative rounded-25px border border-hex-ECF5FF border-2 w-221px h-50px flex justify-between items-center cursor-pointer p-2 dark:(bg-black border-0) <lg:w-107px <lg:h-38px <lg:rounded-19px <lg:p-1 <md:border-none <md:w-24px <md:h-24px'
       id='toggleTheme'
       onClick={handleOnClick}
     >
@@ -42,7 +42,7 @@ export default function ToggleTheme() {
           mode === 'dark' ? '<md:hidden' : ''
         }`}
       >
-        <img src='/light-icon.svg' alt='light icon' className='' />
+        <img src='/proxy-memoize/light-icon.svg' alt='light icon' className='' />
         <p className='font-Dm font-bold text-12px text-white dark:(text-light-gray) <lg:hidden'>
           Light
         </p>
@@ -52,7 +52,7 @@ export default function ToggleTheme() {
           mode === 'light' ? '<md:hidden' : ''
         }`}
       >
-        <img src='/dark-icon.svg' alt='dark icon' className='' />
+        <img src='/proxy-memoize/dark-icon.svg' alt='dark icon' className='' />
         <p className='font-Dm font-bold text-12px pt-1px text-black dark:(text-light-gray) <lg:hidden'>
           Dark
         </p>

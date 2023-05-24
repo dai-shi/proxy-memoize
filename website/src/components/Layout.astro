@@ -16,10 +16,10 @@ const { sections } = Astro.props;
 
 ---
 
-<html lang="en" id="parentHTML">
+<html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/proxy-memoize/favicon.svg" />
+		<link rel="icon" href="/proxy-memoize/favicon.ico" type="image/x-icon" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Proxy Memoize</title>
@@ -43,21 +43,21 @@ const { sections } = Astro.props;
 		</div>
 	</body>
 	<script>
-		const parentEl = document.getElementById("parentHTML")!;
+    const htmlEl = document.getElementsByTagName('html')[0];
 		const toggleThemeEl = document.getElementById("toggleTheme")!;
 		const toggleBgEl = document.getElementById("switch")!;
 		if (localStorage.getItem('theme') === 'dark') {
-		  parentEl.classList.add("dark");
+		  htmlEl.classList.add("dark");
 		//   toggleBgEl.style.left = "106px";
 		}
 		function darkMode() {
-		  if (parentEl.classList.contains("dark")) {
+		  if (htmlEl.classList.contains("dark")) {
 			localStorage.setItem('theme', 'light')
-			parentEl.classList.remove("dark");
+			htmlEl.classList.remove("dark");
 			// toggleBgEl.style.left = "6px";
 		  } else {
 			localStorage.setItem('theme', 'dark')
-			parentEl.classList.add("dark");
+			htmlEl.classList.add("dark");
 			// toggleBgEl.style.left = "106px";
 		  }
 		}
