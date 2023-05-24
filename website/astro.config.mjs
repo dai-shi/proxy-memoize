@@ -1,7 +1,8 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
-
 import UnoCSS from 'unocss/astro';
+
+import compress from "astro-compress";
 
 // https://astro.build/config
 export default defineConfig({
@@ -9,10 +10,7 @@ export default defineConfig({
   site: 'https://pheno-agency.github.io',
   // note: this is the path to the repo, not the path to the site
   base: '/proxy-memoize',
-  integrations: [
-    react(),
-    UnoCSS({
-      injectReset: true, // or a path to the reset file
-    }),
-  ],
+  integrations: [react(), UnoCSS({
+    injectReset: true // or a path to the reset file
+  }), compress()]
 });
