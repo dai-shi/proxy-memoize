@@ -1,25 +1,35 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useWindowSize } from './useWindowWidth';
 
+const htmlEl = globalThis.document?.getElementsByTagName('html')[0];
+
+function changeTheme(mode) {
+  if (mode === 'dark') {
+    localStorage.setItem('theme', 'dark')
+    htmlEl.classList.add("dark");
+  } else {
+    localStorage.setItem('theme', 'light')
+    htmlEl.classList.remove("dark");
+  }
+}
+
 export default function ToggleTheme() {
-  const { width } = useWindowSize();
   const [mode, setMode] = useState('light');
+
   useEffect(() => {
-    const htmlEl = document.getElementsByTagName('html')[0];
-    const condition = htmlEl.classList.contains('dark');
-    if (condition) {
+    if (localStorage.getItem('theme') === 'dark') {
+      setMode('dark');
+    } else {
       setMode('light');
     }
-    if (condition) {
-      setMode('dark');
-    }
-  }, [mode]);
+  }, []);
 
   const handleOnClick = () => {
     if (mode === 'light') {
+      changeTheme('dark')
       setMode('dark');
-    }
-    if (mode === 'dark') {
+    } else {
+      changeTheme('light')
       setMode('light');
     }
   };
