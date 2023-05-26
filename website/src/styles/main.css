@@ -1,0 +1,75 @@
+:root {
+  --c-bg: #fff;
+  --c-scrollbar: #eee;
+  --c-scrollbar-hover: #bbb;
+  --p: #536e8f;
+  --headers: #183f6e;
+}
+html {
+  background-color: var(--c-bg);
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+html.dark {
+  --c-bg: #1c1c1c;
+  --c-scrollbar: #111;
+  --c-scrollbar-hover: #222;
+  --p: #a6a6a6;
+  --headers: #fff;
+}
+
+body {
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #8884;
+}
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: #888;
+  opacity: 0.75;
+  position: fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+}
+
+* {
+  scrollbar-color: var(--c-scrollbar) var(--c-bg);
+}
+.prose :where(h1, h2, h3, h4, h5, h6):not(:where(.not-prose, .not-prose *)) {
+  color: var(--headers) !important;
+}
+.prose :where(p):not(:where(.not-prose, .not-prose *)) {
+  color: var(--p);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar:horizontal {
+  height: 6px;
+}
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+  background: var(--c-bg);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--c-scrollbar);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--c-scrollbar-hover);
+}

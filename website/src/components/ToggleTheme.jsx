@@ -1,15 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useWindowSize } from './useWindowWidth';
+import React, { useEffect, useState } from 'react';
 
 const htmlEl = globalThis.document?.getElementsByTagName('html')[0];
 
 function changeTheme(mode) {
   if (mode === 'dark') {
-    localStorage.setItem('theme', 'dark')
-    htmlEl.classList.add("dark");
+    localStorage.setItem('theme', 'dark');
+    htmlEl.classList.add('dark');
   } else {
-    localStorage.setItem('theme', 'light')
-    htmlEl.classList.remove("dark");
+    localStorage.setItem('theme', 'light');
+    htmlEl.classList.remove('dark');
   }
 }
 
@@ -26,10 +25,10 @@ export default function ToggleTheme() {
 
   const handleOnClick = () => {
     if (mode === 'light') {
-      changeTheme('dark')
+      changeTheme('dark');
       setMode('dark');
     } else {
-      changeTheme('light')
+      changeTheme('light');
       setMode('light');
     }
   };
@@ -52,7 +51,11 @@ export default function ToggleTheme() {
           mode === 'dark' ? '<md:hidden' : ''
         }`}
       >
-        <img src='/proxy-memoize/light-icon.svg' alt='light icon' className='' />
+        <img
+          src='/proxy-memoize/light-icon.svg'
+          alt='light icon'
+          className=''
+        />
         <p className='font-Dm font-bold text-12px text-white dark:(text-light-gray) <lg:hidden'>
           Light
         </p>

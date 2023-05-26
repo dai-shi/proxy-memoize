@@ -3,17 +3,17 @@ import MainHero from "./Mainhero.astro";
 import Navbar from "./Navbar.astro";
 import Sidebar from "./Sidebar.astro";
 import SectionSelector from "./SectionSelector.astro";
+import '../styles/main.css'
+import '../styles/markdown.css'
+// import '../styles/prose.css'
 
 const docs = await Astro.glob("../../../docs/**/*.md");
-
 const guides = docs.flatMap((d) => {
 	const doc = { ...d.getHeadings()[0]! };
 	return { title: doc.text, href: "/docs/" + doc.slug, id: doc.slug };
 });
 
 const { sections } = Astro.props;
-
-
 ---
 
 <html lang="en">
@@ -29,13 +29,14 @@ const { sections } = Astro.props;
 			class="flex flex-col justify-start transition-all duration-300 ease-in-out dark:bg-full-black"
 		>
 			<Navbar guides={guides} />
-			<MainHero />
-			<div class="w-100% px-48px flex flex-row items-start gap-80px mt-10 max-w-1600px mx-auto <lg:mt-0 <md:mt-8vw <md:px-20px">
-				<Sidebar guides={guides} />
-				<div class="flex-col mt-10 w-70% <lg:w-100% <lg:mt-6vw">
-					<SectionSelector sections={sections} />
-					<div class="prose prose-violet w-full max-w-full">
-						<slot />
+			<div class=" overflow-scroll h-[calc(100vh-100px)]">
+
+				<MainHero />
+				<div class="w-100% px-48px flex flex-row items-start gap-80px mt-10 max-w-1600px mx-auto <lg:mt-0 <md:mt-8vw <md:px-20px">
+					<Sidebar guides={guides} />
+					<div class="flex-col mt-10 w-70% <lg:w-100% <lg:mt-6vw">
+						<SectionSelector sections={sections} />
+						<slot class="prose prose-violet"/>
 						<!-- your content is injected here -->
 					</div>
 				</div>

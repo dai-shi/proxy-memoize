@@ -41,18 +41,24 @@ export default defineConfig({
       // CSS declaration block as value like writing normal CSS.
       cssExtend: {
         'h1,h2,h3,h4,h5,h6': {
-          color: colors.indigo,
+          // color: colors.indigo,
           'font-family': 'Roboto',
         },
+        ':not(pre) > code::before,:not(pre) > code::after': {
+          content: '"`"',
+        },
+        // ':where(pre,code),:not(:where(.not-prose,.not-prose *)) ': {
+        //   background: 'red',
+        // },
         pre: {
           background: '#183F6E',
         },
         'pre code': {
-          'font-family': 'DM Sans',
+          'font-family': 'Roboto Mono',
         },
-        p: {
-          color: '#536E8F',
-        },
+        // p: {
+        //   color: '#536E8F',
+        // },
         'code span': {
           color: '#fff',
         },
@@ -60,7 +66,7 @@ export default defineConfig({
           color: colors.indigo,
         },
         'a:hover': {
-          color: '#f43f5e',
+          // color: '#f43f5e',
         },
         'a:visited': {
           color: '#14b8a6',
@@ -84,6 +90,10 @@ export default defineConfig({
         ],
         Dm: {
           name: 'DM Sans',
+          weights: ['400', '500', '700'],
+        },
+        'Roboto Mono': {
+          name: 'Roboto Mono',
           weights: ['400', '500', '700'],
         },
       },
