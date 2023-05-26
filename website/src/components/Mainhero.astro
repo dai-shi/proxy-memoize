@@ -7,26 +7,26 @@
       <img
         src="/proxy-memoize/lightHeroBg.svg"
         alt="heroBg"
-        class="dark:(hidden) w-100% z-0 absolute left-0 top-0 h-35vw <md:hidden"
+        class="dark:(hidden) z-0 absolute object-cover w-100% top-0 h-35vw <md:hidden"
       />
       <img
         src="/proxy-memoize/lightHeroMobileBg.svg"
         alt="heroBg"
-        class="hidden dark:(hidden) <md:block w-100% z-0 absolute left-0 top-0 h-118%"
+        class="hidden dark:(hidden) <md:block w-100% z-0 relative object-cover top-0"
       />
       <img
         src="/proxy-memoize/darkHeroBg.svg"
         alt="heroBg"
-        class="dark:(block) dark:(w-100% z-0 absolute left-0 top-0 h-35vw <md:hidden) hidden"
+        class="dark:(block) dark:( z-0 absolute object-cover w-100% top-0 h-35vw <md:hidden) hidden"
       />
       <img
         src="/proxy-memoize/darkHeroMobileBg.svg"
         alt="heroBg"
-        class="hidden dark:(hidden) dark:(<md:block w-100% z-0 absolute left-0 top-0 h-118% <md:block)"
+        class="hidden dark:(hidden) dark:(<md:block w-100% z-0 relative object-cover top-0  <md:block)"
       />
 
       <div
-        class="flex flex-row justify-between items-start w-88% z-1 mx-auto max-w-1600px <lg:w-85% <lg:max-w-800px <md:flex-col-reverse <md:justify-center <md:items-center <md:w-90%"
+        class="flex flex-row justify-between items-start w-88% z-1 mx-auto max-w-1600px <lg:w-85% <lg:max-w-800px <md:flex-col-reverse <md:justify-center <md:items-center <md:w-90% <md:absolute <md:top-4rem <md:left-0 <md:right-0"
       >
         <div
           class="flex flex-col justify-start items-start gap-10px w-56% mt-50px max-w-602px relative <lg:mt-40px <lg:pt-1rem <lg:gap-5px <md:w-100% <md:pt-0 <md:max-w-300px"
@@ -109,7 +109,7 @@
       const rotateX = (THRESHOLD / 2 - horizontal * THRESHOLD).toFixed(2);
       const rotateY = (vertical * THRESHOLD - THRESHOLD / 2).toFixed(2);
 
-      heroImgEl.style.transform = `perspective(${clientWidth}px) rotateX(${rotateY}deg) rotateY(${rotateX}deg) scale3d(1.1, 1.1, 1.1)`;
+      heroImgEl.style.transform = `perspective(${clientWidth}px) rotateX(${rotateY}deg) rotateY(${rotateX}deg)`;
   };
   heroImgEl.addEventListener("mousemove",onMove)
   heroImgEl.addEventListener("mouseleave",onLeave)

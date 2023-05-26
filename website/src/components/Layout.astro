@@ -29,12 +29,12 @@ const { sections } = Astro.props;
 			class="flex flex-col justify-start transition-all duration-300 ease-in-out dark:bg-full-black"
 		>
 			<Navbar guides={guides} />
-			<div class=" overflow-scroll h-[calc(100vh-100px)]">
+			<div class="  h-[calc(100vh-100px)]">
 
 				<MainHero />
-				<div class="w-100% px-48px flex flex-row items-start gap-80px mt-10 max-w-1600px mx-auto <lg:mt-0 <md:mt-8vw <md:px-20px">
+				<div class="w-100% px-48px flex flex-row items-start gap-80px mt-10 max-w-1600px mx-auto <lg:mt-0 <md:mt-0 <md:px-20px">
 					<Sidebar guides={guides} />
-					<div class="flex-col mt-10 w-70% <lg:w-100% <lg:mt-6vw">
+					<div class="flex-col mt-10 w-70% <lg:w-100% <lg:mt-6vw <md:mt-0">
 						<SectionSelector sections={sections} />
 						<slot class="prose prose-violet"/>
 						<!-- your content is injected here -->
