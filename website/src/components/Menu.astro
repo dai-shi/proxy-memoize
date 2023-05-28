@@ -42,35 +42,35 @@ const items = [
 ];
 ---
 <div class="relative hidden <lg:block">
-<img src="/proxy-memoize/Hamburger.svg" alt="Hamburger" id="hamburger" class="hidden <lg:block <lg:w-38px <lg:h-38px <md:w-24px <md:h-24px cursor-pointer">
+<img src="/proxy-memoize/Hamburger.svg" alt="Hamburger" id="hamburger" class="hidden <lg:block hamburgerFilter <lg:w-38px <lg:h-38px <md:w-24px <md:h-24px cursor-pointer">
 
 <div id="menuContianer" class="  absolute w-110vw h-110vh -left-100px <md:-left-77px -top-100px opacity-0 -z-1 bg-hex-ffffff4a transition-all duration-500 ease-in-out">
 <div id='menu' class="absolute flex flex-col px-24px py-16px rounded-r-16px
- -left-1000px top-72px w-304px h-954px bg-white dark:bg-full-black transition-all duration-500 ease-in-out">
+ -left-1000px top-72px w-304px h-954px bg-white dark:bg-hex-1e1e1e transition-all duration-500 ease-in-out">
 
-  <button id='closeMenu' class="text-30px cursor-pointer self-end text-hex-8094AC rounded-5px">&times;</button>
+  <button id='closeMenu' class="text-30px cursor-pointer self-end text-hex-8094AC rounded-5px dark:(text-hex-EFEFEF)">&times;</button>
   <div
   class="w-225px min-h-289px sticky top-65px flex flex-col justify-start items-start gap-2 font-Dm text-14px font-bold text-indigo dark:(text-light-gray) "
 >
-  {
-    items.map(({ title, img, href, subsection }) => (
-      <>
-        <a
-          href={href}
-          class={`${ subsection ? 'opacity-40!' : 'sidebarItem cursor-pointer'} opacity-60 w-full p-10px border-l-6 border-l-transparent flex items-center gap-10px`}
-        >
-          <img src={img} alt={title} />
+{
+  items.map(({ title, img, href, subsection }) => (
+    <>
+      <a
+        href={href}
+        class={`${ subsection ? 'opacity-40! sidebarItem' : 'sidebarItem cursor-pointer'} opacity-60 w-full p-10px border-l-6 border-l-transparent flex items-center gap-10px`}
+      >
+        <img src={img} alt={title} />
+        <span class="font-Dm">{title}</span>
+      </a>
+      {subsection?.map(({ title, href: subHref}: { title: string, id: string, href: string }) => (
+        <a href={'/proxy-memoize' + subHref} class="sidebarItem p-10px pl-22px ml-16px border-l-6 border-l-transparent flex items-center cursor-pointer opacity-60 gap-10px">
+          <span>#</span>
           <span class="font-Dm">{title}</span>
         </a>
-        {subsection?.map(({ title, href: subHref}: { title: string, id: string, href: string }) => (
-          <a href={'/proxy-memoize' + subHref} class="sidebarItem p-10px pl-22px ml-16px border-l-6 border-l-transparent flex items-center cursor-pointer opacity-60 gap-10px">
-            <span>#</span>
-            <span class="font-Dm">{title}</span>
-          </a>
-        ))}
-      </>
-    ))
-  }
+      ))}
+    </>
+  ))
+}
 </div>
 <div
   class="phenoLogo h-44px p-4 fixed bottom-4rem left-3.2rem border-l-6 border-l-indigo flex justify-center items-center gap-1 dark:(border-light-gray)"
@@ -106,36 +106,46 @@ hamburger.addEventListener("click",openMenu)
 colse.addEventListener("click",closeMenu)
 function sidebarOnClick(e: Event) {
     const clickedElement = e.currentTarget as Element;
-    const currentActiveElement = document.querySelector(".sidebarItem.active");
+    const currentActiveElement = document.querySelector(".sidebarItem.activeSidebar");
 
     if (currentActiveElement !== null) {
-      currentActiveElement.classList.remove("active");
+      currentActiveElement.classList.remove("activeSidebar");
       currentActiveElement.classList.add("opacity-60");
     }
 
-    clickedElement.classList.add("active");
+    clickedElement.classList.add("activeSidebar");
+    clickedElement.classList.remove("opacity-60");
+  }
+  function darkSidebarOnClick(e: Event) {
+    const clickedElement = e.currentTarget as Element;
+    const currentActiveElement = document.querySelector(".sidebarItem.darkActiveSidebar");
+
+    if (currentActiveElement !== null) {
+      currentActiveElement.classList.remove("darkActiveSidebar");
+      currentActiveElement.classList.add("opacity-60");
+    }
+
+    clickedElement.classList.add("darkActiveSidebar");
     clickedElement.classList.remove("opacity-60");
   }
   const buttons = document.querySelectorAll(".sidebarItem");
   buttons.forEach((el) =>{
     if (location.href.endsWith(el.attributes.getNamedItem('href')?.value!)) {
-        el.classList.add('active')
+        el.classList.add('activeSidebar')
         el.classList.remove("opacity-60");
       }
     el.addEventListener("click", sidebarOnClick, { capture: false })
   });
-  
-  function closeMenuOnClickOutside(event:any) {
-    if (!menu.contains(event.target) && !event.target.matches("#hamburger")) {
-      closeMenu(); 
-    }
-  }
-
- 
-  document.addEventListener("click", closeMenuOnClickOutside);
+  buttons.forEach((el) =>{
+    if (location.href.endsWith(el.attributes.getNamedItem('href')?.value!)) {
+        el.classList.add('darkActiveSidebar')
+        el.classList.remove("opacity-60");
+      }
+    el.addEventListener("click", darkSidebarOnClick, { capture: false })
+  });
 </script>
 <style>
-  .active {
+  /* .active {
     border-left: 6px solid #183f6e !important;
     width: 100%;
     background: linear-gradient(
@@ -143,5 +153,5 @@ function sidebarOnClick(e: Event) {
       #dcedff 0.36%,
       rgba(245, 250, 255, 0) 106.19%
     );
-  }
+  } */
 </style>

@@ -10,16 +10,16 @@ const selectItems = [
 
 const { sections } = Astro.props
 ---
-<div class="sticky top-0px mb-40px <lg:hidden">
+<div id="selector-container" class="sticky flex flex-col h-80px justify-end bg-white dark:(bg-hex-1e1e1e) -top-1 mb-40px <lg:hidden">
 
     <div
-    class="sectionSelector  flex flex-row justify-start items-end gap-32px  bg-white dark:bg-full-black w-full overflow-auto "
+    class="sectionSelector darkSectionSelector flex flex-row justify-start items-end gap-32px bg-white dark:bg-hex-1e1e1e w-full overflow-auto "
     >
     {
         sections.map(({ text, slug }: { text: string, slug: string }) => {
             const href = "#" + slug
             return (
-                <a href={href} class="tab-item flex flex-col justify-start items-center gap-16px notActive font-Dm text-14px font-500 text-gray dark:text-white">
+                <a href={href} class="tab-item flex flex-col justify-start items-center gap-16px notActive font-Dm text-14px font-500 text-gray dark:text-hex-A6A6A6">
                     
                        <p class="w-max">{text}
                         </p> 
@@ -29,7 +29,7 @@ const { sections } = Astro.props
                     })
                 }
 </div>
-<div class="w-full border-b-2px border-b-DEF2F0 -mt-7px"/>
+<div class="w-full border-b-2px border-b-DEF2F0 -mt-7px dark:(border-b border-hex-A6A6A6)"/>
     
 
 </div>
@@ -41,13 +41,19 @@ const { sections } = Astro.props
         }
         el.addEventListener("click", tabOnClick)
     });
+    tabItems.forEach((el) => { 
+        if (el.attributes.getNamedItem('href')?.value === location.hash) {
+            el.classList.add('darkActive')
+        }
+        el.addEventListener("click", darkTabOnClick)
+    });
     if (location.hash) {
         setTimeout(() => {
             document.getElementById(location.hash.slice(1))!.scrollIntoView({ behavior: 'smooth' })
         }, 500)
     }
 
-    function tabOnClick(e: Event) {
+    function darkTabOnClick(e: Event) {
         const clickedElement = e.currentTarget as Element;
 
         const currentActiveElement = document.querySelector(".tab-item.active");
@@ -56,18 +62,35 @@ const { sections } = Astro.props
         }
         clickedElement.classList.add("active");
     }
+    function tabOnClick(e: Event) {
+        const clickedElement = e.currentTarget as Element;
+
+        const currentActiveElement = document.querySelector(".tab-item.darkActive");
+        if (currentActiveElement !== null) {
+            currentActiveElement.classList.remove("darkActive");
+        }
+        clickedElement.classList.add("darkActive");
+    }
 </script>
 <style scoped>
+    .sectionSelector::::-webkit-scrollbar {
+  width: 0px;
+}
  .sectionSelector::-webkit-scrollbar-track {
     background-color: transparent;
+    width:0px
 }
 
 .sectionSelector::-webkit-scrollbar {
     background-color: transparent;
+    width:0px
+
 }
 
 .sectionSelector::-webkit-scrollbar-thumb {
     background-color: transparent;
+    width:0px
+
 }
 
     .notActive {
@@ -80,7 +103,7 @@ const { sections } = Astro.props
         display: block;
     }
     .active > p {
-        color: #183F6E;
+        /* color: #183F6E; */
         font-weight: 700;
     }
 </style>

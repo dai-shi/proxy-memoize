@@ -1,7 +1,7 @@
-.prose pre:not(.shiki) {
-  background: #183f6e !important;
+/* .prose pre:not(.shiki) {
+  background: #183f6e;
   padding: 30px;
-}
+} */
 
 .prose .shiki {
   font-family: 'DM Mono', 'Input Mono', 'Fira Code', monospace;
