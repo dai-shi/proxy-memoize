@@ -42,15 +42,15 @@ const items = [
 ];
 ---
 <div class="relative hidden <lg:block">
-<img src="/proxy-memoize/Hamburger.svg" alt="Hamburger" id="hamburger" class="hidden <lg:block hamburgerFilter <lg:w-38px <lg:h-38px <md:w-24px <md:h-24px cursor-pointer">
+<img src="/proxy-memoize/Hamburger.svg" alt="Hamburger" id="hamburger" class="hidden <lg:block hamburgerFilter <lg:w-38px <lg:h-38px <md:w-30px <md:h-30px cursor-pointer">
 
-<div id="menuContianer" class="  absolute w-110vw h-110vh -left-100px <md:-left-77px -top-100px opacity-0 -z-1 bg-hex-ffffff4a transition-all duration-500 ease-in-out">
+<div id="menuContianer" class="  absolute w-110vw h-300vh -left-100px <md:-left-77px -top-100px opacity-0 -z-1 bg-hex-ffffff4a transition-all duration-500 ease-in-out <md:w-115vw">
 <div id='menu' class="absolute flex flex-col px-24px py-16px rounded-r-16px
- -left-1000px top-72px w-304px h-954px bg-white dark:bg-hex-1e1e1e transition-all duration-500 ease-in-out">
+ -left-1000px top-72px w-304px h-636px bg-white dark:bg-hex-1e1e1e transition-all duration-500 ease-in-out">
 
   <button id='closeMenu' class="text-30px cursor-pointer self-end text-hex-8094AC rounded-5px dark:(text-hex-EFEFEF)">&times;</button>
   <div
-  class="w-225px min-h-289px sticky top-65px flex flex-col justify-start items-start gap-2 font-Dm text-14px font-bold text-indigo dark:(text-light-gray) "
+  class="w-225px min-h-289px top-65px flex flex-col justify-start items-start gap-2 font-Dm text-14px font-bold text-indigo dark:(text-light-gray) "
 >
 {
   items.map(({ title, img, href, subsection }) => (
@@ -73,7 +73,7 @@ const items = [
 }
 </div>
 <div
-  class="phenoLogo h-44px p-4 fixed bottom-4rem left-3.2rem border-l-6 border-l-indigo flex justify-center items-center gap-1 dark:(border-light-gray)"
+  class="phenoLogo h-44px p-4 relative -bottom-8rem -left-24px border-l-6 border-l-indigo flex justify-center items-center gap-1 dark:(border-light-gray)"
 >
   <img src="/proxy-memoize/pheno-agency-logo.svg" alt="pheno agency logo" class=" w-27px h-27px" />
   <p class="font-Roboto text-indigo font-500 text-14px dark:(text-hex-EFEFEF)">
@@ -143,6 +143,14 @@ function sidebarOnClick(e: Event) {
       }
     el.addEventListener("click", darkSidebarOnClick, { capture: false })
   });
+  function closeMenuOnClickOutside(event) {
+   
+    if (!menu.contains(event.target) && !event.target.matches("#hamburger")) {
+     
+      closeMenu(); 
+    }
+  }
+  document.addEventListener("click", closeMenuOnClickOutside);
 </script>
 <style>
   /* .active {

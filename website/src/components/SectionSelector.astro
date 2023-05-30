@@ -13,7 +13,7 @@ const { sections } = Astro.props
 <div id="selector-container" class="sticky flex flex-col h-80px justify-end bg-white dark:(bg-hex-1e1e1e) -top-1 mb-40px <lg:hidden">
 
     <div
-    class="sectionSelector darkSectionSelector flex flex-row justify-start items-end gap-32px bg-white dark:bg-hex-1e1e1e w-full overflow-auto "
+    class="sectionSelector darkSectionSelector flex flex-row justify-start items-end gap-32px bg-white dark:bg-hex-1e1e1e w-full overflow-scroll "
     >
     {
         sections.map(({ text, slug }: { text: string, slug: string }) => {
@@ -29,7 +29,7 @@ const { sections } = Astro.props
                     })
                 }
 </div>
-<div class="w-full border-b-2px border-b-DEF2F0 -mt-7px dark:(border-b border-hex-A6A6A6)"/>
+<div class={`w-full border-b-2px border-b-DEF2F0 ${sections.length<1 ?'-mt-7px':'-mt-6px'}  dark:(border-b border-hex-A6A6A6)`}/>
     
 
 </div>
@@ -46,6 +46,7 @@ const { sections } = Astro.props
             el.classList.add('darkActive')
         }
         el.addEventListener("click", darkTabOnClick)
+       
     });
     if (location.hash) {
         setTimeout(() => {
