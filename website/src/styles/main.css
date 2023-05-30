@@ -33,8 +33,6 @@ html.dark {
   --sidebar-filter:invert(100%) sepia(0%) saturate(0%) hue-rotate(131deg) brightness(103%) contrast(130%);
   --sidebar-item: invert(78%) sepia(1%) saturate(0%) hue-rotate(185deg) brightness(84%) contrast(99%);
   --box-background:#2D2D2D;
-
-
 }
 
 body {
@@ -114,8 +112,6 @@ body {
   width: 100%;
   background: linear-gradient(89.51deg,rgba(var(--linear-gradient-primary)) 0.33%, rgba( var(--linear-gradient-secondary)) 99.66%);
   color:var(--active-text);
-  
-
 }
 .darkActiveSidebar >img {
   filter: var(--sidebar-filter) !important;

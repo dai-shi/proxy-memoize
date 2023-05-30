@@ -1,6 +1,5 @@
 ---
 const { guides } = Astro.props;
-const { sections } = Astro.props;
 
 const items = [
   {
@@ -14,6 +13,7 @@ const items = [
     title: "Guides",
     img: "/proxy-memoize/guides.svg",
     subsection: guides,
+    href: "#",
   },
   {
     id: 2,
@@ -41,72 +41,108 @@ const items = [
   },
 ];
 ---
+
 <div class="relative hidden <lg:block">
-<img src="/proxy-memoize/Hamburger.svg" alt="Hamburger" id="hamburger" class="hidden <lg:block hamburgerFilter <lg:w-38px <lg:h-38px <md:w-30px <md:h-30px cursor-pointer">
+  <img
+    src="/proxy-memoize/Hamburger.svg"
+    alt="Hamburger"
+    id="hamburger"
+    class="hidden <lg:block hamburgerFilter <lg:w-38px <lg:h-38px <md:w-30px <md:h-30px cursor-pointer"
+  />
 
-<div id="menuContianer" class="  absolute w-110vw h-300vh -left-100px <md:-left-77px -top-100px opacity-0 -z-1 bg-hex-ffffff4a transition-all duration-500 ease-in-out <md:w-115vw">
-<div id='menu' class="absolute flex flex-col px-24px py-16px rounded-r-16px
- -left-1000px top-72px w-304px h-636px bg-white dark:bg-hex-1e1e1e transition-all duration-500 ease-in-out">
-
-  <button id='closeMenu' class="text-30px cursor-pointer self-end text-hex-8094AC rounded-5px dark:(text-hex-EFEFEF)">&times;</button>
   <div
-  class="w-225px min-h-289px top-65px flex flex-col justify-start items-start gap-2 font-Dm text-14px font-bold text-indigo dark:(text-light-gray) "
->
-{
-  items.map(({ title, img, href, subsection }) => (
-    <>
-      <a
-        href={href}
-        class={`${ subsection ? 'opacity-40! sidebarItem' : 'sidebarItem cursor-pointer'} opacity-60 w-full p-10px border-l-6 border-l-transparent flex items-center gap-10px`}
+    id="menuContianer"
+    class="absolute w-110vw h-300vh -left-100px <md:-left-77px -top-100px opacity-0 -z-1 bg-hex-ffffff4a transition-all duration-500 ease-in-out <md:w-115vw"
+  >
+    <div
+      id="menu"
+      class="absolute flex flex-col px-24px py-16px rounded-r-16px -left-1000px top-72px w-304px h-636px bg-white dark:bg-hex-1e1e1e transition-all duration-500 ease-in-out"
+    >
+      <button
+        id="close-menu"
+        class="text-30px cursor-pointer self-end text-hex-8094AC rounded-5px dark:(text-hex-EFEFEF)"
+        >&times;</button
       >
-        <img src={img} alt={title} />
-        <span class="font-Dm">{title}</span>
-      </a>
-      {subsection?.map(({ title, href: subHref}: { title: string, id: string, href: string }) => (
-        <a href={'/proxy-memoize' + subHref} class="sidebarItem p-10px pl-22px ml-16px border-l-6 border-l-transparent flex items-center cursor-pointer opacity-60 gap-10px">
-          <span>#</span>
-          <span class="font-Dm">{title}</span>
-        </a>
-      ))}
-    </>
-  ))
-}
+      <div
+        class="w-225px min-h-289px top-65px flex flex-col justify-start items-start gap-2 font-Dm text-14px font-bold text-indigo dark:(text-light-gray)"
+      >
+        {
+          items.map(({ title, img, href, subsection }) => (
+            <>
+              <a
+                href={href}
+                class={`${
+                  subsection
+                    ? "opacity-40!"
+                    : "sidebarItem cursor-pointer"
+                } opacity-60 w-full p-10px border-l-6 border-l-transparent flex items-center gap-10px`}
+              >
+                <img src={img} alt={title} />
+                <span class="font-Dm">{title}</span>
+              </a>
+              {subsection?.map(
+                ({
+                  title,
+                  href: subHref,
+                }: {
+                  title: string;
+                  id: string;
+                  href: string;
+                }) => (
+                  <a
+                    href={"/proxy-memoize" + subHref}
+                    class="sidebarItem p-10px pl-22px ml-16px border-l-6 border-l-transparent flex items-center cursor-pointer opacity-60 gap-10px"
+                  >
+                    <span>#</span>
+                    <span class="font-Dm">{title}</span>
+                  </a>
+                )
+              )}
+            </>
+          ))
+        }
+      </div>
+      <div
+        class="phenoLogo h-44px p-4 relative -bottom-8rem -left-24px border-l-6 border-l-indigo flex justify-center items-center gap-1 dark:(border-light-gray)"
+      >
+        <img
+          src="/proxy-memoize/pheno-agency-logo.svg"
+          alt="pheno agency logo"
+          class="w-27px h-27px"
+        />
+        <p
+          class="font-Roboto text-indigo font-500 text-14px dark:(text-hex-EFEFEF)"
+        >
+          Designed by Pheno Agency
+        </p>
+      </div>
+    </div>
+  </div>
 </div>
-<div
-  class="phenoLogo h-44px p-4 relative -bottom-8rem -left-24px border-l-6 border-l-indigo flex justify-center items-center gap-1 dark:(border-light-gray)"
->
-  <img src="/proxy-memoize/pheno-agency-logo.svg" alt="pheno agency logo" class=" w-27px h-27px" />
-  <p class="font-Roboto text-indigo font-500 text-14px dark:(text-hex-EFEFEF)">
-    Designed by Pheno Agency
-  </p>
-</div>
-</div>
-</div>
-</div>
-
 <script>
-
-  const hamburger = document.getElementById("hamburger")!;
-  const colse = document.getElementById("closeMenu")!;
+  const hamburgerEl = document.getElementById("hamburger")!;
+  const closeMenuEl = document.getElementById("close-menu")!;
   const menuContianer = document.getElementById("menuContianer")!;
   const menu = document.getElementById("menu")!;
-function openMenu(){
-  menuContianer.style.backdropFilter='Blur(2px)'
-  menuContianer.style.zIndex='2'
-  menuContianer.style.opacity='1'
-  menu.style.left="52px"
-}
-function closeMenu(){
-  menuContianer.style.backdropFilter='Blur(0px)'
-  menuContianer.style.zIndex='-1'
-  menuContianer.style.opacity='0'
-  menu.style.left="-1000px"
-}
-hamburger.addEventListener("click",openMenu)
-colse.addEventListener("click",closeMenu)
-function sidebarOnClick(e: Event) {
+  function openMenu() {
+    menuContianer.style.backdropFilter = "Blur(2px)";
+    menuContianer.style.zIndex = "2";
+    menuContianer.style.opacity = "1";
+    menu.style.left = "52px";
+  }
+  function closeMenu() {
+    menuContianer.style.backdropFilter = "Blur(0px)";
+    menuContianer.style.zIndex = "-1";
+    menuContianer.style.opacity = "0";
+    menu.style.left = "-1000px";
+  }
+  hamburgerEl.addEventListener("click", openMenu);
+  closeMenuEl.addEventListener("click", closeMenu);
+  function sidebarOnClick(e: Event) {
     const clickedElement = e.currentTarget as Element;
-    const currentActiveElement = document.querySelector(".sidebarItem.activeSidebar");
+    const currentActiveElement = document.querySelector(
+      ".sidebarItem.activeSidebar"
+    );
 
     if (currentActiveElement !== null) {
       currentActiveElement.classList.remove("activeSidebar");
@@ -118,7 +154,9 @@ function sidebarOnClick(e: Event) {
   }
   function darkSidebarOnClick(e: Event) {
     const clickedElement = e.currentTarget as Element;
-    const currentActiveElement = document.querySelector(".sidebarItem.darkActiveSidebar");
+    const currentActiveElement = document.querySelector(
+      ".sidebarItem.darkActiveSidebar"
+    );
 
     if (currentActiveElement !== null) {
       currentActiveElement.classList.remove("darkActiveSidebar");
@@ -129,25 +167,23 @@ function sidebarOnClick(e: Event) {
     clickedElement.classList.remove("opacity-60");
   }
   const buttons = document.querySelectorAll(".sidebarItem");
-  buttons.forEach((el) =>{
-    if (location.href.endsWith(el.attributes.getNamedItem('href')?.value!)) {
-        el.classList.add('activeSidebar')
-        el.classList.remove("opacity-60");
-      }
-    el.addEventListener("click", sidebarOnClick, { capture: false })
+  buttons.forEach((el) => {
+    if (location.href.endsWith(el.attributes.getNamedItem("href")?.value!)) {
+      el.classList.add("activeSidebar");
+      el.classList.remove("opacity-60");
+    }
+    el.addEventListener("click", sidebarOnClick, { capture: false });
   });
-  buttons.forEach((el) =>{
-    if (location.href.endsWith(el.attributes.getNamedItem('href')?.value!)) {
-        el.classList.add('darkActiveSidebar')
-        el.classList.remove("opacity-60");
-      }
-    el.addEventListener("click", darkSidebarOnClick, { capture: false })
+  buttons.forEach((el) => {
+    if (location.href.endsWith(el.attributes.getNamedItem("href")?.value!)) {
+      el.classList.add("darkActiveSidebar");
+      el.classList.remove("opacity-60");
+    }
+    el.addEventListener("click", darkSidebarOnClick, { capture: false });
   });
   function closeMenuOnClickOutside(event) {
-   
     if (!menu.contains(event.target) && !event.target.matches("#hamburger")) {
-     
-      closeMenu(); 
+      closeMenu();
     }
   }
   document.addEventListener("click", closeMenuOnClickOutside);
