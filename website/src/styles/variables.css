@@ -1,0 +1,31 @@
+:root {
+  --c-bg: #fff;
+  --c-scrollbar: #eee;
+  --c-scrollbar-hover: #bbb;
+  --p: #536e8f;
+  --headers: #183f6e;
+  --linear-gradient-primary:220, 237, 255, 1;
+  --linear-gradient-secondary:245, 250, 255, 0;
+  --section-scroll:#ffffff;
+  --active-text:#183F6E;
+  --border: #183F6E;
+  --sidebar-item: invert(59%) sepia(8%) saturate(1043%) hue-rotate(173deg) brightness(96%) contrast(20%);
+  --box-background:#183f6e;
+}
+
+
+html.dark {
+  --c-bg: #1e1e1e;
+  --c-scrollbar: #111;
+  --c-scrollbar-hover: #222;
+  --p: #a6a6a6;
+  --headers: #fff;
+  --linear-gradient-primary:60, 60, 60, 1;
+  --linear-gradient-secondary:60, 60, 60, 0;
+  --section-scroll:#1e1e1e;
+  --active-text:#ffffff;
+  --border: #a6a6a6;
+  --sidebar-filter:invert(100%) sepia(0%) saturate(0%) hue-rotate(131deg) brightness(103%) contrast(130%);
+  --sidebar-item: invert(78%) sepia(1%) saturate(0%) hue-rotate(185deg) brightness(84%) contrast(99%);
+  --box-background:#2D2D2D;
+}

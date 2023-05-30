@@ -1,7 +1,5 @@
-/* .prose pre:not(.shiki) {
-  background: #183f6e;
-  padding: 30px;
-} */
+
+@import "variables.css";
 
 .prose .shiki {
   font-family: 'DM Mono', 'Input Mono', 'Fira Code', monospace;
@@ -34,4 +32,23 @@ html:not(.dark) .vitesse-dark {
   --fg-deeper: #000;
 
   color: var(--fg);
+}
+.prose :where(h1, h2, h3, h4, h5, h6):not(:where(.not-prose, .not-prose *)) {
+  color: var(--headers) !important;
+}
+.prose :where(p):not(:where(.not-prose, .not-prose *)) {
+  color: var(--p);
+  font-weight: 500;
+}
+.prose :where(li):not(:where(.not-prose, .not-prose *)) {
+  color: var(--p);
+  font-weight: 400;
+}
+.prose :where(a):not(:where(.not-prose, .not-prose *)) {
+  color: var( --headers) !important;
+  
+}
+.prose pre:not(.shiki) {
+  background: var(--box-background) !important;
+  padding: 30px;
 }

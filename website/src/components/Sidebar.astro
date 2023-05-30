@@ -3,47 +3,47 @@ const { guides } = Astro.props;
 const items = [
   {
     id: 0,
-    title: "Introduction",
-    img: "/proxy-memoize/introduction.svg",
-    href: "/proxy-memoize/#introduction",
+    title: 'Introduction',
+    img: '/proxy-memoize/introduction.svg',
+    href: '/proxy-memoize/#introduction',
   },
   {
     id: 1,
-    title: "Guides",
-    img: "/proxy-memoize/guides.svg",
+    title: 'Guides',
+    img: '/proxy-memoize/guides.svg',
     subsection: guides,
-    href: "#",
+    href: '#',
   },
   {
     id: 2,
-    title: "API",
-    img: "/proxy-memoize/API.svg",
-    href: "/proxy-memoize/#api",
+    title: 'API',
+    img: '/proxy-memoize/API.svg',
+    href: '/proxy-memoize/#api',
   },
   {
     id: 3,
-    title: "Repository",
-    img: "/proxy-memoize/repository.svg",
-    href: "https://github.com/dai-shi/proxy-memoize/",
+    title: 'Repository',
+    img: '/proxy-memoize/repository.svg',
+    href: 'https://github.com/dai-shi/proxy-memoize/',
   },
   {
     id: 4,
-    title: "Change Log",
-    img: "/proxy-memoize/updates.svg",
-    href: "https://github.com/dai-shi/proxy-memoize/blob/main/CHANGELOG.md",
+    title: 'Change Log',
+    img: '/proxy-memoize/updates.svg',
+    href: 'https://github.com/dai-shi/proxy-memoize/blob/main/CHANGELOG.md',
   },
   {
     id: 5,
-    title: "Help",
-    img: "/proxy-memoize/help.svg",
-    href: "https://github.com/dai-shi/proxy-memoize/issues",
+    title: 'Help',
+    img: '/proxy-memoize/help.svg',
+    href: 'https://github.com/dai-shi/proxy-memoize/issues',
   },
 ];
 ---
 
-<div class="flex flex-col top-100px justify-between sticky <lg:hidden">
+<div class='flex flex-col top-100px justify-between sticky'>
   <div
-    class="w-225px min-h-289px flex flex-col justify-start items-start gap-2 font-Dm text-14px font-bold text-hex-8094AC dark:(text-hex-A6A6A6) <lg:hidden"
+    class='w-225px min-h-289px flex flex-col justify-start items-start gap-2 font-Dm text-14px font-bold text-hex-8094AC dark:(text-hex-A6A6A6)'
   >
     {
       items.map(({ title, img, href, subsection }) => (
@@ -52,12 +52,12 @@ const items = [
             href={href}
             class={`${
               subsection
-                ? "opacity-40! sidebarItem"
-                : "sidebarItem cursor-pointer"
+                ? 'opacity-40! subsection'
+                : 'sidebarItem cursor-pointer'
             } opacity-60 w-full p-10px border-l-6 border-l-transparent flex items-center gap-10px`}
           >
             <img src={img} alt={title} />
-            <span class="font-Dm">{title}</span>
+            <span class='font-Dm '>{title}</span>
           </a>
           {subsection?.map(
             ({
@@ -69,11 +69,11 @@ const items = [
               href: string;
             }) => (
               <a
-                href={"/proxy-memoize" + subHref}
-                class="sidebarItem p-10px pl-22px ml-16px border-l-6 border-l-transparent flex items-center cursor-pointer opacity-60 gap-10px"
+                href={'/proxy-memoize' + subHref}
+                class='sidebarItem p-10px pl-22px ml-16px border-l-6 border-l-transparent flex items-center cursor-pointer opacity-60 gap-10px'
               >
                 <span>#</span>
-                <span class="font-Dm">{title}</span>
+                <span class='font-Dm'>{title}</span>
               </a>
             )
           )}
@@ -82,15 +82,15 @@ const items = [
     }
   </div>
   <div
-    class="phenoLogo relative -left-3rem top-11rem h-44px p-4 border-l-6 border-l-indigo flex justify-center items-center gap-1 dark:(border-light-gray) <lg:hidden"
+    class='phenoLogo relative -left-3rem top-7rem h-44px p-4 border-l-6 border-l-indigo flex justify-center items-center gap-1 dark:(border-light-gray) <md:(-left-1.5rem)'
   >
     <img
-      src="/proxy-memoize/pheno-agency-logo.svg"
-      alt="pheno agency logo"
-      class="w-27px h-27px"
+      src='/proxy-memoize/pheno-agency-logo.svg'
+      alt='pheno agency logo'
+      class='w-27px h-27px'
     />
     <p
-      class="font-Roboto text-indigo font-500 text-14px dark:(text-hex-EFEFEF)"
+      class='font-Roboto text-indigo font-500 text-14px dark:(text-hex-EFEFEF)'
     >
       Designed by Pheno Agency
     </p>
@@ -101,45 +101,25 @@ const items = [
     function sidebarOnClick(e: Event) {
       const clickedElement = e.currentTarget as Element;
       const currentActiveElement = document.querySelector(
-        ".sidebarItem.activeSidebar"
+        '.sidebarItem.activeSidebar'
       );
 
       if (currentActiveElement !== null) {
-        currentActiveElement.classList.remove("activeSidebar");
-        currentActiveElement.classList.add("opacity-60");
+        currentActiveElement.classList.remove('activeSidebar');
+        currentActiveElement.classList.add('opacity-60');
       }
 
-      clickedElement.classList.add("activeSidebar");
-      clickedElement.classList.remove("opacity-60");
+      clickedElement.classList.add('activeSidebar');
+      clickedElement.classList.remove('opacity-60');
     }
-    function darkSidebarOnClick(e: Event) {
-      const clickedElement = e.currentTarget as Element;
-      const currentActiveElement = document.querySelector(
-        ".sidebarItem.darkActiveSidebar"
-      );
 
-      if (currentActiveElement !== null) {
-        currentActiveElement.classList.remove("darkActiveSidebar");
-        currentActiveElement.classList.add("opacity-60");
-      }
-
-      clickedElement.classList.add("darkActiveSidebar");
-      clickedElement.classList.remove("opacity-60");
-    }
-    const buttons = document.querySelectorAll(".sidebarItem");
+    const buttons = document.querySelectorAll('.sidebarItem');
     buttons.forEach((el) => {
-      if (location.href.endsWith(el.attributes.getNamedItem("href")?.value!)) {
-        el.classList.add("activeSidebar");
-        el.classList.remove("opacity-60");
+      if (location.href.endsWith(el.attributes.getNamedItem('href')?.value!)) {
+        el.classList.add('activeSidebar');
+        el.classList.remove('opacity-60');
       }
-      el.addEventListener("click", sidebarOnClick, { capture: false });
-    });
-    buttons.forEach((el) => {
-      if (location.href.endsWith(el.attributes.getNamedItem("href")?.value!)) {
-        el.classList.add("darkActiveSidebar");
-        el.classList.remove("opacity-60");
-      }
-      el.addEventListener("click", darkSidebarOnClick, { capture: false });
+      el.addEventListener('click', sidebarOnClick, { capture: false });
     });
   </script>
   <style>

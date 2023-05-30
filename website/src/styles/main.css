@@ -1,40 +1,11 @@
-:root {
-  --c-bg: #fff;
-  --c-scrollbar: #eee;
-  --c-scrollbar-hover: #bbb;
-  --p: #536e8f;
-  --headers: #183f6e;
-  --linear-gradient-primary:220, 237, 255, 1;
-  --linear-gradient-secondary:245, 250, 255, 0;
-  --section-scroll:#ffffff;
-  --active-text:#183F6E;
-  --border: #183F6E;
-  --sidebar-item: invert(59%) sepia(8%) saturate(1043%) hue-rotate(173deg) brightness(96%) contrast(20%);
-  --box-background:#183f6e;
-}
+@import "variables.css";
+
 html {
   background-color: var(--c-bg);
   height: 100vh;
   width: 100vw;
   overflow: hidden;
 }
-
-html.dark {
-  --c-bg: #1e1e1e;
-  --c-scrollbar: #111;
-  --c-scrollbar-hover: #222;
-  --p: #a6a6a6;
-  --headers: #fff;
-  --linear-gradient-primary:60, 60, 60, 1;
-  --linear-gradient-secondary:60, 60, 60, 0;
-  --section-scroll:#1e1e1e;
-  --active-text:#ffffff;
-  --border: #a6a6a6;
-  --sidebar-filter:invert(100%) sepia(0%) saturate(0%) hue-rotate(131deg) brightness(103%) contrast(130%);
-  --sidebar-item: invert(78%) sepia(1%) saturate(0%) hue-rotate(185deg) brightness(84%) contrast(99%);
-  --box-background:#2D2D2D;
-}
-
 body {
   height: 100%;
   overflow-y: scroll;
@@ -63,21 +34,7 @@ body {
 * {
   scrollbar-color: var(--c-scrollbar) var(--c-bg);
 }
-.prose :where(h1, h2, h3, h4, h5, h6):not(:where(.not-prose, .not-prose *)) {
-  color: var(--headers) !important;
-}
-.prose :where(p):not(:where(.not-prose, .not-prose *)) {
-  color: var(--p);
-  font-weight: 500;
-}
-.prose :where(li):not(:where(.not-prose, .not-prose *)) {
-  color: var(--p);
-  font-weight: 400;
-}
-.prose :where(a):not(:where(.not-prose, .not-prose *)) {
-  color: var( --headers) !important;
-  
-}
+
 .phenoLogo{
   background: linear-gradient(89.46deg,rgba(var(--linear-gradient-primary)) 0.36%, rgba( var(--linear-gradient-secondary)) 106.19%);
 
@@ -89,46 +46,33 @@ body {
 .sectionSelector::-webkit-scrollbar-thumb:hover {
   background: var(--section-scroll);
 }
-.darkSectionSelector::-webkit-scrollbar-thumb:hover {
-  background: var(--section-scroll);
-}
-.active > p {
-  color: var(--active-text);
-}
-.darkActive > p {
-  color: var(--active-text);
-}
+
+
 .activeSidebar {
   border-left: 6px solid var(--active-text) !important;
   width: 100%;
   background: linear-gradient(89.46deg,rgba(var(--linear-gradient-primary)) 0.36%, rgba( var(--linear-gradient-secondary)) 106.19%);
-  color:var()
-}
-/* .activeSidebar >img{
-  filter: (var(--sidebar-filter))
-} */
-.darkActiveSidebar {
-  border-left: 6px solid var(--border) !important;
-  width: 100%;
-  background: linear-gradient(89.51deg,rgba(var(--linear-gradient-primary)) 0.33%, rgba( var(--linear-gradient-secondary)) 99.66%);
   color:var(--active-text);
 }
-.darkActiveSidebar >img {
+
+
+.activeSidebar >img {
   filter: var(--sidebar-filter) !important;
 }
-.sidebarItem >img{
+.subsection >img{
   filter: var(--sidebar-item);
 }
-.prose pre:not(.shiki) {
-  background: var(--box-background) !important;
-  padding: 30px;
+.sidebarItem>img{
+  filter: var(--sidebar-item);
 }
+
 .hamburgerFilter{
   filter:  invert(78%) sepia(1%) saturate(0%) hue-rotate(185deg) brightness(84%) contrast(99%);
 }
 .navbar >a:nth-of-type(2),.navbar >a:nth-of-type(4){
   display: none;
 }
+
 ::-webkit-scrollbar {
   width: 6px;
 }

@@ -1,5 +1,5 @@
 ---
-import MainHero from "./Mainhero.astro";
+import MainHero from "./MainHero.astro";
 import Navbar from "./Navbar.astro";
 import Sidebar from "./Sidebar.astro";
 import SectionSelector from "./SectionSelector.astro";
@@ -41,7 +41,9 @@ const { sections } = Astro.props;
 				<div
 					class="w-100% px-48px flex flex-row items-start gap-80px mt-10 max-w-1600px mx-auto <lg:mt-0 <md:mt-0 <md:px-20px"
 				>
+				<div class='<lg:hidden'>
 					<Sidebar guides={guides} />
+				</div>
 					<div
 						class="flex-col mt-0.5rem w-70% relative -top-2.3rem <lg:w-100% <lg:mt-6vw <md:mt-0"
 					>
