@@ -13,7 +13,7 @@ const { sections } = Astro.props
 <div id="selector-container" class="sticky flex flex-col h-80px justify-end bg-white dark:(bg-hex-1e1e1e) -top-1 mb-40px <lg:hidden">
 
     <div
-    class="sectionSelector darkSectionSelector flex flex-row justify-start items-end gap-32px bg-white dark:bg-hex-1e1e1e w-full overflow-scroll "
+    class="section-selector flex flex-row justify-start items-end gap-32px bg-white dark:bg-hex-1e1e1e w-full overflow-scroll "
     >
     {
         sections.map(({ text, slug }: { text: string, slug: string }) => {
@@ -59,25 +59,29 @@ const { sections } = Astro.props
     
 </script>
 <style scoped>
-    .sectionSelector::::-webkit-scrollbar {
+    .section-selector::::-webkit-scrollbar {
   width: 0px;
 }
- .sectionSelector::-webkit-scrollbar-track {
+ .section-selector::-webkit-scrollbar-track {
     background-color: transparent;
     width:0px
 }
 
-.sectionSelector::-webkit-scrollbar {
+.section-selector::-webkit-scrollbar {
     background-color: transparent;
     width:0px
 
 }
 
-.sectionSelector::-webkit-scrollbar-thumb {
+.section-selector::-webkit-scrollbar-thumb {
     background-color: transparent;
     width:0px
 
 }
+.section-selector::-webkit-scrollbar-thumb:hover {
+  background: var(--section-scroll);
+}
+
 
     .notActive {
         margin-bottom: 16px;
@@ -89,7 +93,7 @@ const { sections } = Astro.props
         display: block;
     }
     .active > p {
-        /* color: #183F6E; */
+        color: var(--active-text);
         font-weight: 700;
     }
 </style>

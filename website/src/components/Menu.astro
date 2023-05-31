@@ -1,8 +1,6 @@
 ---
 const { guides } = Astro.props;
 import Sidebar from './Sidebar.astro';
-
-
 ---
 
 <div class='relative hidden <lg:block'>
@@ -35,28 +33,34 @@ import Sidebar from './Sidebar.astro';
 <script>
   const hamburgerEl = document.getElementById('hamburger')!;
   const closeMenuEl = document.getElementById('close-menu')!;
-  const menuContianer = document.getElementById('menu-contianer')!;
-  const menu = document.getElementById('menu')!;
+  const menuContianerEl = document.getElementById('menu-contianer')!;
+  const menuEl = document.getElementById('menu')!;
   function openMenu() {
-    menuContianer.style.backdropFilter = 'blur(2px)';
-    menuContianer.style.zIndex = '2';
-    menuContianer.style.opacity = '1';
-    menu.style.left = '52px';
+    menuContianerEl.style.backdropFilter = 'blur(2px)';
+    menuContianerEl.style.zIndex = '2';
+    menuContianerEl.style.opacity = '1';
+    menuEl.style.left = '52px';
   }
   function closeMenu() {
-    menuContianer.style.backdropFilter = 'blur(0px)';
-    menuContianer.style.zIndex = '-1';
-    menuContianer.style.opacity = '0';
-    menu.style.left = '-1000px';
+    menuContianerEl.style.backdropFilter = 'blur(0px)';
+    menuContianerEl.style.zIndex = '-1';
+    menuContianerEl.style.opacity = '0';
+    menuEl.style.left = '-1000px';
   }
   hamburgerEl.addEventListener('click', openMenu);
   closeMenuEl.addEventListener('click', closeMenu);
- 
+
   function closeMenuOnClickOutside(event: Event) {
     const target = event.target as HTMLTextAreaElement;
-    if (!menu.contains(target) && !target.matches('#hamburger')) {
+    if (!menuEl.contains(target) && !target.matches('#hamburger')) {
       closeMenu();
     }
   }
   document.addEventListener('click', closeMenuOnClickOutside);
 </script>
+<style>
+  .hamburger-filter {
+    filter: invert(78%) sepia(1%) saturate(0%) hue-rotate(185deg)
+      brightness(84%) contrast(99%);
+  }
+</style>

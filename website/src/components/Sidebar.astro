@@ -82,7 +82,7 @@ const items = [
     }
   </div>
   <div
-    class='phenoLogo relative -left-3rem top-7rem w-15rem h-44px p-4 border-l-6 border-l-indigo flex justify-center items-center gap-1 dark:(border-light-gray) <md:(-left-1.5rem)'
+    class='pheno-logo relative -left-3rem top-7rem w-15rem h-44px p-4 border-l-6 border-l-indigo flex justify-center items-center gap-1 dark:(border-light-gray) <md:(-left-1.5rem)'
   >
     <img
       src='/proxy-memoize/pheno-agency-logo.svg'
@@ -124,14 +124,36 @@ const items = [
   </script>
 </div>
 <style>
-  @import "../styles/variables.css";
-  .subsection >img{
-    filter:var(--sidebar-item);
+  @import '../styles/variables.css';
+  .subsection > img {
+    filter: var(--sidebar-item);
   }
-  /* .darkSubsection >img{
-    filter:invert(78%) sepia(1%) saturate(0%) hue-rotate(185deg) brightness(84%) contrast(99%);
-  } */
-  .sidebar-item>img{
-  filter: var(--sidebar-item);
-}
+
+  .sidebar-item > img {
+    filter: var(--sidebar-item);
+  }
+  .active-item {
+    border-left: 6px solid var(--active-text) !important;
+    width: 100%;
+    background: linear-gradient(
+      89.46deg,
+      rgba(var(--linear-gradient-primary)) 0.36%,
+      rgba(var(--linear-gradient-secondary)) 106.19%
+    );
+    color: var(--active-text);
+  }
+
+  .active-item > img {
+    filter: var(--sidebar-filter) !important;
+  }
+  .sidebar-item > img {
+    filter: var(--sidebar-item);
+  }
+  .pheno-logo {
+    background: linear-gradient(
+      89.46deg,
+      rgba(var(--linear-gradient-primary)) 0.36%,
+      rgba(var(--linear-gradient-secondary)) 106.19%
+    );
+  }
 </style>

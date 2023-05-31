@@ -35,41 +35,6 @@ body {
   scrollbar-color: var(--c-scrollbar) var(--c-bg);
 }
 
-.phenoLogo{
-  background: linear-gradient(89.46deg,rgba(var(--linear-gradient-primary)) 0.36%, rgba( var(--linear-gradient-secondary)) 106.19%);
-
-}
-.darkPhenoLogo{
-  background: linear-gradient(89.51deg,rgba(var(--linear-gradient-primary)) 0.33%, rgba( var(--linear-gradient-secondary)) 99.66%);
-
-}
-.sectionSelector::-webkit-scrollbar-thumb:hover {
-  background: var(--section-scroll);
-}
-
-
-.active-item {
-  border-left: 6px solid var(--active-text) !important;
-  width: 100%;
-  background: linear-gradient(89.46deg,rgba(var(--linear-gradient-primary)) 0.36%, rgba( var(--linear-gradient-secondary)) 106.19%);
-  color:var(--active-text);
-}
-
-
-.active-item >img {
-  filter: var(--sidebar-filter) !important;
-}
-.sidebar-item>img{
-  filter: var(--sidebar-item);
-}
-
-.hamburger-filter{
-  filter:  invert(78%) sepia(1%) saturate(0%) hue-rotate(185deg) brightness(84%) contrast(99%);
-}
-.navbar >a:nth-of-type(2),.navbar >a:nth-of-type(4){
-  display: none;
-}
-
 ::-webkit-scrollbar {
   width: 6px;
 }
