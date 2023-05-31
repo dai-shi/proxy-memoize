@@ -48,7 +48,7 @@ body {
 }
 
 
-.activeSidebar {
+.active-item {
   border-left: 6px solid var(--active-text) !important;
   width: 100%;
   background: linear-gradient(89.46deg,rgba(var(--linear-gradient-primary)) 0.36%, rgba( var(--linear-gradient-secondary)) 106.19%);
@@ -56,17 +56,14 @@ body {
 }
 
 
-.activeSidebar >img {
+.active-item >img {
   filter: var(--sidebar-filter) !important;
 }
-.subsection >img{
-  filter: var(--sidebar-item);
-}
-.sidebarItem>img{
+.sidebar-item>img{
   filter: var(--sidebar-item);
 }
 
-.hamburgerFilter{
+.hamburger-filter{
   filter:  invert(78%) sepia(1%) saturate(0%) hue-rotate(185deg) brightness(84%) contrast(99%);
 }
 .navbar >a:nth-of-type(2),.navbar >a:nth-of-type(4){

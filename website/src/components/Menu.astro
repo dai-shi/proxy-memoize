@@ -2,45 +2,7 @@
 const { guides } = Astro.props;
 import Sidebar from './Sidebar.astro';
 
-const items = [
-  {
-    id: 0,
-    title: 'Introduction',
-    img: '/proxy-memoize/introduction.svg',
-    href: '/proxy-memoize/#introduction',
-  },
-  {
-    id: 1,
-    title: 'Guides',
-    img: '/proxy-memoize/guides.svg',
-    subsection: guides,
-    href: '#',
-  },
-  {
-    id: 2,
-    title: 'API',
-    img: '/proxy-memoize/API.svg',
-    href: '/proxy-memoize/#api',
-  },
-  {
-    id: 3,
-    title: 'Repository',
-    img: '/proxy-memoize/repository.svg',
-    href: 'https://github.com/dai-shi/proxy-memoize/',
-  },
-  {
-    id: 4,
-    title: 'Change Log',
-    img: '/proxy-memoize/updates.svg',
-    href: 'https://github.com/dai-shi/proxy-memoize/blob/main/CHANGELOG.md',
-  },
-  {
-    id: 5,
-    title: 'Help',
-    img: '/proxy-memoize/help.svg',
-    href: 'https://github.com/dai-shi/proxy-memoize/issues',
-  },
-];
+
 ---
 
 <div class='relative hidden <lg:block'>
@@ -48,11 +10,11 @@ const items = [
     src='/proxy-memoize/Hamburger.svg'
     alt='Hamburger'
     id='hamburger'
-    class='hidden <lg:block hamburgerFilter <lg:w-38px <lg:h-38px <md:w-30px <md:h-30px cursor-pointer'
+    class='hidden <lg:block hamburger-filter <lg:w-38px <lg:h-38px <md:w-30px <md:h-30px cursor-pointer'
   />
 
   <div
-    id='menuContianer'
+    id='menu-contianer'
     class='absolute w-110vw h-300vh -left-100px <md:-left-77px -top-100px opacity-0 -z-1 bg-hex-ffffff4a transition-all duration-500 ease-in-out <md:w-115vw'
   >
     <div
@@ -73,46 +35,23 @@ const items = [
 <script>
   const hamburgerEl = document.getElementById('hamburger')!;
   const closeMenuEl = document.getElementById('close-menu')!;
-  const menuContianer = document.getElementById('menuContianer')!;
+  const menuContianer = document.getElementById('menu-contianer')!;
   const menu = document.getElementById('menu')!;
   function openMenu() {
-    menuContianer.style.backdropFilter = 'Blur(2px)';
+    menuContianer.style.backdropFilter = 'blur(2px)';
     menuContianer.style.zIndex = '2';
     menuContianer.style.opacity = '1';
     menu.style.left = '52px';
   }
   function closeMenu() {
-    menuContianer.style.backdropFilter = 'Blur(0px)';
+    menuContianer.style.backdropFilter = 'blur(0px)';
     menuContianer.style.zIndex = '-1';
     menuContianer.style.opacity = '0';
     menu.style.left = '-1000px';
   }
   hamburgerEl.addEventListener('click', openMenu);
   closeMenuEl.addEventListener('click', closeMenu);
-  function sidebarOnClick(e: Event) {
-    const clickedElement = e.currentTarget as Element;
-    const currentActiveElement = document.querySelector(
-      '.sidebarItem.activeSidebar'
-    );
-
-    if (currentActiveElement !== null) {
-      currentActiveElement.classList.remove('activeSidebar');
-      currentActiveElement.classList.add('opacity-60');
-    }
-
-    clickedElement.classList.add('activeSidebar');
-    clickedElement.classList.remove('opacity-60');
-  }
-
-  const buttons = document.querySelectorAll('.sidebarItem');
-  buttons.forEach((el) => {
-    if (location.href.endsWith(el.attributes.getNamedItem('href')?.value!)) {
-      el.classList.add('activeSidebar');
-      el.classList.remove('opacity-60');
-    }
-    el.addEventListener('click', sidebarOnClick, { capture: false });
-  });
-
+ 
   function closeMenuOnClickOutside(event: Event) {
     const target = event.target as HTMLTextAreaElement;
     if (!menu.contains(target) && !target.matches('#hamburger')) {

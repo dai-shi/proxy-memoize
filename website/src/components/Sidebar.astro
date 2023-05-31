@@ -53,7 +53,7 @@ const items = [
             class={`${
               subsection
                 ? 'opacity-40! subsection'
-                : 'sidebarItem cursor-pointer'
+                : 'sidebar-item cursor-pointer'
             } opacity-60 w-full p-10px border-l-6 border-l-transparent flex items-center gap-10px`}
           >
             <img src={img} alt={title} />
@@ -70,7 +70,7 @@ const items = [
             }) => (
               <a
                 href={'/proxy-memoize' + subHref}
-                class='sidebarItem p-10px pl-22px ml-16px border-l-6 border-l-transparent flex items-center cursor-pointer opacity-60 gap-10px'
+                class='sidebar-item p-10px pl-22px ml-16px border-l-6 border-l-transparent flex items-center cursor-pointer opacity-60 gap-10px'
               >
                 <span>#</span>
                 <span class='font-Dm'>{title}</span>
@@ -82,7 +82,7 @@ const items = [
     }
   </div>
   <div
-    class='phenoLogo relative -left-3rem top-7rem h-44px p-4 border-l-6 border-l-indigo flex justify-center items-center gap-1 dark:(border-light-gray) <md:(-left-1.5rem)'
+    class='phenoLogo relative -left-3rem top-7rem w-15rem h-44px p-4 border-l-6 border-l-indigo flex justify-center items-center gap-1 dark:(border-light-gray) <md:(-left-1.5rem)'
   >
     <img
       src='/proxy-memoize/pheno-agency-logo.svg'
@@ -101,36 +101,37 @@ const items = [
     function sidebarOnClick(e: Event) {
       const clickedElement = e.currentTarget as Element;
       const currentActiveElement = document.querySelector(
-        '.sidebarItem.activeSidebar'
+        '.sidebar-item.active-item'
       );
 
       if (currentActiveElement !== null) {
-        currentActiveElement.classList.remove('activeSidebar');
+        currentActiveElement.classList.remove('active-item');
         currentActiveElement.classList.add('opacity-60');
       }
 
-      clickedElement.classList.add('activeSidebar');
+      clickedElement.classList.add('active-item');
       clickedElement.classList.remove('opacity-60');
     }
 
-    const buttons = document.querySelectorAll('.sidebarItem');
+    const buttons = document.querySelectorAll('.sidebar-item');
     buttons.forEach((el) => {
       if (location.href.endsWith(el.attributes.getNamedItem('href')?.value!)) {
-        el.classList.add('activeSidebar');
+        el.classList.add('active-item');
         el.classList.remove('opacity-60');
       }
-      el.addEventListener('click', sidebarOnClick, { capture: false });
+      el.addEventListener('click', sidebarOnClick);
     });
   </script>
-  <style>
-    /* .active {
-    border-left: 6px solid #183f6e !important;
-    width: 100%;
-    background: linear-gradient(
-      89.46deg,
-      #dcedff 0.36%,
-      rgba(245, 250, 255, 0) 106.19%
-    );
-  } */
-  </style>
 </div>
+<style>
+  @import "../styles/variables.css";
+  .subsection >img{
+    filter:var(--sidebar-item);
+  }
+  /* .darkSubsection >img{
+    filter:invert(78%) sepia(1%) saturate(0%) hue-rotate(185deg) brightness(84%) contrast(99%);
+  } */
+  .sidebar-item>img{
+  filter: var(--sidebar-item);
+}
+</style>
