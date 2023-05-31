@@ -1,99 +1,104 @@
 ---
 const selectItems = [
-    { id: 0, title: "How it works" },
-    { id: 1, title: "Install" },
-    { id: 2, title: "How it behaves" },
-    { id: 3, title: "Usage with React Context" },
-    { id: 4, title: "Using size option" },
-    { id: 5, title: "Usage with Zustand" },
+  { id: 0, title: 'How it works' },
+  { id: 1, title: 'Install' },
+  { id: 2, title: 'How it behaves' },
+  { id: 3, title: 'Usage with React Context' },
+  { id: 4, title: 'Using size option' },
+  { id: 5, title: 'Usage with Zustand' },
 ];
 
-const { sections } = Astro.props
+const { sections } = Astro.props;
 ---
-<div id="selector-container" class="sticky flex flex-col h-80px justify-end bg-white dark:(bg-hex-1e1e1e) -top-1 mb-40px <lg:hidden">
 
-    <div
-    class="section-selector flex flex-row justify-start items-end gap-32px bg-white dark:bg-hex-1e1e1e w-full overflow-scroll "
-    >
+<div
+  id='selector-container'
+  class='sticky flex flex-col h-80px justify-end bg-white dark:(bg-hex-1e1e1e) -top-40px mb-40px <lg:hidden'
+>
+  <div
+    class='section-selector flex flex-row justify-start items-end gap-32px bg-white dark:bg-hex-1e1e1e w-full overflow-scroll'
+  >
     {
-        sections.map(({ text, slug }: { text: string, slug: string }) => {
-            const href = "#" + slug
-            return (
-                <a href={href} class="tab-item flex flex-col justify-start items-center gap-16px notActive font-Dm text-14px font-500 text-gray dark:text-hex-A6A6A6">
-                    
-                       <p class="w-max">{text}
-                        </p> 
-                        <div class="w-full h-4px rounded-full bg-hex-009B8D hidden" />
-                        </a>
-                        );
-                    })
-                }
-</div>
-<div class={`w-full border-b-2px border-b-DEF2F0 ${sections.length<1 ?'-mt-7px':'-mt-6px'}  dark:(border-b border-hex-A6A6A6)`}/>
-    
-
+      sections.map(({ text, slug }: { text: string; slug: string }) => {
+        const href = '#' + slug;
+        return (
+          <a
+            href={href}
+            class='tab-item flex flex-col justify-start items-center gap-16px notActive font-Dm text-14px font-500 text-gray dark:text-hex-A6A6A6'
+          >
+            <p class='w-max'>{text}</p>
+            <div class='w-full h-4px rounded-full bg-hex-009B8D hidden' />
+          </a>
+        );
+      })
+    }
+  </div>
+  <div
+    class={`w-full border-b-2px border-b-DEF2F0 ${
+      sections.length < 1 ? '-mt-7px' : '-mt-6px'
+    }  dark:(border-b border-hex-A6A6A6)`}
+  >
+  </div>
 </div>
 <script>
-    const tabItems = document.querySelectorAll(".tab-item");
-    tabItems.forEach((el) => { 
-        if (el.attributes.getNamedItem('href')?.value === location.hash) {
-            el.classList.add('active')
-        }
-        el.addEventListener("click", tabOnClick)
-    });
-    if (location.hash) {
-        setTimeout(() => {
-            document.getElementById(location.hash.slice(1))!.scrollIntoView({ behavior: 'smooth' })
-        }, 500)
+  const tabItems = document.querySelectorAll('.tab-item');
+  tabItems.forEach((el) => {
+    if (el.attributes.getNamedItem('href')?.value === location.hash) {
+      el.classList.add('active');
     }
+    el.addEventListener('click', tabOnClick);
+  });
+  if (location.hash) {
+    setTimeout(() => {
+      document
+        .getElementById(location.hash.slice(1))!
+        .scrollIntoView({ behavior: 'smooth' });
+    }, 500);
+  }
 
-    function tabOnClick(e: Event) {
-        const clickedElement = e.currentTarget as Element;
+  function tabOnClick(e: Event) {
+    const clickedElement = e.currentTarget as Element;
 
-        const currentActiveElement = document.querySelector(".tab-item.active");
-        if (currentActiveElement !== null) {
-            currentActiveElement.classList.remove("active");
-        }
-        clickedElement.classList.add("active");
+    const currentActiveElement = document.querySelector('.tab-item.active');
+    if (currentActiveElement !== null) {
+      currentActiveElement.classList.remove('active');
     }
-    
+    clickedElement.classList.add('active');
+  }
 </script>
 <style scoped>
-    .section-selector::::-webkit-scrollbar {
-  width: 0px;
-}
- .section-selector::-webkit-scrollbar-track {
+  .section-selector::::-webkit-scrollbar {
+    width: 0px;
+  }
+  .section-selector::-webkit-scrollbar-track {
     background-color: transparent;
-    width:0px
-}
+    width: 0px;
+  }
 
-.section-selector::-webkit-scrollbar {
+  .section-selector::-webkit-scrollbar {
     background-color: transparent;
-    width:0px
+    width: 0px;
+  }
 
-}
-
-.section-selector::-webkit-scrollbar-thumb {
+  .section-selector::-webkit-scrollbar-thumb {
     background-color: transparent;
-    width:0px
+    width: 0px;
+  }
+  .section-selector::-webkit-scrollbar-thumb:hover {
+    background: var(--section-scroll);
+  }
 
-}
-.section-selector::-webkit-scrollbar-thumb:hover {
-  background: var(--section-scroll);
-}
-
-
-    .notActive {
-        margin-bottom: 16px;
-    }
-    .active {
-        margin-bottom: 0px !important;
-    }
-    .active > div {
-        display: block;
-    }
-    .active > p {
-        color: var(--active-text);
-        font-weight: 700;
-    }
+  .notActive {
+    margin-bottom: 16px;
+  }
+  .active {
+    margin-bottom: 0px !important;
+  }
+  .active > div {
+    display: block;
+  }
+  .active > p {
+    color: var(--active-text);
+    font-weight: 700;
+  }
 </style>

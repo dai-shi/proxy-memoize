@@ -1,75 +1,73 @@
 ---
-import MainHero from "./MainHero.astro";
-import Navbar from "./Navbar.astro";
-import Sidebar from "./Sidebar.astro";
-import SectionSelector from "./SectionSelector.astro";
-import "../styles/main.css";
-import "../styles/markdown.css";
+import MainHero from './MainHero.astro';
+import Navbar from './Navbar.astro';
+import Sidebar from './Sidebar.astro';
+import SectionSelector from './SectionSelector.astro';
+import '../styles/main.css';
+import '../styles/markdown.css';
 
-const docs = await Astro.glob("../../../docs/**/*.md");
+const docs = await Astro.glob('../../../docs/**/*.md');
 const guides = docs.flatMap((d) => {
-	const doc = { ...d.getHeadings()[0]! };
-	return { title: doc.text, href: "/docs/" + doc.slug, id: doc.slug };
+  const doc = { ...d.getHeadings()[0]! };
+  return { title: doc.text, href: '/docs/' + doc.slug, id: doc.slug };
 });
 
 const { sections } = Astro.props;
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link
-			rel="icon"
-			href="/proxy-memoize/favicon.ico"
-			type="image/x-icon"
-		/>
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<meta
-			name="description"
-			content="Intuitive magical memoization library with Proxy and WeakMap"
-		/>
-		<title>Proxy Memoize</title>
-	</head>
-	<body>
-		<div
-			class="flex flex-col justify-start transition-all duration-300 ease-in-out dark:bg-hex-1e1e1e"
-		>
-			<Navbar guides={guides} />
-			<div class="h-[calc(100vh-100px)]">
-				<MainHero />
-				<div
-					class="w-100% px-48px flex flex-row items-start gap-80px mt-10 max-w-1600px mx-auto <lg:mt-0 <md:mt-0 <md:px-20px"
-				>
-				<div class='<lg:hidden'>
-					<Sidebar guides={guides} />
-				</div>
-					<div
-						class="flex-col mt-0.5rem w-70% relative -top-2.3rem <lg:w-100% <lg:mt-6vw <md:mt-0"
-					>
-						<SectionSelector sections={sections} />
-						<slot class="prose prose-violet" />
-					</div>
-				</div>
-			</div>
-		</div>
-	</body>
-	<script>
-		const htmlEl = document.getElementsByTagName("html")[0];
-		if (localStorage.getItem("theme") === "dark") {
-			htmlEl.classList.add("dark");
-		}
-	</script>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <link rel='icon' href='/proxy-memoize/favicon.ico' type='image/x-icon' />
+    <meta name='viewport' content='width=device-width' />
+    <meta name='generator' content={Astro.generator} />
+    <meta
+      name='description'
+      content='Intuitive magical memoization library with Proxy and WeakMap'
+    />
+    <title>Proxy Memoize</title>
+  </head>
+  <body>
+    <div
+      class='flex flex-col justify-start transition-all duration-300 ease-in-out dark:bg-hex-1e1e1e'
+    >
+      <Navbar guides={guides} />
+      <div
+        class='h-[calc(100vh-100px)] <lg:h-[calc(100vh-88px)] <md:h-[calc(100vh-65px)] overflow-y-scroll'
+      >
+        <MainHero />
+        <div
+          class='w-100% px-48px flex flex-row items-start gap-80px mt-10 max-w-1600px mx-auto <lg:mt-0 <md:mt-0 <md:px-20px'
+        >
+          <div class='<lg:hidden'>
+            <Sidebar guides={guides} />
+          </div>
+          <div
+            class='flex-col mt-0.5rem w-70% relative -top-2.3rem <lg:w-100% <lg:mt-6vw <md:mt-0'
+          >
+            <SectionSelector sections={sections} />
+            <slot class='prose prose-violet' />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    const htmlEl = document.getElementsByTagName('html')[0];
+    if (localStorage.getItem('theme') === 'dark') {
+      htmlEl.classList.add('dark');
+    }
+  </script>
 </html>
 
 <style>
-	html {
-		scroll-behavior: smooth;
-	}
-	.prose:where(pre):not(:where(.not-prose, .not-prose *)) {
-		padding: 1.25rem 1.5rem;
-		overflow-x: auto;
-		border-radius: 0.375rem;
-		background: #183f6e;
-	}
+  html {
+    scroll-behavior: smooth;
+  }
+  .prose:where(pre):not(:where(.not-prose, .not-prose *)) {
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    border-radius: 0.375rem;
+    background: #183f6e;
+  }
 </style>
