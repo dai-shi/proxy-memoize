@@ -267,7 +267,7 @@ A workaround is to unwrap a proxy.
 
 ```js
 const fn = memoize(obj => {
-  console.log(getUntrackedObject(obj).c);
+  console.log(getUntracked(obj).c);
   return { sum: obj.a + obj.b, diff: obj.a - obj.b };
 });
 ```
