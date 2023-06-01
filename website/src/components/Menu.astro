@@ -3,60 +3,54 @@ const { guides } = Astro.props;
 import Sidebar from './Sidebar.astro';
 ---
 
-
-    <div id="menu-contianer" class="overlay"></div>
-    <button id="myDIV" class="burger hidden <lg:block" >
-      <img
-      src='/proxy-memoize/Hamburger.svg'
-      alt='Hamburger'
-      id='hamburger'
-      class=' hamburger-filter transition-all duration-100 ease-in <lg:w-38px <lg:h-38px <md:w-30px <md:h-30px cursor-pointer <md:top-19rem'
-    />
-   
-    </button>
-    <div
-      id='menu'
-      class='hidden <lg:flex flex-col px-24px py-16px rounded-r-16px w-304px h-636px bg-white dark:bg-hex-1e1e1e transition-all duration-700 ease-in-out relative top-17rem -left-32rem'
-    >
-    <p id='close-menu'
-    class=' text-30px close cursor-pointer self-end text-hex-8094AC rounded-5px dark:(text-hex-EFEFEF)'
-    >&times</p>
-      <div class=''>
-        <Sidebar guides={guides} />
-      </div>
-    </div>
+<div id='menu-contianer' class='overlay transition-all duration-500 ease-in-out'></div>
+<button class='burger hidden <lg:block'>
+  <img
+    src='/proxy-memoize/Hamburger.svg'
+    alt='Hamburger'
+    id='hamburger'
+    class='hamburger-filter transition-all duration-500 ease-linear <lg:w-38px <lg:h-38px <md:w-30px <md:h-30px cursor-pointer <md:top-19rem'
+  />
+</button>
+<div
+  id='menu'
+  class='hidden <lg:flex flex-col px-24px py-16px rounded-r-16px w-304px h-636px bg-white dark:bg-hex-1e1e1e transition-all duration-700 ease-in-out relative top-17rem -left-32rem'
+>
+  <p
+    id='close-menu'
+    class='text-30px close-btn cursor-pointer self-end text-hex-8094AC rounded-5px dark:(text-hex-EFEFEF)'
+  >
+    &times
+  </p>
+  <div class=''>
+    <Sidebar guides={guides} />
+  </div>
+</div>
 
 <script>
   const hamburgerEl = document.getElementById('hamburger')!;
   const closeMenuEl = document.getElementById('close-menu')!;
   const menuContianerEl = document.getElementById('menu-contianer')!;
   const menuEl = document.getElementById('menu')!;
- 
-  const inputTag = document.getElementById('hamburger') as HTMLInputElement;
-  const Tag = document.getElementById('my') as HTMLInputElement;
-  const toggleMenu = () => {
-    menuContianerEl.classList.add('open-menu');
+  const openMenu = () => {
+    menuContianerEl.classList.add('menu-overlay');
     closeMenuEl.classList.add('close-menu');
     menuEl.classList.add('menu');
-    hamburgerEl.classList.add('hamburger');
   };
-  hamburgerEl.addEventListener('click', toggleMenu);
-  // document.addEventListener('click', toggleMenu);
-  const toggleMenuClose = () => {
-    menuContianerEl.classList.remove('open-menu');
+  hamburgerEl.addEventListener('click', openMenu);
+  const closeMenu = () => {
+    menuContianerEl.classList.remove('menu-overlay');
     closeMenuEl.classList.remove('close-menu');
     menuEl.classList.remove('menu');
-    hamburgerEl.classList.remove('hamburger');
   };
-  closeMenuEl.addEventListener('click', toggleMenuClose);
+  closeMenuEl.addEventListener('click', closeMenu);
   function closeMenuOnClickOutside(event: Event) {
     const target = event.target as HTMLTextAreaElement;
     if (!menuEl.contains(target) && !target.matches('#hamburger')) {
-      toggleMenuClose();
+      closeMenu();
     }
   }
   document.addEventListener('click', closeMenuOnClickOutside);
-
 </script>
 
 <style>
@@ -65,51 +59,42 @@ import Sidebar from './Sidebar.astro';
       brightness(84%) contrast(99%);
   }
   .burger {
-  position: absolute;
-  z-index: 3;
-  top: 20px;
-  left: 32px;
-  /* display: grid; */
-  /* place-items: center; */
-  cursor: pointer;
-}
-.overlay {
-  position: fixed;
-  z-index: 0;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: rgba(255, 255, 255, 0.7);
-   visibility: hidden;
-  /* opacity: 0; */ 
-  backdrop-filter: blur(2px);
-  transition: 0.4s;
-}
-.open-menu {
-  visibility: visible;
-
-  opacity: 1;
-  z-index: 2;
-
-}
-.close-menu{
-  visibility: visible !important;
-}
-.close{
-  visibility: hidden;
-}
-.menu{
-  left: -48px !important;
-  z-index: 2;
-}
-.hamburger{
-  visibility: hidden !important;
-}
-@media (max-width:767.9px){
-  .menu{
-  left: -24px !important;
-  z-index: 2;
-}
-}
+    position: absolute;
+    z-index: 0;
+    top: 20px;
+    left: 32px;
+    cursor: pointer;
+  }
+  .overlay {
+    position: fixed;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.7);
+    visibility: hidden;
+    backdrop-filter: blur(2px);
+  }
+  .menu-overlay {
+    visibility: visible;
+    opacity: 1;
+    z-index: 2;
+  }
+  .close-menu {
+    visibility: visible !important;
+  }
+  .close-btn {
+    visibility: hidden;
+  }
+  .menu {
+    left: -48px !important;
+    z-index: 2;
+  }
+  @media (max-width: 767.9px) {
+    .menu {
+      left: -24px !important;
+      z-index: 2;
+    }
+  }
 </style>

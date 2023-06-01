@@ -13,7 +13,7 @@ const { sections } = Astro.props;
 
 <div
   id='selector-container'
-  class='sticky flex flex-col h-80px justify-end bg-white dark:(bg-hex-1e1e1e) -top-40px mb-40px <lg:hidden'
+  class='sticky flex flex-col h-80px justify-end bg-white dark:(bg-hex-1e1e1e) -top-20px mb-40px <lg:hidden'
 >
   <div
     class='section-selector flex flex-row justify-start items-end gap-32px bg-white dark:bg-hex-1e1e1e w-full overflow-scroll'
@@ -58,7 +58,6 @@ const { sections } = Astro.props;
 
   function tabOnClick(e: Event) {
     const clickedElement = e.currentTarget as Element;
-
     const currentActiveElement = document.querySelector('.tab-item.active');
     if (currentActiveElement !== null) {
       currentActiveElement.classList.remove('active');
