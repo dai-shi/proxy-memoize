@@ -1,6 +1,3 @@
-
-@import "variables.css";
-
 html.dark .vitesse-light {
   display: none;
 }
@@ -28,8 +25,7 @@ html:not(.dark) .vitesse-dark {
   font-weight: 400;
 }
 .prose :where(a):not(:where(.not-prose, .not-prose *)) {
-  color: var( --headers) !important;
-  
+  color: var(--headers) !important;
 }
 .prose pre:not(.shiki) {
   background: var(--box-background) !important;

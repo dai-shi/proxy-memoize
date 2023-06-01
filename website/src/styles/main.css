@@ -1,5 +1,3 @@
-@import "variables.css";
-
 html {
   background-color: var(--c-bg);
   height: 100vh;
@@ -54,7 +52,7 @@ body {
   background: var(--c-scrollbar-hover);
 }
 
-@media (max-width:767.9px) {
+@media (max-width: 767.9px) {
   ::-webkit-scrollbar {
     width: 0px;
   }
