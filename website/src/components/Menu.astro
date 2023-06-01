@@ -3,64 +3,113 @@ const { guides } = Astro.props;
 import Sidebar from './Sidebar.astro';
 ---
 
-<div class='relative hidden <lg:block'>
-  <img
-    src='/proxy-memoize/Hamburger.svg'
-    alt='Hamburger'
-    id='hamburger'
-    class='hidden <lg:block hamburger-filter <lg:w-38px <lg:h-38px <md:w-30px <md:h-30px cursor-pointer'
-  />
 
-  <div
-    id='menu-contianer'
-    class='absolute w-110vw h-300vh -left-100px <md:-left-77px -top-100px opacity-0 -z-1 bg-hex-ffffff4a transition-all duration-500 ease-in-out <md:w-115vw'
-  >
+    <div id="menu-contianer" class="overlay"></div>
+    <button id="myDIV" class="burger hidden <lg:block" >
+      <img
+      src='/proxy-memoize/Hamburger.svg'
+      alt='Hamburger'
+      id='hamburger'
+      class=' hamburger-filter transition-all duration-100 ease-in <lg:w-38px <lg:h-38px <md:w-30px <md:h-30px cursor-pointer <md:top-19rem'
+    />
+   
+    </button>
     <div
       id='menu'
-      class='absolute flex flex-col px-24px py-16px rounded-r-16px -left-1000px top-72px w-304px h-636px bg-white dark:bg-hex-1e1e1e transition-all duration-500 ease-in-out'
+      class='hidden <lg:flex flex-col px-24px py-16px rounded-r-16px w-304px h-636px bg-white dark:bg-hex-1e1e1e transition-all duration-700 ease-in-out relative top-17rem -left-32rem'
     >
-      <button
-        id='close-menu'
-        class='text-30px cursor-pointer self-end text-hex-8094AC rounded-5px dark:(text-hex-EFEFEF)'
-        >&times;</button
-      >
-      <div class='menu-sidebar'>
+    <p id='close-menu'
+    class=' text-30px close cursor-pointer self-end text-hex-8094AC rounded-5px dark:(text-hex-EFEFEF)'
+    >&times</p>
+      <div class=''>
         <Sidebar guides={guides} />
       </div>
     </div>
-  </div>
-</div>
+
 <script>
   const hamburgerEl = document.getElementById('hamburger')!;
   const closeMenuEl = document.getElementById('close-menu')!;
   const menuContianerEl = document.getElementById('menu-contianer')!;
   const menuEl = document.getElementById('menu')!;
-  function openMenu() {
-    menuContianerEl.style.backdropFilter = 'blur(2px)';
-    menuContianerEl.style.zIndex = '2';
-    menuContianerEl.style.opacity = '1';
-    menuEl.style.left = '52px';
-  }
-  function closeMenu() {
-    menuContianerEl.style.backdropFilter = 'blur(0px)';
-    menuContianerEl.style.zIndex = '-1';
-    menuContianerEl.style.opacity = '0';
-    menuEl.style.left = '-1000px';
-  }
-  hamburgerEl.addEventListener('click', openMenu);
-  closeMenuEl.addEventListener('click', closeMenu);
-
+ 
+  const inputTag = document.getElementById('hamburger') as HTMLInputElement;
+  const Tag = document.getElementById('my') as HTMLInputElement;
+  const toggleMenu = () => {
+    menuContianerEl.classList.add('open-menu');
+    closeMenuEl.classList.add('close-menu');
+    menuEl.classList.add('menu');
+    hamburgerEl.classList.add('hamburger');
+  };
+  hamburgerEl.addEventListener('click', toggleMenu);
+  // document.addEventListener('click', toggleMenu);
+  const toggleMenuClose = () => {
+    menuContianerEl.classList.remove('open-menu');
+    closeMenuEl.classList.remove('close-menu');
+    menuEl.classList.remove('menu');
+    hamburgerEl.classList.remove('hamburger');
+  };
+  closeMenuEl.addEventListener('click', toggleMenuClose);
   function closeMenuOnClickOutside(event: Event) {
     const target = event.target as HTMLTextAreaElement;
     if (!menuEl.contains(target) && !target.matches('#hamburger')) {
-      closeMenu();
+      toggleMenuClose();
     }
   }
   document.addEventListener('click', closeMenuOnClickOutside);
+
 </script>
+
 <style>
   .hamburger-filter {
     filter: invert(78%) sepia(1%) saturate(0%) hue-rotate(185deg)
       brightness(84%) contrast(99%);
   }
+  .burger {
+  position: absolute;
+  z-index: 3;
+  top: 20px;
+  left: 32px;
+  /* display: grid; */
+  /* place-items: center; */
+  cursor: pointer;
+}
+.overlay {
+  position: fixed;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.7);
+   visibility: hidden;
+  /* opacity: 0; */ 
+  backdrop-filter: blur(2px);
+  transition: 0.4s;
+}
+.open-menu {
+  visibility: visible;
+
+  opacity: 1;
+  z-index: 2;
+
+}
+.close-menu{
+  visibility: visible !important;
+}
+.close{
+  visibility: hidden;
+}
+.menu{
+  left: -48px !important;
+  z-index: 2;
+}
+.hamburger{
+  visibility: hidden !important;
+}
+@media (max-width:767.9px){
+  .menu{
+  left: -24px !important;
+  z-index: 2;
+}
+}
 </style>

@@ -34,7 +34,7 @@ export default function ToggleTheme() {
   };
   return (
     <button
-      className='relative rounded-25px border border-hex-ECF5FF border-2 w-221px h-50px flex justify-between items-center cursor-pointer p-2 dark:(bg-black border-0) <lg:w-107px <lg:h-38px <lg:rounded-19px <lg:p-1 <md:border-none <md:w-30px <md:h-30px'
+      className='relative rounded-25px border border-hex-ECF5FF border-2 w-221px h-50px flex justify-between items-center cursor-pointer p-2 dark:(bg-black border-0) <lg:w-107px <lg:h-38px <lg:rounded-19px <lg:p-1 <lg:-z-1 <md:border-none <md:w-30px <md:h-30px <md:absolute <md:right-6%'
       id='toggleTheme'
       onClick={handleOnClick}
     >

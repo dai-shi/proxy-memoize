@@ -6,13 +6,16 @@ const { guides } = Astro.props;
 ---
 
 <div
-class="navbar z-10 w-full flex flex-row justify-between items-center gap-20 h-100px pt-32px pb-27px px-48px bg-white dark:bg-hex-1e1e1e <lg:h-88px <md:h-65px <lg:pt-28px <lg:pb-22px <md:p-24px "
+class="navbar relative z-10 w-full flex flex-row justify-between items-center gap-20 h-100px pt-32px pb-27px px-48px bg-white dark:bg-hex-1e1e1e <lg:h-88px <md:h-65px <lg:pt-28px <lg:pb-22px <md:p-24px "
 >
+
+
 	<Menu guides={guides}/>
-	<a href="/proxy-memoize/" class="<md:hidden">
+
+	<a href="/proxy-memoize/" class="<lg:relative <lg:-left-13% <lg:-z-1 <md:hidden">
 		<img src="/proxy-memoize/proxy-memoize-logo.svg" alt="proxy memoize logo" class=" <lg:w-166px <lg:h-38px " />
 	<a/>
-	<a href="/proxy-memoize/" class="hidden <lg:hidden <md:block">
+	<a href="/proxy-memoize/" class="hidden <lg:hidden <md:block <md:absolute <md:left-47% transition-all duration-500 ease-in-out">
 		<img src="/proxy-memoize/proxy-memoize-logo-mobile.svg" alt="proxy memoize logo" class=" <md:w-30px <md:h-30px " />
 	<a/>
 	<ToggleTheme client:load />

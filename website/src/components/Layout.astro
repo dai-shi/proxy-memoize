@@ -33,13 +33,13 @@ const { sections } = Astro.props;
     >
       <Navbar guides={guides} />
       <div
-        class='h-[calc(100vh-100px)] <lg:h-[calc(100vh-88px)] <md:h-[calc(100vh-65px)] overflow-y-scroll'
+        class='h-[calc(100vh-100px)] <lg:h-[calc(100vh-88px)] <md:h-[calc(100vh-65px)] '
       >
         <MainHero />
         <div
           class='w-100% px-48px flex flex-row items-start gap-80px mt-10 max-w-1600px mx-auto <lg:mt-0 <md:mt-0 <md:px-20px'
         >
-          <div class='<lg:hidden'>
+          <div class='top-100px sticky <lg:hidden'>
             <Sidebar guides={guides} />
           </div>
           <div
