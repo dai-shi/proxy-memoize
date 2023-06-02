@@ -3,7 +3,11 @@ const { guides } = Astro.props;
 import Sidebar from './Sidebar.astro';
 ---
 
-<div id='menu-contianer' class='overlay transition-all duration-500 ease-in-out'></div>
+<div
+  id='menu-contianer'
+  class='overlay transition-all duration-500 ease-in-out'
+>
+</div>
 <button class='burger hidden <lg:block'>
   <img
     src='/proxy-memoize/Hamburger.svg'
@@ -71,13 +75,13 @@ import Sidebar from './Sidebar.astro';
     top: 0;
     left: 0;
     bottom: 0;
-    right: 0;
+    right: 100%;
+    opacity: 0;
     background: rgba(255, 255, 255, 0.7);
-    visibility: hidden;
     backdrop-filter: blur(2px);
   }
   .menu-overlay {
-    visibility: visible;
+    right: 0;
     opacity: 1;
     z-index: 2;
   }
