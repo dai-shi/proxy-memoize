@@ -32,16 +32,19 @@ import Sidebar from './Sidebar.astro';
   const closeMenuEl = document.getElementById('close-menu')!;
   const menuContianerEl = document.getElementById('menu-contianer')!;
   const menuEl = document.getElementById('menu')!;
+  let isMenuOpen = false;
   const openMenu = () => {
     menuContianerEl.classList.add('menu-overlay');
     closeMenuEl.classList.add('close-menu');
     menuEl.classList.add('menu');
+    isMenuOpen = true;
   };
   hamburgerEl.addEventListener('click', openMenu);
   const closeMenu = () => {
     menuContianerEl.classList.remove('menu-overlay');
     closeMenuEl.classList.remove('close-menu');
     menuEl.classList.remove('menu');
+    isMenuOpen = false;
   };
   closeMenuEl.addEventListener('click', closeMenu);
   function closeMenuOnClickOutside(event: Event) {
@@ -51,6 +54,8 @@ import Sidebar from './Sidebar.astro';
     }
   }
   document.addEventListener('click', closeMenuOnClickOutside);
+  console.log('here')
+  document.body.addEventListener('scroll', () => isMenuOpen && closeMenu())
 </script>
 
 <style>
