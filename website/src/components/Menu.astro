@@ -8,7 +8,9 @@ import Sidebar from './Sidebar.astro';
   class='overlay transition-all duration-500 ease-in-out'
 >
 </div>
-<button class='burger hidden <lg:block'>
+<button
+  class='burger hidden top-28px left-48px <md:top-18px <md:left-23px <lg:block'
+>
   <img
     src='/proxy-memoize/Hamburger.svg'
     alt='Hamburger'
@@ -18,7 +20,7 @@ import Sidebar from './Sidebar.astro';
 </button>
 <div
   id='menu'
-  class='hidden <lg:flex flex-col px-24px py-16px rounded-r-16px w-304px h-636px bg-white dark:bg-hex-1e1e1e transition-all duration-700 ease-in-out relative top-17rem -left-32rem'
+  class='hidden <lg:flex flex-col px-24px py-16px rounded-r-16px w-304px h-636px bg-white dark:bg-hex-1e1e1e transition-all duration-700 ease-in-out relative top-16.9rem -left-32rem <md:top-17.8rem'
 >
   <p
     id='close-menu'
@@ -58,7 +60,7 @@ import Sidebar from './Sidebar.astro';
     }
   }
   document.addEventListener('click', closeMenuOnClickOutside);
-  document.body.addEventListener('scroll', () => isMenuOpen && closeMenu())
+  document.body.addEventListener('scroll', () => isMenuOpen && closeMenu());
 </script>
 
 <style>
@@ -69,8 +71,6 @@ import Sidebar from './Sidebar.astro';
   .burger {
     position: absolute;
     z-index: 0;
-    top: 20px;
-    left: 32px;
     cursor: pointer;
   }
   .overlay {
@@ -81,7 +81,7 @@ import Sidebar from './Sidebar.astro';
     bottom: 0;
     right: 100%;
     opacity: 0;
-    background: rgba(255, 255, 255, 0.7);
+    background: var(--overlay-background);
     backdrop-filter: blur(2px);
   }
   .menu-overlay {

@@ -18,7 +18,6 @@ const { guides } = Astro.props;
       alt='proxy memoize logo'
       class='<lg:w-166px <lg:h-38px'
     />
-    <a></a>
     <a
       href='/proxy-memoize/'
       class='hidden <lg:hidden <md:block <md:absolute <md:left-47% transition-all duration-500 ease-in-out'
@@ -28,13 +27,7 @@ const { guides } = Astro.props;
         alt='proxy memoize logo'
         class='<md:w-30px <md:h-30px'
       />
-      <a></a>
-      <ToggleTheme client:load />
     </a>
-    <style>
-      .navbar > a:nth-of-type(2),
-      .navbar > a:nth-of-type(4) {
-        display: none;
-      }
-    </style></a>
+    <ToggleTheme client:load />
+  </a>
 </div>

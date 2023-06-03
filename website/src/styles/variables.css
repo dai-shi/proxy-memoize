@@ -11,6 +11,7 @@
   --border: #183F6E;
   --sidebar-item: invert(59%) sepia(8%) saturate(1043%) hue-rotate(173deg) brightness(96%) contrast(20%);
   --box-background:#183f6e;
+  --overlay-background:rgba(231, 231, 231, 0.2);
 }
 
 
@@ -28,4 +29,6 @@ html.dark {
   --sidebar-filter:invert(100%) sepia(0%) saturate(0%) hue-rotate(131deg) brightness(103%) contrast(130%);
   --sidebar-item: invert(78%) sepia(1%) saturate(0%) hue-rotate(185deg) brightness(84%) contrast(99%);
   --box-background:#2D2D2D;
+  --overlay-background:rgba(52, 52, 52, 0.2);
+
 }
