@@ -37,7 +37,7 @@ const { sections } = Astro.props;
       >
         <MainHero />
         <div
-          class='w-100% px-48px flex flex-row items-start gap-80px mt-10 max-w-1600px mx-auto <lg:mt-0 <md:mt-0 <md:px-20px'
+          class='container w-100% px-48px flex flex-row items-start gap-80px mt-10 max-w-1600px mx-auto <lg:mt-0 <md:mt-0 <md:px-20px'
         >
           <div class='top-100px sticky <lg:hidden'>
             <Sidebar guides={guides} />
@@ -58,4 +58,11 @@ const { sections } = Astro.props;
       htmlEl.classList.add('dark');
     }
   </script>
+  <style>
+   @media (min-width: 2000px) {
+    .container{
+      margin-top:10% !important;
+    }
+   }
+  </style>
 </html>
