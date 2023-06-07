@@ -1,0 +1,14 @@
+---
+import * as readme from "../../../README.md";
+import Layout from "../components/Layout.astro";
+import Markdown from "../components/Markdown.astro";
+
+// useful for the tab section
+const sections = readme.getHeadings().filter((h) => h.depth === 2);
+---
+
+<Layout sections={sections}>
+	<Markdown>
+		<readme.Content />
+	</Markdown>
+</Layout>

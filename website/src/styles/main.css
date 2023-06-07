@@ -1,0 +1,59 @@
+html {
+  background-color: var(--c-bg);
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+body {
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #8884;
+}
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: #888;
+  opacity: 0.75;
+  position: fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+}
+
+* {
+  scrollbar-color: var(--c-scrollbar) var(--c-bg);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar:horizontal {
+  height: 6px;
+}
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+  background: var(--c-bg);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--c-scrollbar);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--c-scrollbar-hover);
+}
+
+@media (max-width: 767.9px) {
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+}

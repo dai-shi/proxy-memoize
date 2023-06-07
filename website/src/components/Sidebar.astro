@@ -1,0 +1,159 @@
+---
+const { guides } = Astro.props;
+const items = [
+  {
+    id: 0,
+    title: 'Introduction',
+    img: '/proxy-memoize/introduction.svg',
+    href: '/proxy-memoize/#introduction',
+  },
+  {
+    id: 1,
+    title: 'Guides',
+    img: '/proxy-memoize/guides.svg',
+    subsection: guides,
+    href: '#',
+  },
+  {
+    id: 2,
+    title: 'API',
+    img: '/proxy-memoize/API.svg',
+    href: '/proxy-memoize/#api',
+  },
+  {
+    id: 3,
+    title: 'Repository',
+    img: '/proxy-memoize/repository.svg',
+    href: 'https://github.com/dai-shi/proxy-memoize/',
+  },
+  {
+    id: 4,
+    title: 'Change Log',
+    img: '/proxy-memoize/updates.svg',
+    href: 'https://github.com/dai-shi/proxy-memoize/blob/main/CHANGELOG.md',
+  },
+  {
+    id: 5,
+    title: 'Help',
+    img: '/proxy-memoize/help.svg',
+    href: 'https://github.com/dai-shi/proxy-memoize/issues',
+  },
+];
+---
+
+<div class='flex flex-col justify-between'>
+  <div
+    class='w-225px min-h-289px flex flex-col justify-start items-start gap-2 font-Dm text-14px font-bold text-hex-8094AC dark:(text-hex-A6A6A6)'
+  >
+    {
+      items.map(({ title, img, href, subsection }) => (
+        <>
+          <a
+            href={href}
+            class={`${
+              subsection
+                ? 'opacity-40! subsection'
+                : 'sidebar-item cursor-pointer'
+            } opacity-60 w-full p-10px border-l-6 border-l-transparent flex items-center gap-10px`}
+          >
+            <img src={img} alt={title} />
+            <span class='font-Dm '>{title}</span>
+          </a>
+          {subsection?.map(
+            ({
+              title,
+              href: subHref,
+            }: {
+              title: string;
+              id: string;
+              href: string;
+            }) => (
+              <a
+                href={'/proxy-memoize' + subHref}
+                class='sidebar-item p-10px pl-22px ml-16px border-l-6 border-l-transparent flex items-center cursor-pointer opacity-60 gap-10px'
+              >
+                <span>#</span>
+                <span class='font-Dm'>{title}</span>
+              </a>
+            )
+          )}
+        </>
+      ))
+    }
+  </div>
+  <div
+    class='pheno-logo relative -left-3rem top-7rem w-15rem h-44px p-4 border-l-6 border-l-indigo flex justify-center items-center gap-1 dark:(border-light-gray) <lg:(-left-1.5rem) <lg:top-5rem'
+  >
+    <img
+      src='/proxy-memoize/pheno-agency-logo.svg'
+      alt='pheno agency logo'
+      class='w-27px h-27px'
+    />
+    <p
+      class='font-Roboto text-indigo font-500 text-14px dark:(text-hex-EFEFEF)'
+    >
+      Designed by Pheno Agency
+    </p>
+  </div>
+  <div></div>
+
+  <script>
+    function sidebarOnClick(e: Event) {
+      const clickedElement = e.currentTarget as Element;
+      const currentActiveElement = document.querySelector(
+        '.sidebar-item.active-item'
+      );
+
+      if (currentActiveElement !== null) {
+        currentActiveElement.classList.remove('active-item');
+        currentActiveElement.classList.add('opacity-60');
+      }
+
+      clickedElement.classList.add('active-item');
+      clickedElement.classList.remove('opacity-60');
+    }
+
+    const buttons = document.querySelectorAll('.sidebar-item');
+    buttons.forEach((el) => {
+      if (location.href.endsWith(el.attributes.getNamedItem('href')?.value!)) {
+        el.classList.add('active-item');
+        el.classList.remove('opacity-60');
+      }
+      el.addEventListener('click', sidebarOnClick);
+    });
+  </script>
+</div>
+<style>
+  @import '../styles/variables.css';
+  .subsection > img {
+    filter: var(--sidebar-item);
+  }
+
+  .sidebar-item > img {
+    filter: var(--sidebar-item);
+  }
+  .active-item {
+    border-left: 6px solid var(--active-text) !important;
+    width: 100%;
+    background: linear-gradient(
+      89.46deg,
+      rgba(var(--linear-gradient-primary)) 0.36%,
+      rgba(var(--linear-gradient-secondary)) 106.19%
+    );
+    color: var(--active-text);
+  }
+
+  .active-item > img {
+    filter: var(--sidebar-filter) !important;
+  }
+  .sidebar-item > img {
+    filter: var(--sidebar-item);
+  }
+  .pheno-logo {
+    background: linear-gradient(
+      89.46deg,
+      rgba(var(--linear-gradient-primary)) 0.36%,
+      rgba(var(--linear-gradient-secondary)) 106.19%
+    );
+  }
+</style>

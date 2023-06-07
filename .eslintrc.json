@@ -21,7 +21,6 @@
     "@typescript-eslint/explicit-function-return-type": "off",
     "import/extensions": ["error", "never"],
     "symbol-description": "off",
-    "@typescript-eslint/ban-types": "off",
     "no-param-reassign": "off",
     "no-unused-vars": "off",
     "import/prefer-default-export": "off"

@@ -1,0 +1,117 @@
+<div class='flex flex-col w-100% relative pt-2rem <lg:pt-0 <md:pt-0rem'>
+  <img
+    src='/proxy-memoize/lightHeroBg.svg'
+    alt='heroBg'
+    class='dark:(hidden) z-0 absolute object-cover w-100% top-0 -left-2px h-35vw <md:hidden'
+  />
+  <img
+    src='/proxy-memoize/lightHeroMobileBg.svg'
+    alt='heroBg'
+    class='hidden dark:(hidden) <md:block w-100% z-0 relative object-cover top-0'
+  />
+  <img
+    src='/proxy-memoize/darkHeroBg.svg'
+    alt='heroBg'
+    class='dark:(block) dark:( z-0 absolute object-cover w-100% top-0 -left-2px h-35vw <md:hidden) hidden'
+  />
+  <img
+    src='/proxy-memoize/darkHeroMobileBg.svg'
+    alt='heroBg'
+    class='hidden dark:(hidden) dark:(<md:block w-100% z-0 relative object-cover top-0 <md:block)'
+  />
+
+  <div
+    class='flex flex-row justify-between items-start w-88% z-1 mx-auto max-w-1600px <lg:w-85% <lg:max-w-800px <md:flex-col-reverse <md:justify-center <md:items-center <md:w-90% <md:absolute <md:top-2% <md:left-0 <md:right-0'
+  >
+    <div
+      class='flex flex-col justify-start items-start gap-10px w-56% mt-50px max-w-602px relative <lg:mt-40px <lg:pt-1rem <lg:gap-5px <md:w-100% <md:pt-0 <md:max-w-300px'
+    >
+      <h1
+        class='text-48px font-bold leading-44px text-white <lg:text-28px <lg:leading-32px <md:text-32px <md:text-center'
+      >
+        The Proxy Memoize Documentation
+      </h1>
+      <p
+        class='text-16px font-meduime leading-25px text-white <lg:text-12px <lg:leading-18px <md:text-center'
+      >
+        Intuitive magical memoization library with Proxy and WeakMap
+      </p>
+
+      <a
+        href='#introduction'
+        class='text-white text-14px font-600 <lg:text-12px relative top-0.5rem w-144px h-48px rounded-12px bg-hex-0DA84B flex justify-center items-center gap-5px <lg:w-111px <lg:h-32px <lg:rounded-8px <md:mx-auto'
+      >
+        Get started
+        <img
+          src='/proxy-memoize/rightArrow.svg'
+          alt='rightArrow'
+          class='w-11px h-11px'
+        />
+        <img
+          src='/proxy-memoize/btnWave.svg'
+          alt='btnWave'
+          class='absolute right-0 left-0 -bottom-1px w-144px h-12px <lg:-bottom-2px'
+        />
+      </a>
+    </div>
+    <img
+      src='/proxy-memoize/heroVector.svg'
+      alt='heroVector'
+      id='hero'
+      class='z-1 w-34vw pt-0.5rem max-w-650px <lg:w-300px <md:mx-auto <md:w-85% <md:max-w-350px'
+    />
+  </div>
+</div>
+
+<script>
+  const heroImgEl = document.getElementById('hero')!;
+
+  function onLeave(e: Event) {
+    heroImgEl.style.transform = `perspective(${
+      (e.currentTarget as Element).clientWidth
+    }px) rotateX(0deg) rotateY(0deg)`;
+  }
+  const THRESHOLD = 15;
+
+  const onMove = (e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    var rect = target.getBoundingClientRect();
+    let rw = rect.width;
+    let rh = rect.height;
+
+    let scale_percent = 1.4;
+
+    let vbw = rw * scale_percent;
+    let vbh = rh * scale_percent;
+
+    let deltaW = (vbw - rw) / 2; // 20 %
+    let deltaH = (vbh - rh) / 2; // 20 %
+
+    let x = e.clientX - rect.left;
+    let y = e.clientY - rect.top;
+
+    if (x > rw / 2) {
+      x += deltaW;
+    } else {
+      x -= deltaW;
+    }
+
+    if (y > rh / 2) {
+      y += deltaH;
+    } else {
+      y -= deltaH;
+    }
+    const { clientX, clientY, currentTarget } = e;
+    const { clientWidth, clientHeight, offsetLeft, offsetTop } =
+      currentTarget as HTMLElement;
+
+    const horizontal = (clientX - offsetLeft) / clientWidth;
+    const vertical = (clientY - offsetTop) / clientHeight;
+    const rotateX = (THRESHOLD / 2 - horizontal * THRESHOLD).toFixed(2);
+    const rotateY = (vertical * THRESHOLD - THRESHOLD / 2).toFixed(2);
+
+    heroImgEl.style.transform = `perspective(${clientWidth}px) rotateX(${rotateY}deg) rotateY(${rotateX}deg)`;
+  };
+  heroImgEl.addEventListener('mousemove', onMove);
+  heroImgEl.addEventListener('mouseleave', onLeave);
+</script>

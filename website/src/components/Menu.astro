@@ -1,0 +1,108 @@
+---
+const { guides } = Astro.props;
+import Sidebar from './Sidebar.astro';
+---
+
+<div
+  id='menu-contianer'
+  class='overlay transition-all duration-500 ease-in-out'
+>
+</div>
+<button
+  class='burger hidden top-28px left-48px <md:top-18px <md:left-23px <lg:block'
+>
+  <img
+    src='/proxy-memoize/Hamburger.svg'
+    alt='Hamburger'
+    id='hamburger'
+    class='hamburger-filter transition-all duration-500 ease-linear <lg:w-38px <lg:h-38px <md:w-30px <md:h-30px cursor-pointer <md:top-19rem'
+  />
+</button>
+<div
+  id='menu'
+  class='hidden <lg:flex flex-col px-24px py-16px rounded-r-16px w-304px h-636px bg-white dark:bg-hex-1e1e1e transition-all duration-700 ease-in-out relative top-16.9rem -left-32rem <md:top-17.8rem'
+>
+  <p
+    id='close-menu'
+    class='text-30px close-btn cursor-pointer self-end text-hex-8094AC rounded-5px dark:(text-hex-EFEFEF)'
+  >
+    &times
+  </p>
+  <div class=''>
+    <Sidebar guides={guides} />
+  </div>
+</div>
+
+<script>
+  const hamburgerEl = document.getElementById('hamburger')!;
+  const closeMenuEl = document.getElementById('close-menu')!;
+  const menuContianerEl = document.getElementById('menu-contianer')!;
+  const menuEl = document.getElementById('menu')!;
+  let isMenuOpen = false;
+  const openMenu = () => {
+    menuContianerEl.classList.add('menu-overlay');
+    closeMenuEl.classList.add('close-menu');
+    menuEl.classList.add('menu');
+    isMenuOpen = true;
+  };
+  hamburgerEl.addEventListener('click', openMenu);
+  const closeMenu = () => {
+    menuContianerEl.classList.remove('menu-overlay');
+    closeMenuEl.classList.remove('close-menu');
+    menuEl.classList.remove('menu');
+    isMenuOpen = false;
+  };
+  closeMenuEl.addEventListener('click', closeMenu);
+  function closeMenuOnClickOutside(event: Event) {
+    const target = event.target as HTMLTextAreaElement;
+    if (!menuEl.contains(target) && !target.matches('#hamburger')) {
+      closeMenu();
+    }
+  }
+  document.addEventListener('click', closeMenuOnClickOutside);
+  document.body.addEventListener('scroll', () => isMenuOpen && closeMenu());
+</script>
+
+<style>
+  .hamburger-filter {
+    filter: invert(78%) sepia(1%) saturate(0%) hue-rotate(185deg)
+      brightness(84%) contrast(99%);
+  }
+  .burger {
+    position: absolute;
+    z-index: 0;
+    cursor: pointer;
+  }
+  .overlay {
+    position: fixed;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 100%;
+    opacity: 0;
+    background: var(--overlay-background);
+    backdrop-filter: blur(2px);
+  }
+  .menu-overlay {
+    right: 0;
+    opacity: 1;
+    z-index: 2;
+  }
+  .close-menu {
+    visibility: visible !important;
+  }
+  .close-btn {
+    visibility: hidden;
+  }
+  .menu {
+    left: -48px !important;
+    z-index: 2;
+  }
+  @media (max-width: 767.9px) {
+    .menu {
+      left: -24px !important;
+      z-index: 2;
+    }
+  }
+</style>

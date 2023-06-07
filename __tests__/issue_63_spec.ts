@@ -4,7 +4,7 @@ const noop = (x: unknown) => x;
 
 describe('issue #63', () => {
   it('triple nested memoized selectors', () => {
-    type State = { obj: {}, num: number };
+    type State = { obj: Record<string, never>; num: number };
     const state1: State = { obj: {}, num: 1 };
     const state2: State = { ...state1, num: 2 };
 
