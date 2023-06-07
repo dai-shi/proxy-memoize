@@ -7,9 +7,9 @@ import compress from "astro-compress";
 // https://astro.build/config
 export default defineConfig({
   // setup for github pages
-  site: 'https://pheno-agency.github.io',
+  site: 'https://proxy-memoize.js.org',
   // note: this is the path to the repo, not the path to the site
-  base: '/proxy-memoize',
+  base: '/',
   integrations: [react(), UnoCSS({
     injectReset: true // or a path to the reset file
   }), compress()]
