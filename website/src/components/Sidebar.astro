@@ -4,38 +4,38 @@ const items = [
   {
     id: 0,
     title: 'Introduction',
-    img: '/proxy-memoize/introduction.svg',
-    href: '/proxy-memoize/#introduction',
+    img: `${import.meta.env.BASE_URL}/introduction.svg`,
+    href: `${import.meta.env.BASE_URL}/#introduction`,
   },
   {
     id: 1,
     title: 'Guides',
-    img: '/proxy-memoize/guides.svg',
+    img: `${import.meta.env.BASE_URL}/guides.svg`,
     subsection: guides,
     href: '#',
   },
   {
     id: 2,
     title: 'API',
-    img: '/proxy-memoize/API.svg',
-    href: '/proxy-memoize/#api',
+    img: `${import.meta.env.BASE_URL}/API.svg`,
+    href: `${import.meta.env.BASE_URL}/#api`,
   },
   {
     id: 3,
     title: 'Repository',
-    img: '/proxy-memoize/repository.svg',
+    img: `${import.meta.env.BASE_URL}/repository.svg`,
     href: 'https://github.com/dai-shi/proxy-memoize/',
   },
   {
     id: 4,
     title: 'Change Log',
-    img: '/proxy-memoize/updates.svg',
+    img: `${import.meta.env.BASE_URL}/updates.svg`,
     href: 'https://github.com/dai-shi/proxy-memoize/blob/main/CHANGELOG.md',
   },
   {
     id: 5,
     title: 'Help',
-    img: '/proxy-memoize/help.svg',
+    img: `${import.meta.env.BASE_URL}/help.svg`,
     href: 'https://github.com/dai-shi/proxy-memoize/issues',
   },
 ];
@@ -69,7 +69,7 @@ const items = [
               href: string;
             }) => (
               <a
-                href={'/proxy-memoize' + subHref}
+                href={import.meta.env.BASE_URL + subHref}
                 class='sidebar-item p-10px pl-22px ml-16px border-l-6 border-l-transparent flex items-center cursor-pointer opacity-60 gap-10px'
               >
                 <span>#</span>
@@ -85,7 +85,7 @@ const items = [
     class='pheno-logo relative -left-3rem top-7rem w-15rem h-44px p-4 border-l-6 border-l-indigo flex justify-center items-center gap-1 dark:(border-light-gray) <lg:(-left-1.5rem) <lg:top-5rem'
   >
     <img
-      src='/proxy-memoize/pheno-agency-logo.svg'
+      src=`${import.meta.env.BASE_URL}/pheno-agency-logo.svg`
       alt='pheno agency logo'
       class='w-27px h-27px'
     />
