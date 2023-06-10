@@ -9,7 +9,7 @@ export default defineConfig({
   // setup for github pages
   site: 'https://proxy-memoize.js.org',
   // note: this is the path to the repo, not the path to the site
-  base: '/',
+  base: '',
   integrations: [react(), UnoCSS({
     injectReset: true // or a path to the reset file
   }), compress()]
