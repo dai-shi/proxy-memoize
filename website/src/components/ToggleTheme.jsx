@@ -52,7 +52,7 @@ export default function ToggleTheme() {
         }`}
       >
         <img
-          src={`${import.meta.env.BASE_URL}/light-icon.svg`}
+          src={`/light-icon.svg`}
           alt='light icon'
           className=''
         />
@@ -65,7 +65,7 @@ export default function ToggleTheme() {
           mode === 'light' ? '<md:hidden' : ''
         }`}
       >
-        <img src={`${import.meta.env.BASE_URL}/proxy-memoize/dark-icon.svg`} alt='dark icon' className='' />
+        <img src={`/dark-icon.svg`} alt='dark icon' className='' />
         <p className='font-Dm font-bold text-12px pt-1px text-black dark:(text-light-gray) <lg:hidden'>
           Dark
         </p>
