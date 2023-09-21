@@ -13,7 +13,7 @@
   "dependencies": {
     "@astrojs/react": "^2.2.0",
     "astro": "^2.3.2",
-    "astro-compress": "^1.1.44",
+    "astro-compress": "^2.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
