@@ -31,6 +31,7 @@ body {
 
 * {
   scrollbar-color: var(--c-scrollbar) var(--c-bg);
+  scroll-behavior: smooth;
 }
 
 ::-webkit-scrollbar {

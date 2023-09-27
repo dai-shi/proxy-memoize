@@ -1,22 +1,12 @@
 ---
-const selectItems = [
-  { id: 0, title: 'How it works' },
-  { id: 1, title: 'Install' },
-  { id: 2, title: 'How it behaves' },
-  { id: 3, title: 'Usage with React Context' },
-  { id: 4, title: 'Using size option' },
-  { id: 5, title: 'Usage with Zustand' },
-];
-
 const { sections } = Astro.props;
 ---
 
 <div
-  id='selector-container'
-  class='sticky flex flex-col h-80px justify-end bg-white dark:(bg-hex-1e1e1e) -top-20px mb-40px <lg:hidden'
+  class='selector-container sticky flex flex-col h-80px justify-end bg-white dark:(bg-hex-1e1e1e) -top-20px mb-40px <lg:hidden'
 >
   <div
-    class='section-selector flex flex-row justify-start items-end gap-32px bg-white dark:bg-hex-1e1e1e w-full overflow-scroll'
+    class='section-selector flex flex-row justify-start items-end gap-32px bg-white dark:bg-hex-1e1e1e w-full overflow-x-scroll'
   >
     {
       sections.map(({ text, slug }: { text: string; slug: string }) => {
@@ -35,7 +25,7 @@ const { sections } = Astro.props;
   </div>
   <div
     class={`w-full border-b-2px border-b-DEF2F0 ${
-      sections.length < 1 ? '-mt-7px' : '-mt-6px'
+      sections.length < 1 ? '-mt-7px' : ''
     }  dark:(border-b border-hex-A6A6A6)`}
   >
   </div>
@@ -66,8 +56,14 @@ const { sections } = Astro.props;
   }
 </script>
 <style scoped>
-  .section-selector::::-webkit-scrollbar {
+  .section-selector {
+    scrollbar-width: none;
+    scrollbar-color: transparent transparent;
+  }
+  
+  .section-selector::-webkit-scrollbar {
     width: 0px;
+    height: 0!important;
   }
   .section-selector::-webkit-scrollbar-track {
     background-color: transparent;
