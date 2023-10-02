@@ -16,7 +16,12 @@ const { guides } = Astro.props;
     <img
       src=`/proxy-memoize-logo.svg`
       alt='proxy memoize logo'
-      class='<lg:w-166px <lg:h-38px'
+      class='dark:hidden <lg:w-166px <lg:h-38px'
+    />
+    <img
+      src=`/proxy-memoize-logo-dark.svg`
+      alt='proxy memoize logo'
+      class='hidden dark:block <lg:w-166px <lg:h-38px'
     />
     <a
       href=`/`
@@ -25,7 +30,12 @@ const { guides } = Astro.props;
       <img
         src=`/proxy-memoize-logo-mobile.svg`
         alt='proxy memoize logo'
-        class='<md:w-30px <md:h-30px'
+        class='dark:hidden <md:w-30px <md:h-30px'
+      />
+      <img
+        src=`/proxy-memoize-logo-mobile-dark.svg`
+        alt='proxy memoize logo'
+        class='hidden dark:block <md:w-30px <md:h-30px'
       />
     </a>
     <ToggleTheme client:load />
