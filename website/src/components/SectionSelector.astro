@@ -39,11 +39,16 @@ const { sections } = Astro.props;
     el.addEventListener('click', tabOnClick);
   });
   if (location.hash) {
+    const id = location.hash.slice(1)
+    setTimeout(() => {
+      const clickedElement = document.querySelector(`a[href*="${id}"]`)
+      clickedElement!.scrollIntoView({ behavior: 'instant' })
+    }, 1000)
     setTimeout(() => {
       document
-        .getElementById(location.hash.slice(1))!
+        .getElementById(id)!
         .scrollIntoView({ behavior: 'smooth' });
-    }, 500);
+    }, 100);
   }
 
   function tabOnClick(e: Event) {
@@ -53,6 +58,9 @@ const { sections } = Astro.props;
       currentActiveElement.classList.remove('active');
     }
     clickedElement.classList.add('active');
+    setTimeout(() => {
+      clickedElement.scrollIntoView({ behavior: 'smooth' })
+    }, 1000)
   }
 </script>
 <style scoped>
