@@ -9,7 +9,7 @@ import '../styles/markdown.css';
 const docs = await Astro.glob('../../../docs/**/*.md');
 const guides = docs.flatMap((d) => {
   const doc = { ...d.getHeadings()[0]! };
-  return { title: doc.text, href: '/docs/' + doc.slug, id: doc.slug };
+  return { title: doc.text, href: '/docs/' + doc.slug + '#' + doc.slug, id: doc.slug };
 });
 
 const { sections } = Astro.props;
