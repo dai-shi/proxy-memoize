@@ -1,16 +1,12 @@
 import { memoize } from '../src/index';
 
 describe('issue #91', () => {
-  it('result cache with nested memoized selectors', () => {
+  it('no extra calculations with nested memoized selectors', () => {
     const reduxState = {
       books: {
         bookByName: {
-          book1: {
-            price: 50,
-          },
-          book2: {
-            price: 100,
-          },
+          book1: { price: 50 },
+          book2: { price: 100 },
         },
       },
     };
@@ -26,10 +22,7 @@ describe('issue #91', () => {
     const selectBooks = memoize((state: typeof reduxState) => {
       const allBooks = selectAllBooks(state);
       const someBooks = selectSomeBooks(state);
-      return {
-        allBooks,
-        someBooks,
-      };
+      return { allBooks, someBooks };
     });
     selectBooks(reduxState);
     expect(selectAllBooksCount).toBe(1);
