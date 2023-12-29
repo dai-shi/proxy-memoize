@@ -67,6 +67,12 @@ const touchAffected = (dst: unknown, src: unknown, affected: Affected) => {
   });
 };
 
+const isOriginalEqual = (x: unknown, y: unknown): boolean => {
+  for (let xx = x; xx; x = xx, xx = getUntracked(xx));
+  for (let yy = y; yy; y = yy, yy = getUntracked(yy));
+  return Object.is(x, y);
+};
+
 // properties
 const OBJ_PROPERTY = 'o';
 const RESULT_PROPERTY = 'r';
@@ -105,7 +111,13 @@ export function memoize<Obj extends object, Result>(
     for (let i = 0; i < size; i += 1) {
       const memo = memoList[(memoListHead + i) % size];
       if (!memo) break;
-      if (!isChanged(memo[OBJ_PROPERTY], obj, memo[AFFECTED_PROPERTY], new WeakMap())) {
+      if (!isChanged(
+        memo[OBJ_PROPERTY],
+        obj,
+        memo[AFFECTED_PROPERTY],
+        new WeakMap(),
+        isOriginalEqual,
+      )) {
         touchAffected(obj, memo[OBJ_PROPERTY], memo[AFFECTED_PROPERTY]);
         resultCache?.set(obj, memo);
         return memo[RESULT_PROPERTY];

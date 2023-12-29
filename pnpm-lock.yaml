@@ -1,9 +1,13 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   proxy-compare:
-    specifier: 2.5.1
-    version: 2.5.1
+    specifier: https://pkg.csb.dev/dai-shi/proxy-compare/commit/67f37fc9/proxy-compare
+    version: '@pkg.csb.dev/dai-shi/proxy-compare/commit/67f37fc9/proxy-compare'
 
 devDependencies:
   '@types/jest':
@@ -2110,6 +2114,7 @@ packages:
 
   /@vue/compiler-core@3.2.47:
     resolution: {integrity: sha512-p4D7FDnQb7+YJmO2iPEv0SQNeNzcbHdGByJDsT4lynf63AFkOTFN07HsiRSvjGo0QrxR/o3d0hUyNCUnBU2Tig==}
+    requiresBuild: true
     dependencies:
       '@babel/parser': 7.21.8
       '@vue/shared': 3.2.47
@@ -2120,6 +2125,7 @@ packages:
 
   /@vue/compiler-dom@3.2.47:
     resolution: {integrity: sha512-dBBnEHEPoftUiS03a4ggEig74J2YBZ2UIeyfpcRM2tavgMWo4bsEfgCGsu+uJIL/vax9S+JztH8NmQerUo7shQ==}
+    requiresBuild: true
     dependencies:
       '@vue/compiler-core': 3.2.47
       '@vue/shared': 3.2.47
@@ -2145,6 +2151,7 @@ packages:
 
   /@vue/compiler-ssr@3.2.47:
     resolution: {integrity: sha512-wVXC+gszhulcMD8wpxMsqSOpvDZ6xKXSVWkf50Guf/S+28hTAXPDYRTbLQ3EDkOP5Xz/+SY37YiwDquKbJOgZw==}
+    requiresBuild: true
     dependencies:
       '@vue/compiler-dom': 3.2.47
       '@vue/shared': 3.2.47
@@ -2153,6 +2160,7 @@ packages:
 
   /@vue/reactivity-transform@3.2.47:
     resolution: {integrity: sha512-m8lGXw8rdnPVVIdIFhf0LeQ/ixyHkH5plYuS83yop5n7ggVJU+z5v0zecwEnX7fa7HNLBhh2qngJJkxpwEEmYA==}
+    requiresBuild: true
     dependencies:
       '@babel/parser': 7.21.8
       '@vue/compiler-core': 3.2.47
@@ -2164,6 +2172,7 @@ packages:
 
   /@vue/shared@3.2.47:
     resolution: {integrity: sha512-BHGyyGN3Q97EZx0taMQ+OLNuZcW3d37ZEVmEAyeoA9ERdGvm9Irc/0Fua8SNyOtV1w6BS4q25wbMzJujO9HIfQ==}
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -3006,6 +3015,7 @@ packages:
 
   /de-indent@1.0.2:
     resolution: {integrity: sha512-e/1zu3xH5MQryN2zdVaF0OrdNLUbvWxzMbi+iNA6Bky7l1RoP8a2fIbRocyHclXt/arDrrR6lL3TqFD9pMQTsg==}
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -4064,6 +4074,7 @@ packages:
   /he@1.2.0:
     resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
     hasBin: true
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -6450,10 +6461,6 @@ packages:
     resolution: {integrity: sha512-/XJ368cyBJ7fzLMwLKv1e4vLxOju2MNAIokcr7meSaNcVbWz/CPcW22cP04mwxOErdA5mwjA8Q6w/cdAQxVn7Q==}
     dev: true
 
-  /proxy-compare@2.5.1:
-    resolution: {integrity: sha512-oyfc0Tx87Cpwva5ZXezSp5V9vht1c7dZBhvuV/y3ctkgMVUmiAGDVeeB0dKhGSyT0v1ZTEQYpe/RXlBVBNuCLA==}
-    dev: false
-
   /punycode@2.3.0:
     resolution: {integrity: sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==}
     engines: {node: '>=6'}
@@ -6914,6 +6921,7 @@ packages:
   /sourcemap-codec@1.4.8:
     resolution: {integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==}
     deprecated: Please use @jridgewell/sourcemap-codec instead
+    requiresBuild: true
     dev: true
 
   /space-separated-tokens@2.0.2:
@@ -7739,3 +7747,9 @@ packages:
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: true
+
+  '@pkg.csb.dev/dai-shi/proxy-compare/commit/67f37fc9/proxy-compare':
+    resolution: {tarball: https://pkg.csb.dev/dai-shi/proxy-compare/commit/67f37fc9/proxy-compare}
+    name: proxy-compare
+    version: 2.5.1
+    dev: false
