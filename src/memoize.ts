@@ -102,25 +102,24 @@ export function memoize<Obj extends object, Result>(
     [AFFECTED_PROPERTY]: Affected;
   }
   const memoList: Entry[] = [];
-  const resultCache = options?.noWeakMap ? null : new WeakMap<Obj, Entry>();
+  const resultCache = options?.noWeakMap ? null : new WeakMap<Obj, Result>();
   const memoizedFn = (obj: Obj) => {
     const cache = resultCache?.get(obj);
     if (cache) {
-      return cache[RESULT_PROPERTY];
+      return cache;
     }
     for (let i = 0; i < size; i += 1) {
       const memo = memoList[(memoListHead + i) % size];
       if (!memo) break;
-      if (!isChanged(
-        memo[OBJ_PROPERTY],
-        obj,
-        memo[AFFECTED_PROPERTY],
-        new WeakMap(),
-        isOriginalEqual,
-      )) {
-        touchAffected(obj, memo[OBJ_PROPERTY], memo[AFFECTED_PROPERTY]);
-        resultCache?.set(obj, memo);
-        return memo[RESULT_PROPERTY];
+      const {
+        [OBJ_PROPERTY]: memoObj,
+        [AFFECTED_PROPERTY]: memoAffected,
+        [RESULT_PROPERTY]: memoResult,
+      } = memo;
+      if (!isChanged(memoObj, obj, memoAffected, new WeakMap(), isOriginalEqual)) {
+        touchAffected(obj, memoObj, memoAffected);
+        resultCache?.set(obj, memoResult);
+        return memoResult;
       }
     }
     const affected: Affected = new WeakMap();
@@ -134,7 +133,7 @@ export function memoize<Obj extends object, Result>(
     };
     memoListHead = (memoListHead - 1 + size) % size;
     memoList[memoListHead] = entry;
-    resultCache?.set(obj, entry);
+    resultCache?.set(obj, result);
     return result;
   };
   return memoizedFn;
