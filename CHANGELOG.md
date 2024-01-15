@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+
+## [2.0.5] - 2024-01-15
 ### Changed
 - fix: no extra calculation with nested memoized selectors #92
 
