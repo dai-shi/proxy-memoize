@@ -30,7 +30,7 @@ const trackMemoOriginalObjSet = new WeakSet<object>();
 
 const isObject = (x: unknown): x is object => typeof x === 'object' && x !== null;
 
-const untrack = <T>(x: T, seen: Set<T>): T => {
+const untrack = <T>(x: T, seen: WeakSet<object>): T => {
   if (!isObject(x)) return x;
   const originalObj = getUntracked(x);
   if (originalObj !== null) {
@@ -131,7 +131,7 @@ export function memoize<Obj extends object, Result>(
     }
     const affected: Affected = new WeakMap();
     const proxy = createProxy(obj, affected, undefined, targetCache);
-    const result = untrack(fn(proxy), new Set());
+    const result = untrack(fn(proxy), new WeakSet());
     touchAffected(obj, obj, affected);
     const entry: Entry = {
       [OBJ_PROPERTY]: obj,
