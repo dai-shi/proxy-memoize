@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [3.0.0] - 2024-05-02
+
 ### Changed
 
 - Module-first steup #99
