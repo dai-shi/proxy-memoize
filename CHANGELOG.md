@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 
+## [2.0.6] - 2024-05-02
 ### Changed
 - fix: unused selectors #97
 - refactor: seen WeakSet #98
