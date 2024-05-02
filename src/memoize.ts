@@ -26,14 +26,17 @@ type Used = {
 };
 type Affected = WeakMap<object, Used>;
 
+const trackMemoOriginalObjSet = new WeakSet<object>();
+
 const isObject = (x: unknown): x is object => typeof x === 'object' && x !== null;
 
 const untrack = <T>(x: T, seen: Set<T>): T => {
   if (!isObject(x)) return x;
-  const untrackedObj = getUntracked(x);
-  if (untrackedObj !== null) {
+  const originalObj = getUntracked(x);
+  if (originalObj !== null) {
     trackMemo(x);
-    return untrackedObj;
+    trackMemoOriginalObjSet.add(originalObj);
+    return originalObj;
   }
   if (!seen.has(x)) {
     seen.add(x);
@@ -47,6 +50,9 @@ const untrack = <T>(x: T, seen: Set<T>): T => {
 
 const touchAffected = (dst: unknown, src: unknown, affected: Affected) => {
   if (!isObject(dst) || !isObject(src)) return;
+  if (trackMemoOriginalObjSet.has(getUntracked(src) as never)) {
+    trackMemo(dst);
+  }
   const used = affected.get(getUntracked(src) || src);
   if (!used) return;
   used[HAS_KEY_PROPERTY]?.forEach((key) => {
