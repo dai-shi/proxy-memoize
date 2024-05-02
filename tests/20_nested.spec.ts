@@ -1,6 +1,5 @@
-/* eslint no-self-compare: off */
-
-import { memoize } from '../src/index';
+import { describe, expect, it } from 'vitest';
+import { memoize } from 'proxy-memoize';
 
 describe('one-level nested spec', () => {
   type State = {

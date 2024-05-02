@@ -1,11 +1,12 @@
-import { memoize } from '../src/index';
+import { describe, expect, it } from 'vitest';
+import { memoize } from 'proxy-memoize';
 
 describe('unused selectors (#96)', () => {
   it('nested memoized selectors with primitive value access', () => {
     type State = {
       ids: string[];
       entities: {
-        [id: string]: { name: string, array: string[] };
+        [id: string]: { name: string; array: string[] };
       };
     };
     const state1: State = {
@@ -20,10 +21,12 @@ describe('unused selectors (#96)', () => {
         1: { name: 'first', array: ['changed'] },
       },
     };
-    const selectAll = memoize((state: State) => state.ids.map((id) => state.entities[id]));
-    const selectAllNames = memoize((state: State) => (
-      state.ids.map((id) => state.entities[id]?.name)
-    ));
+    const selectAll = memoize((state: State) =>
+      state.ids.map((id) => state.entities[id]),
+    );
+    const selectAllNames = memoize((state: State) =>
+      state.ids.map((id) => state.entities[id]?.name),
+    );
     const intermediateSelector = memoize((state: State) => {
       selectAllNames(state);
       return selectAll(state);

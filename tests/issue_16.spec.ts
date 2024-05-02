@@ -1,4 +1,5 @@
-import { memoize } from '../src/index';
+import { describe, expect, it, vi } from 'vitest';
+import { memoize } from 'proxy-memoize';
 
 describe('issue #16', () => {
   it('slimmed test', () => {
@@ -9,7 +10,7 @@ describe('issue #16', () => {
       b: 20,
     };
 
-    const spy = jest.fn();
+    const spy = vi.fn();
 
     const selector = memoize(
       ({ state, orderId }: { state: State; orderId: string }) => {
@@ -33,7 +34,9 @@ describe('issue #16', () => {
       c: 30,
     };
 
-    expect(selector({ state: secondState, orderId: 'a' }) === result).toBe(true);
+    expect(selector({ state: secondState, orderId: 'a' }) === result).toBe(
+      true,
+    );
     expect(spy).toHaveBeenCalledTimes(2);
 
     const thirdState: State = {
@@ -46,7 +49,9 @@ describe('issue #16', () => {
     expect(newResult === result).toBe(false);
     expect(spy).toHaveBeenCalledTimes(3);
 
-    expect(selector({ state: thirdState, orderId: 'b' }) === otherResult).toBe(true);
+    expect(selector({ state: thirdState, orderId: 'b' }) === otherResult).toBe(
+      true,
+    );
   });
 
   it('receipt use case', () => {
@@ -61,7 +66,7 @@ describe('issue #16', () => {
       receipts: Record<number, ReceiptType>;
     }
 
-    const spy = jest.fn();
+    const spy = vi.fn();
 
     function getAmount(receipt: ReceiptType) {
       // call the spy without using receipt, just in case
@@ -141,6 +146,8 @@ describe('issue #16', () => {
     expect(spy).toHaveBeenCalledTimes(3);
 
     // Re-check 6 with a state which has changed twice, but not for 6.
-    expect(selector({ state: thirdState, orderId: 6 }) === otherResult).toBe(true);
+    expect(selector({ state: thirdState, orderId: 6 }) === otherResult).toBe(
+      true,
+    );
   });
 });

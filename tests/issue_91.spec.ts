@@ -1,4 +1,5 @@
-import { memoize } from '../src/index';
+import { describe, expect, it } from 'vitest';
+import { memoize } from 'proxy-memoize';
 
 describe('no extra calculations (#91)', () => {
   it('nested memoized selectors with primitive value access', () => {

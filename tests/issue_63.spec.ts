@@ -1,4 +1,5 @@
-import { memoize } from '../src/index';
+import { describe, expect, it } from 'vitest';
+import { memoize } from 'proxy-memoize';
 
 const noop = (x: unknown) => x;
 

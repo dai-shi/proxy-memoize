@@ -1,9 +1,4 @@
-import {
-  createProxy,
-  isChanged,
-  getUntracked,
-  trackMemo,
-} from 'proxy-compare';
+import { createProxy, isChanged, getUntracked, trackMemo } from 'proxy-compare';
 
 // This is required only for performance.
 // https://github.com/dai-shi/proxy-memoize/issues/68
@@ -15,9 +10,9 @@ const ALL_OWN_KEYS_PROPERTY = 'w';
 const HAS_OWN_KEY_PROPERTY = 'o';
 const KEYS_PROPERTY = 'k';
 
-type HasKeySet = Set<string | symbol>
-type HasOwnKeySet = Set<string | symbol>
-type KeysSet = Set<string | symbol>
+type HasKeySet = Set<string | symbol>;
+type HasOwnKeySet = Set<string | symbol>;
+type KeysSet = Set<string | symbol>;
 type Used = {
   [HAS_KEY_PROPERTY]?: HasKeySet;
   [ALL_OWN_KEYS_PROPERTY]?: true;
@@ -28,7 +23,8 @@ type Affected = WeakMap<object, Used>;
 
 const trackMemoOriginalObjSet = new WeakSet<object>();
 
-const isObject = (x: unknown): x is object => typeof x === 'object' && x !== null;
+const isObject = (x: unknown): x is object =>
+  typeof x === 'object' && x !== null;
 
 const untrack = <T>(x: T, seen: WeakSet<object>): T => {
   if (!isObject(x)) return x;
@@ -107,7 +103,7 @@ export function memoize<Obj extends object, Result>(
     [OBJ_PROPERTY]: Obj;
     [RESULT_PROPERTY]: Result;
     [AFFECTED_PROPERTY]: Affected;
-  }
+  };
   const memoList: Entry[] = [];
   const resultCache = options?.noWeakMap ? null : new WeakMap<Obj, Result>();
   const memoizedFn = (obj: Obj) => {
@@ -123,7 +119,9 @@ export function memoize<Obj extends object, Result>(
         [AFFECTED_PROPERTY]: memoAffected,
         [RESULT_PROPERTY]: memoResult,
       } = memo;
-      if (!isChanged(memoObj, obj, memoAffected, new WeakMap(), isOriginalEqual)) {
+      if (
+        !isChanged(memoObj, obj, memoAffected, new WeakMap(), isOriginalEqual)
+      ) {
         touchAffected(obj, memoObj, memoAffected);
         resultCache?.set(obj, memoResult);
         return memoResult;
