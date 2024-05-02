@@ -1,4 +1,5 @@
-import { memoize } from '../src/index';
+import { describe, expect, it } from 'vitest';
+import { memoize } from 'proxy-memoize';
 
 describe('issue #44', () => {
   it('nested selectors', () => {
@@ -21,13 +22,13 @@ describe('issue #44', () => {
       },
     };
 
-    const getEntityById = memoize(({ state, id }: { state: State, id: number }) => (
-      state.entities[id]
-    ));
+    const getEntityById = memoize(
+      ({ state, id }: { state: State; id: number }) => state.entities[id],
+    );
 
-    const getCurrentEntities = memoize((state: State) => (
-      state.ids.map((id) => getEntityById({ state, id }))
-    ));
+    const getCurrentEntities = memoize((state: State) =>
+      state.ids.map((id) => getEntityById({ state, id })),
+    );
 
     expect(getCurrentEntities(state1)).toEqual([undefined, undefined]);
     expect(getCurrentEntities(state2)).toEqual(['e-1', 'e-2']);

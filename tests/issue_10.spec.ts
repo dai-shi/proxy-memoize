@@ -1,10 +1,11 @@
-import { memoize } from '../src/index';
+import { describe, it } from 'vitest';
+import { memoize } from 'proxy-memoize';
 
 describe('issue #10', () => {
   it('todos filter status', () => {
     type State = {
-      todos: { id: number, text: string }[],
-      filters: { status: string },
+      todos: { id: number; text: string }[];
+      filters: { status: string };
     };
     const state1: State = {
       todos: [{ id: 1, text: 'aaa' }],
@@ -27,9 +28,9 @@ describe('issue #10', () => {
       return [];
     });
 
-    const selectFilteredTodoIds = memoize((state: State) => (
-      selectFilteredTodos(state).map((todo) => todo.id)
-    ));
+    const selectFilteredTodoIds = memoize((state: State) =>
+      selectFilteredTodos(state).map((todo) => todo.id),
+    );
 
     selectFilteredTodoIds(state1);
     selectFilteredTodoIds(state2);

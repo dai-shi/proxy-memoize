@@ -19,9 +19,9 @@ Contributions are welcome.
 
 Immutability is pivotal in more than a few frameworks, like React and Redux. It enables simple-yet-efficient change detection in large nested data structures.
 
-JavaScript is a mutable language by default. Libraries like [immer](https://github.com/immerjs/immer) simplify _updating_ immutable data strucutres.
+JavaScript is a mutable language by default. Libraries like [immer](https://github.com/immerjs/immer) simplify *updating* immutable data strucutres.
 
-This library helps _deriving data_ from immutable structures (AKA, selectors), efficiantly caching results for faster performance.
+This library helps *deriving data* from immutable structures (AKA, selectors), efficiantly caching results for faster performance.
 
 This library utilizes Proxy and WeakMap, and provides memoization.
 The memoized function will re-evaluate the original function

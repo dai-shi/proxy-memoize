@@ -1,9 +1,6 @@
-import { memoize } from './memoize';
+import { memoize } from './memoize.js';
 
-type Options = Omit<
-  NonNullable<Parameters<typeof memoize>[1]>,
-  'noWeakMap'
->;
+type Options = Omit<NonNullable<Parameters<typeof memoize>[1]>, 'noWeakMap'>;
 
 /**
  * Create a memoized function with args
@@ -20,9 +17,9 @@ export const memoizeWithArgs = <Args extends unknown[], Result>(
   fnWithArgs: (...args: Args) => Result,
   options?: Options,
 ) => {
-  const fn = memoize(
-    (args: Args) => fnWithArgs(...args),
-    { ...options, noWeakMap: true },
-  );
+  const fn = memoize((args: Args) => fnWithArgs(...args), {
+    ...options,
+    noWeakMap: true,
+  });
   return (...args: Args) => fn(args);
 };
