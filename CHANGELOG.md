@@ -4,6 +4,7 @@
 
 ### Changed
 - fix: unused selectors #97
+- refactor: seen WeakSet #98
 
 ## [2.0.5] - 2024-01-15
 ### Changed
