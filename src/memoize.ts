@@ -48,7 +48,6 @@ const touchAffected = (dst: unknown, src: unknown, affected: Affected) => {
   if (!isObject(dst) || !isObject(src)) return;
   if (trackMemoOriginalObjSet.has(getUntracked(src) as never)) {
     trackMemo(dst);
-    return;
   }
   const used = affected.get(getUntracked(src) || src);
   if (!used) return;
