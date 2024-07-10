@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { memoize } from 'proxy-memoize';
 
-describe('#100', () => {
-  it('should select correctly', () => {
+describe('Static props prevents selectors recall (#100)', () => {
+  it('should select correctly with nested selectors', () => {
     type State = {
       book1: {
         staticProp: string;
