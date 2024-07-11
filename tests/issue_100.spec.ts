@@ -60,7 +60,7 @@ describe('Static props prevents selectors recall (#100)', () => {
     const state2: State = {
       book1: {
         staticProp: '5',
-        priceString: '0',
+        priceString: '20',
       },
     };
 
@@ -84,6 +84,6 @@ describe('Static props prevents selectors recall (#100)', () => {
     selectMemoizedPriceString(state1);
 
     expect(selectAdjustedPriceString(state1)).toBe('10');
-    expect(selectAdjustedPriceString(state2)).toBe('0');
+    expect(selectAdjustedPriceString(state2)).toBe('20');
   });
 });
