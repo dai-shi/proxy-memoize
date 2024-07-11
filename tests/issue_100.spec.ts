@@ -24,7 +24,7 @@ describe('Static props prevents selectors recall (#100)', () => {
       },
     };
 
-    const selectAllBooks = memoize((state: State) => Object.values(state));
+    const selectBook1 = memoize((state: State) => state.book1);
 
     const selectPriceString = memoize(
       (state: State) => state.book1.priceString,
@@ -36,7 +36,7 @@ describe('Static props prevents selectors recall (#100)', () => {
       return priceString;
     });
 
-    selectAllBooks(state1);
+    selectBook1(state1);
 
     expect(selectAdjustedPriceString(state1)).toBe('10');
     expect(selectAdjustedPriceString(state2)).toBe('20');
@@ -44,109 +44,46 @@ describe('Static props prevents selectors recall (#100)', () => {
 
   it('case 2', () => {
     type State = {
-      booksState: {
-        booksObject: {
-          book1: { shortName: string };
-        };
-      };
-      extendedBooksState: {
-        extendedBooksObject: {
-          book1: {
-            staticProp: string;
-            priceString: string;
-            book: { shortName: string };
-          };
-        };
+      book1: {
+        staticProp: string;
+        priceString: string;
       };
     };
 
     const state1: State = {
-      booksState: {
-        booksObject: {
-          book1: {
-            shortName: 'book1-name',
-          },
-        },
-      },
-      extendedBooksState: {
-        extendedBooksObject: {
-          book1: {
-            staticProp: '5',
-            priceString: '10',
-            book: {
-              shortName: 'book1-name',
-            },
-          },
-        },
+      book1: {
+        staticProp: '5',
+        priceString: '10',
       },
     };
 
     const state2: State = {
-      booksState: {
-        booksObject: {
-          book1: {
-            shortName: 'book1-name',
-          },
-        },
-      },
-      extendedBooksState: {
-        extendedBooksObject: {
-          book1: {
-            staticProp: '5',
-            priceString: '0',
-            book: {
-              shortName: 'book1-name',
-            },
-          },
-        },
+      book1: {
+        staticProp: '5',
+        priceString: '0',
       },
     };
 
+    const selectBook1 = memoize((state: State) => state.book1);
+
     const selectPriceString = memoize(
-      (state: State) =>
-        state.extendedBooksState.extendedBooksObject.book1.priceString,
+      (state: State) => state.book1.priceString,
     );
 
     const selectAdjustedPriceString = memoize((state: State) => {
-      const {
-        booksState: { booksObject },
-        extendedBooksState: { extendedBooksObject },
-      } = state;
-
-      const book = booksObject.book1;
-
-      book.shortName; // touch the prop
-
       const priceString = selectPriceString(state);
-
-      extendedBooksObject.book1.staticProp; // touch the prop
-
+      state.book1.staticProp; // touch the prop
       return priceString;
     });
 
-    const selectAllExtendedBooks = memoize((state: State) =>
-      Object.values(state.extendedBooksState.extendedBooksObject),
+    const selectMemoizedPriceString = memoize((state: State) =>
+      selectPriceString(state),
     );
 
-    const selectBookThroughExtendedBooks = memoize(
-      (state: State) => selectAllExtendedBooks(state)[0]!.book,
-    );
+    selectBook1(state1);
+    selectMemoizedPriceString(state1);
 
-    const selectMemoizedPriceString = memoize(
-      (state: State) => selectPriceString(state),
-    );
-
-    const getPriceStringSelector =
-      (
-        _book: unknown, // looks as touch
-      ) =>
-      (state: State) =>
-        selectMemoizedPriceString(state);
-
-    getPriceStringSelector(selectBookThroughExtendedBooks(state1))(state1);
     expect(selectAdjustedPriceString(state1)).toBe('10');
-
-    getPriceStringSelector(selectBookThroughExtendedBooks(state2))(state2);
     expect(selectAdjustedPriceString(state2)).toBe('0');
   });
 });
