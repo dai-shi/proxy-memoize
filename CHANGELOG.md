@@ -5,6 +5,7 @@
 ### Changed
 
 - fix: Static props prevents selectors recall #101
+- fix: Static props prevents selectors recall [2] #102
 
 ## [3.0.0] - 2024-05-02
 
