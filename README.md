@@ -9,11 +9,14 @@ Intuitive magical memoization library with Proxy and WeakMap
 
 ## Project status
 
-The feature has been pretty stable in v1.
-In v2, we added some new capabilities.
+It's stable and production ready.
+As the technique behind it is a bit tricky with Proxy,
+there might still be some bugs especially with nested memoized selectors.
+
+> Note: Nesting memoized selectors is theoretically less performant.
+
 Our docs and examples are not very comprehensive,
-and we hope to have more best practices.
-Contributions are welcome.
+and contributions are welcome.
 
 ## Introduction
 
