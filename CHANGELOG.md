@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [3.0.1] - 2024-07-12
+
 ### Changed
 
 - fix: Static props prevents selectors recall #101
