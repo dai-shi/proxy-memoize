@@ -51,7 +51,7 @@
     "singleQuote": true
   },
   "dependencies": {
-    "proxy-compare": "^3.0.0"
+    "proxy-compare": "https://pkg.csb.dev/dai-shi/proxy-compare/commit/42bb1fee/proxy-compare"
   },
   "devDependencies": {
     "@types/node": "^20.12.8",

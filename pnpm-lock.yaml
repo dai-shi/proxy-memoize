@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   proxy-compare:
-    specifier: ^3.0.0
-    version: 3.0.0
+    specifier: https://pkg.csb.dev/dai-shi/proxy-compare/commit/42bb1fee/proxy-compare
+    version: '@pkg.csb.dev/dai-shi/proxy-compare/commit/42bb1fee/proxy-compare'
 
 devDependencies:
   '@types/node':
@@ -3520,10 +3520,6 @@ packages:
     resolution: {integrity: sha512-/XJ368cyBJ7fzLMwLKv1e4vLxOju2MNAIokcr7meSaNcVbWz/CPcW22cP04mwxOErdA5mwjA8Q6w/cdAQxVn7Q==}
     dev: true
 
-  /proxy-compare@3.0.0:
-    resolution: {integrity: sha512-y44MCkgtZUCT9tZGuE278fB7PWVf7fRYy0vbRXAts2o5F0EfC4fIQrvQQGBJo1WJbFcVLXzApOscyJuZqHQc1w==}
-    dev: false
-
   /punycode@2.3.1:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
@@ -4483,3 +4479,9 @@ packages:
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: true
+
+  '@pkg.csb.dev/dai-shi/proxy-compare/commit/42bb1fee/proxy-compare':
+    resolution: {tarball: https://pkg.csb.dev/dai-shi/proxy-compare/commit/42bb1fee/proxy-compare}
+    name: proxy-compare
+    version: 3.0.0
+    dev: false
