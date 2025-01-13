@@ -32,6 +32,7 @@ describe('Static props prevents selectors recall (#100)', () => {
 
     const selectAdjustedPriceString = memoize((state: State) => {
       const priceString = selectPriceString(state);
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       state.book1.staticProp; // touch the prop
       return priceString;
     });
@@ -72,6 +73,7 @@ describe('Static props prevents selectors recall (#100)', () => {
 
     const selectAdjustedPriceString = memoize((state: State) => {
       const priceString = selectPriceString(state);
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       state.book1.staticProp; // touch the prop
       return priceString;
     });
