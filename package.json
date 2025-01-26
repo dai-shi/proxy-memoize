@@ -51,7 +51,7 @@
     "singleQuote": true
   },
   "dependencies": {
-    "proxy-compare": "^3.0.1"
+    "proxy-compare": "^3.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",

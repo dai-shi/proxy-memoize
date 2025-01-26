@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       proxy-compare:
-        specifier: ^3.0.1
+        specifier: ^3.0.0
         version: 3.0.1
     devDependencies:
       '@eslint/js':
