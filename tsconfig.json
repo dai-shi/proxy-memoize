@@ -12,7 +12,7 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "proxy-memoize": ["./src/index.js"]
+      "proxy-memoize": ["./src/index.ts"]
     }
   },
   "exclude": ["dist", "examples"]
