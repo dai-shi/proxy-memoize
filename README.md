@@ -28,7 +28,7 @@ This library helps *derive data* from immutable structures (AKA, selectors), eff
 
 This library utilizes Proxy and WeakMap, and provides memoization.
 The memoized function will re-evaluate the original function
-only if the part of the argument (object) used is changed.
+only if the used part of the argument (object) is changed.
 It's intuitive in a sense and magical in another sense.
 
 ## How it works
