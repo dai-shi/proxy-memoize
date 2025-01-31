@@ -9,26 +9,26 @@ Intuitive magical memoization library with Proxy and WeakMap
 
 ## Project status
 
-It's stable and production ready.
+It's stable and production-ready.
 As the technique behind it is a bit tricky with Proxy,
-there might still be some bugs especially with nested memoized selectors.
+there might still be some bugs, especially with nested memoized selectors.
 
-> Note: Nesting memoized selectors is theoretically less performant.
+> Note: Nesting memoized selectors are theoretically less performant.
 
 Our docs and examples are not very comprehensive,
 and contributions are welcome.
 
 ## Introduction
 
-Immutability is pivotal in more than a few frameworks, like React and Redux. It enables simple-yet-efficient change detection in large nested data structures.
+Immutability is pivotal in more than a few frameworks, like React and Redux. It enables simple yet efficient change detection in large nested data structures.
 
-JavaScript is a mutable language by default. Libraries like [immer](https://github.com/immerjs/immer) simplify *updating* immutable data strucutres.
+JavaScript is a mutable language by default. Libraries like [immer](https://github.com/immerjs/immer) simplify *updating* immutable data structures.
 
-This library helps *deriving data* from immutable structures (AKA, selectors), efficiantly caching results for faster performance.
+This library helps *derive data* from immutable structures (AKA, selectors), efficiently caching results for faster performance.
 
 This library utilizes Proxy and WeakMap, and provides memoization.
 The memoized function will re-evaluate the original function
-only if the used part of argument (object) is changed.
+only if the part of the argument (object) used is changed.
 It's intuitive in a sense and magical in another sense.
 
 ## How it works
@@ -38,7 +38,7 @@ it will wrap an input object with proxies (recursively, on demand)
 and invoke the function.
 When it's finished it will check what is "affected".
 The "affected" is a list of paths of the input object
-that are accessed during the function invocation.
+accessed during the function invocation.
 
 Next time when it receives a new input object,
 it will check if values in "affected" paths are changed.
@@ -47,8 +47,8 @@ Otherwise, it will return a cached result.
 
 The cache size is `1` by default, but configurable.
 
-We have 2-tier cache mechanism.
-What is described so far is the second tier cache.
+We have a 2-tier cache mechanism.
+What is described so far is the second-tier cache.
 
 The first tier cache is with WeakMap.
 It's a WeakMap of the input object and the result of function invocation.
@@ -57,7 +57,7 @@ There's no notion of cache size.
 In summary, there are two types of cache:
 
 *   tier-1: WeakMap based cache (size=infinity)
-*   tier-2: Proxy based cache (size=1, configurable)
+*   tier-2: Proxy-based cache (size=1, configurable)
 
 ## Install
 
@@ -131,7 +131,7 @@ const Component = ({ id }) => {
 
 ### Using `size` option
 
-The example above might seem tricky to create memoized selector in component.
+The example above might seem tricky to create a memoized selector in a component.
 Alternatively, we can use `size` option.
 
 ```jsx
@@ -201,7 +201,7 @@ This is to unwrap a proxy object and return an original object.
 It returns null if not relevant.
 
 \[Notes]
-This function is for debugging purpose.
+This function is for debugging purposes.
 It's not supposed to be used in production and it's subject to change.
 
 #### Examples
@@ -217,11 +217,11 @@ const fn = memoize(obj => {
 
 ### replaceNewProxy
 
-This is to replace newProxy function in upstream library, proxy-compare.
+This is to replace newProxy function in an upstream library, proxy-compare.
 Use it at your own risk.
 
 \[Notes]
-See related discussoin: <https://github.com/dai-shi/proxy-compare/issues/40>
+See related discussion: <https://github.com/dai-shi/proxy-compare/issues/40>
 
 ### memoize
 
@@ -302,7 +302,7 @@ const fn = memoize(obj => {
 
 We can't unwrap Set/Map or other non-plain objects.
 The problem is when `obj.a` is an object (which will be wrapped with a proxy)
-and touching its property will record the usage, which leads
+and touching its property will record the usage, which leads to
 unexpected behavior.
 If `obj.a` is a primitive value, there's no problem.
 
@@ -325,7 +325,7 @@ const result2 = fn(state); // Ends up unexpected result
 
 The input `obj` or the `state` must be immutable.
 The whole concept is built around the immutability.
-It's faily common in Redux and React,
+It's fairly common in Redux and React,
 but be careful if you are not familiar with the concept.
 
 There's no workaround.
@@ -355,7 +355,7 @@ Note: this disables the tier-1 cache with WeakMap.
 
 ### Reselect
 
-At a basic level, memoize can be substituted in for `createSelector`. Doing
+At a basic level, memoize can be substituted for `createSelector`. Doing
 so will return a selector function with proxy-memoize's built-in tracking
 of your state object.
 
@@ -387,8 +387,8 @@ const state = {
 };
 
 // reselect
-// If the .completed property changes inside state, the selector must be recalculated
-// even through none of the properties we care about changed. In react-redux, this
+// If the .completed property changes inside the state, the selector must be recalculated
+// even though none of the properties we care about changed. In react-redux, this
 // selector will result in additional UI re-renders or the developer to implement
 // selectorOptions.memoizeOptions.resultEqualityCheck
 createSelector(
@@ -400,7 +400,7 @@ createSelector(
 
 // proxy-memozie
 // If the .completed property changes inside state, the selector does NOT change
-// this is because we track only the accessed property (todos.text) and can ignore
+// because we track only the accessed property (todos.text) and can ignore
 // the unrelated change
 const todoTextsSelector = memoize(state => state.todos.map(todo => todo.text));
 ```
