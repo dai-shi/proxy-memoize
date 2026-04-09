@@ -6,20 +6,24 @@ This creates a `useProxySelector` hook which can be used to create a typed `useS
 
 ```ts
 import { memoize } from 'proxy-memoize';
-import { useCallback } from 'react';
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 // import your react-redux RootState type
 import type { RootState } from './path/to/root/state/declaration';
 
-const createProxySelectorHook = <TState extends object = any>() => {
+const createProxySelectorHook = <TState extends object>() => {
+  const useTypedSelector = useSelector.withTypes<TState>();
+
   const useProxySelector = <TReturnType>(
     fn: (state: TState) => TReturnType,
-    deps?: any[],
+    deps: React.DependencyList = [],
   ): TReturnType => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    return useSelector(useCallback(memoize(fn), deps));
+    const selector = useMemo(() => memoize(fn), deps);
+    return useTypedSelector(selector);
   };
+
   return useProxySelector;
 };
 
