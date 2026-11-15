@@ -130,7 +130,7 @@ export function memoize<Obj extends object, Result>(
       }
     }
     const affected: Affected = new WeakMap();
-    const proxy = createProxy(obj, affected, undefined, targetCache);
+    const proxy = createProxy(obj, affected, new WeakMap(), targetCache);
     const result = untrack(fn(proxy), new WeakSet());
     touchAffected(obj, obj, affected);
     const entry: Entry = {
