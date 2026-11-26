@@ -301,6 +301,8 @@ const fn = memoize(obj => {
 ```
 
 We can't unwrap Set/Map or other non-plain objects.
+We also can't unwrap read-only properties, such as in frozen objects
+(`Object.freeze`) or getter-only properties. They are left as they are.
 The problem is when `obj.a` is an object (which will be wrapped with a proxy)
 and touching its property will record the usage, which leads to
 unexpected behavior.

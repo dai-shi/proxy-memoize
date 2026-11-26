@@ -38,7 +38,8 @@ const untrack = <T>(x: T, seen: WeakSet<object>): T => {
     seen.add(x);
     Object.entries(x).forEach(([k, v]) => {
       const vv = untrack(v, seen);
-      if (!Object.is(vv, v)) x[k as keyof T] = vv;
+      // Reflect.set does not throw for frozen objects or getter-only props
+      if (!Object.is(vv, v)) Reflect.set(x, k, vv);
     });
   }
   return x;
